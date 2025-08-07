@@ -34,10 +34,12 @@ for script in prompt.*.sh; do
     read -r comments
 
     if [[ "$grade" = "pass" ]] || [[ "$grade" = "p" ]]; then
-        echo "$script passed: $comments" >> test.log
+        mkdir -p "passed"
+        echo "$script PASSED: $comments" >> test.log
         mv -v "$script" "passed/$script"
     else
-        echo "$script failed: $comments" >> test.log
+        mkdir -p "failed"
+        echo "$script FAILED: $comments" >> test.log
         mv -v "$script" "failed/$script"
     fi
 done
