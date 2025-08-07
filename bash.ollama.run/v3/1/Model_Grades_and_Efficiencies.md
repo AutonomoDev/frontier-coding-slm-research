@@ -5,16 +5,19 @@
 | Google Gemini 2.5-pro     | (Cloud) |          | $0.0070 | 100             | 100                | **95.3**   |
 | qwen3-coder               | 19B     | 22.5     |         | 82              | 90                 | **91.0**   |
 | OpenAI o3                 | (Cloud) |          | $0.0063 | 90              | 92                 | **89.9**   |
+| gemma3:12b                | 12B     | 43       |         | 80              | 75                 | **82.5**   |
 | Anthropic Claude 4 Sonnet | (Cloud) |          | $0.0078 | 95              | 70                 | **78.7**   |
 | OpenAI GPT-4.1-mini       | (Cloud) |          | $0.0010 | 85              | 50                 | **72.0**   |
 | codestral                 | 22B     | 90       |         | 88              | 50                 | **70.1**   |
 | Grok-4                    | (Cloud) |          | $0.0122 | 100             | 50                 | **66.2**   |
 | Anthropic Claude 4 Opus   | (Cloud) |          | $0.0394 | 72              | 100                | **64.4**   |
+| gpt-oss:20b               | 20B     | 972      |         | 90              | 92                 | **64.0**   |
 | codellama:13b             | 13B     | 50       |         | 45              | 45                 | **60.2**   |
 | OpenAI o4-mini            | (Cloud) |          | $0.0036 | 85              | 25                 | **57.5**   |
 | codellama:34b             | 34B     | 177      |         | 50              | 40                 | **54.8**   |
 | deepseek-coder-v2         | 16B     | 9.4      |         | 60              | 25                 | **54.5**   |
 | wizardcoder:33b           | 33B     | 183      |         | 70              | 30                 | **53.6**   |
+| gemma3                    | 27B     | 201      |         | 70              | 30                 | **53.0**   |
 | deepseek-r1:32b           | 32B     | 323      |         | 65              | 35                 | **50.8**   |
 | deepseek-v3-qwen2.5       | 32B     | 185      |         | 85              | 10                 | **46.5**   |
 | deepseek-r1               | 14B     | 84       |         | 55              | 10                 | **43.7**   |
@@ -107,3 +110,16 @@ Efficiency = (0.5 × 30) + (0.3 × 81.97) + (0.2 × 70) = 15.00 + 24.59 + 14.00 
 **deepseek-r1:32b**
 Normalized Time Score = 67.49
 Efficiency = (0.5 × 35) + (0.3 × 67.49) + (0.2 × 65) = 17.50 + 20.25 + 13.00 = 50.75
+
+**gemma3:12b**
+Normalized Time Score = 96.51
+Efficiency = (0.5 × 75) + (0.3 × 96.51) + (0.2 × 80) = 37.50 + 28.95 + 16.00 = 82.45
+
+**gemma3:27b**
+Normalized Time Score = 80.10
+Efficiency = (0.5 × 30) + (0.3 × 80.10) + (0.2 × 70) = 15.00 + 24.03 + 14.00 = 53.03
+
+**gpt-oss:20b**
+Normalized Time Score = 0.00
+Efficiency = (0.5 × 92) + (0.3 × 0.00) + (0.2 × 90) = 46.00 + 0.00 + 18.00 = 64.00
+

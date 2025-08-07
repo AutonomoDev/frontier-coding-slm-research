@@ -11,3 +11,6 @@ qwen3-coder:19b: 00:22
 mistral-small:24b: 02:05
 phi4:14b: 00:57
 wizardcoder:33b: 03:03
+gemma3:27b: 04:07
+gemma3:12b: 01:10
+gpt-oss:20b: 07:05

@@ -1,11 +1,12 @@
-dagbs/deepseek-coder-v2-lite-instruct:q4_k_l => prompt.v3-dagbs_deepseek-coder-v2-lite-instruct:17b_q4_0_l.sh
-dagbs/deepseek-coder-v2-lite-instruct:q8_0_l => prompt.v3-dagbs_deepseek-coder-v2-lite-instruct:17b_q8_0_l.sh
 deepseek-coder-v2:16b => prompt.v3-deepseek_coder_v2_16b.sh
 deepseek-r1:14b => prompt.v3-deepseek_r1_14b.sh
 deepseek-r1:32b => prompt.v3-deepseek_r1_32b.sh
 xiaowangge/deepseek-v3-qwen2.5:32b => prompt.v3-deepseek_v3_qwen2.5_32b.sh
 codellama:13b => prompt.v3-meta_codellama_13b.sh
 codellama:34b => prompt.v3-meta_codellama_34b.sh
+gemma3:27b => prompt.v3-google_gemma3_27b.sh
+gemma3:12b => prompt.v3-google_gemma3_12b.sh
+gpt-oss:20b => prompt.v3-openai_gpt_oss_20b.sh
 phind-codellama:34b => prompt.v3-phind_codellama_34b.sh
 codestral:22b => prompt.v3-mistral_codestral_22b.sh
 mistral-small:24b => prompt.v3-mistral_small_24b.sh
