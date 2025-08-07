@@ -65,14 +65,16 @@ while [[ $ITERATION -le $MAX_ITERATIONS ]]; do
         #echo "$model -> $output_file"; continue;
 
         # Skip empty lines or invalid entries
-        if [[ -z "$model" || -z "$output_file" ]]; then
+        if [[ -z "$model" ]]; then
             continue
         fi
 
         CURRENT_OUTPUT="$DESTINATION/$ITERATION/$output_file"
+        FAILED_OUTPUT="$DESTINATION/$ITERATION/failed/$output_file"
+        PASSED_OUTPUT="$DESTINATION/$ITERATION/passed/$output_file"
 
         # Skip if output file already exists
-        if [[ -f "$CURRENT_OUTPUT" ]]; then
+        if [[ -f "$CURRENT_OUTPUT" || -f "$FAILED_OUTPUT" || -f "$PASSED_OUTPUT" ]]; then
             echo "Skipping $model - output file already exists: $CURRENT_OUTPUT"
             continue
         fi
