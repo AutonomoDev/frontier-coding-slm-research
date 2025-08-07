@@ -1,0 +1,18 @@
+prompt.v3-deepseek_coder_v2_16b.sh failed: 
+prompt.v3-deepseek_r1_14b.sh failed: 
+prompt.v3-deepseek_coder_v2_16b.sh failed: 
+prompt.v3-deepseek_coder_v2_16b.sh FAILED: 
+prompt.v3-deepseek_r1_14b.sh FAILED: 
+prompt.v3-deepseek_r1_32b.sh FAILED: 
+prompt.v3-deepseek_v3_qwen2.5_32b.sh FAILED: 
+prompt.v3-google_gemma3_12b.sh FAILED: f
+prompt.v3-google_gemma3_27b.sh FAILED: 
+prompt.v3-meta_codellama_13b.sh FAILED: 
+prompt.v3-meta_codellama_34b.sh FAILED: 
+prompt.v3-microsoft_phi4_14b.sh FAILED: 
+prompt.v3-mistral_codestral_22b.sh FAILED: 
+prompt.v3-mistral_small_24b.sh FAILED: 
+prompt.v3-openai_gpt_oss_20b.sh FAILED: 
+prompt.v3-phind_codellama_34b.sh FAILED: 
+prompt.v3-qwen3_coder_19b.sh PASSED: Perfect.
+prompt.v3-wizardcoder_33b.sh FAILED: 
