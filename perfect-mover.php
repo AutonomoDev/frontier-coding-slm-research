@@ -29,16 +29,22 @@ $CANONICAL_MODELS = [
     'olympus-coder:13b' => ['id' => 17, 'suffix' => 'aadi19_olympus_coder_13b'],
 ];
 
+// Create a reverse mapping for efficient lookup: suffix => model_key
+$suffixToModelKey = [];
+foreach ($CANONICAL_MODELS as $modelKey => $info) {
+    $suffixToModelKey[$info['suffix']] = $modelKey;
+}
+
 // Process all version directories
 $versionDirs = glob($basePath . '/v*', GLOB_ONLYDIR);
 foreach ($versionDirs as $versionDir) {
-    processVersionDirectory($versionDir, $CANONICAL_MODELS);
+    processVersionDirectory($versionDir, $CANONICAL_MODELS, $suffixToModelKey);
 }
 
 /**
  * Process a version directory and unify model names
  */
-function processVersionDirectory($versionDir, $canonicalModels) {
+function processVersionDirectory($versionDir, $canonicalModels, $suffixToModelKey) {
     $version = extractVersionNumber($versionDir);
     if ($version === null) {
         return;
@@ -52,21 +58,28 @@ function processVersionDirectory($versionDir, $canonicalModels) {
 
     echo "Processing $versionDir (version $version)\n";
 
-    $entries = parseModelsFile($modelsFile);
+    // Store the original entries from models.txt for later updating models.txt
+    $initialModelsFileEntries = parseModelsFile($modelsFile);
 
-    // Process each iteration directory
-    $iterationDirs = glob($versionDir . '/*', GLOB_ONLYDIR);
-    foreach ($iterationDirs as $iterationDir) {
-        if (!isNumericDirectory($iterationDir)) {
-            continue;
+    // Process each numeric iteration directory (e.g., 'v4/1', 'v4/2')
+    $iterationNumberDirs = glob($versionDir . '/*', GLOB_ONLYDIR);
+    foreach ($iterationNumberDirs as $iterationNumberDir) {
+        if (!is_numeric(basename($iterationNumberDir))) {
+            continue; // Skip non-numeric directories like 'models.txt' or unexpected ones
         }
 
-        echo "  Processing iteration: " . basename($iterationDir) . "\n";
-        processIterationDirectory($iterationDir, $version, $entries, $canonicalModels);
+        echo "  Processing iteration: " . basename($iterationNumberDir) . "\n";
+
+        // Now, within each numeric iteration directory, find 'failed' and 'passed' subdirectories
+        $statusDirs = glob($iterationNumberDir . '/*', GLOB_ONLYDIR);
+        foreach ($statusDirs as $statusDir) {
+            echo "    Processing status directory: " . basename($statusDir) . "\n";
+            processFilesInStatusDirectory($statusDir, $version, $canonicalModels, $suffixToModelKey);
+        }
     }
 
-    // Update models.txt with corrected entries
-    $updatedEntries = buildUpdatedEntries($entries, $version, $canonicalModels);
+    // Update models.txt with corrected entries based on the canonical format
+    $updatedEntries = buildUpdatedEntries($initialModelsFileEntries, $version, $canonicalModels);
     writeModelsFile($modelsFile, $updatedEntries, $canonicalModels);
 }
 
@@ -82,7 +95,7 @@ function extractVersionNumber($versionDir) {
 }
 
 /**
- * Check if directory has a numeric name
+ * Check if directory has a numeric name - (no longer directly used by main loop)
  */
 function isNumericDirectory($dir) {
     return is_numeric(basename($dir));
@@ -105,7 +118,7 @@ function parseModelsFile($modelsFile) {
         if (count($parts) === 2) {
             $entries[] = [
                 'model_key' => $parts[0],
-                'old_filename' => $parts[1]
+                'old_filename' => $parts[1] // Store for models.txt update, not for file lookup
             ];
         }
     }
@@ -114,22 +127,37 @@ function parseModelsFile($modelsFile) {
 }
 
 /**
- * Process files in a single iteration directory
+ * Process files in a single 'failed' or 'passed' directory
  */
-function processIterationDirectory($iterationDir, $version, $entries, $canonicalModels) {
-    foreach ($entries as $entry) {
-        $modelKey = $entry['model_key'];
-        $oldFilename = $entry['old_filename'];
+function processFilesInStatusDirectory($statusDir, $version, $canonicalModels, $suffixToModelKey) {
+    // Get all shell script files directly in this status directory
+    $currentFiles = glob($statusDir . '/*.sh');
 
-        if (!isset($canonicalModels[$modelKey])) {
+    foreach ($currentFiles as $oldFullPath) {
+        $oldFilename = basename($oldFullPath);
+
+        // Robustly extract the model suffix from the actual filename on disk.
+        // This regex handles both '(X) prompt.vN-SUFFIX.sh' and 'prompt.vN-SUFFIX.sh' formats.
+        if (!preg_match('/^(?:\(\d+\)\s*)?prompt\.v\d+-([\w\d_.-]+)\.sh$/', $oldFilename, $matches)) {
+            echo "      Warning: Could not parse model suffix from filename: $oldFilename (in $statusDir)\n";
             continue;
         }
+        $extractedSuffix = $matches[1]; // e.g., 'deepseek_coder_v2_16b'
 
+        // Use the reverse map to find the canonical model key
+        if (!isset($suffixToModelKey[$extractedSuffix])) {
+            echo "      Warning: Unknown model suffix '$extractedSuffix' found in file '$oldFilename' (in $statusDir) - skipping.\n";
+            continue;
+        }
+        $modelKey = $suffixToModelKey[$extractedSuffix];
         $modelInfo = $canonicalModels[$modelKey];
+
+        // Build the correct new filename based on canonical ID and suffix
         $newFilename = buildCorrectFilename($version, $modelInfo['id'], $modelInfo['suffix']);
 
+        // Only rename if the current filename is different from the desired new filename
         if ($oldFilename !== $newFilename) {
-            renameModelFile($iterationDir, $oldFilename, $newFilename, $modelKey);
+            renameModelFile($statusDir, $oldFilename, $newFilename, $modelKey);
         }
     }
 }
@@ -138,18 +166,21 @@ function processIterationDirectory($iterationDir, $version, $entries, $canonical
  * Build the correct filename for a model
  */
 function buildCorrectFilename($version, $modelId, $suffix) {
+    // Target format: prompt.v{version}-{modelId}.{suffix}.sh
     return "prompt.v{$version}-{$modelId}.{$suffix}.sh";
 }
 
 /**
  * Rename a model file using git mv
  */
-function renameModelFile($iterationDir, $oldFilename, $newFilename, $modelKey) {
-    $oldPath = $iterationDir . '/' . $oldFilename;
-    $newPath = $iterationDir . '/' . $newFilename;
+function renameModelFile($directory, $oldFilename, $newFilename, $modelKey) {
+    $oldPath = $directory . '/' . $oldFilename;
+    $newPath = $directory . '/' . $newFilename;
 
+    // file_exists check is now implicit through globbing actual files
+    // But if something unexpected happens between glob and rename, this helps.
     if (!file_exists($oldPath)) {
-        // File might not exist in this iteration, skip silently
+        echo "      Error: File to rename not found: $oldPath (for $modelKey)\n";
         return;
     }
 
@@ -161,11 +192,11 @@ function renameModelFile($iterationDir, $oldFilename, $newFilename, $modelKey) {
     exec($command, $output, $returnCode);
 
     if ($returnCode === 0) {
-        echo "    Renamed: $oldFilename => $newFilename\n";
+        echo "      Renamed: $oldFilename => $newFilename\n";
     } else {
-        echo "    Error: Failed to git mv $oldFilename\n";
+        echo "      Error: Failed to git mv $oldFilename\n";
         if (!empty($output)) {
-            echo "      Git output: " . implode("\n      ", $output) . "\n";
+            echo "        Git output: " . implode("\n        ", $output) . "\n";
         }
     }
 }
@@ -180,12 +211,13 @@ function buildUpdatedEntries($entries, $version, $canonicalModels) {
         $modelKey = $entry['model_key'];
 
         if (!isset($canonicalModels[$modelKey])) {
-            echo "  Warning: Unknown model '$modelKey' - keeping as-is\n";
+            echo "  Warning: Unknown model '$modelKey' in models.txt - keeping filename as-is in output.\n";
             $updatedEntries[] = ['model_key' => $modelKey, 'filename' => $entry['old_filename']];
             continue;
         }
 
         $modelInfo = $canonicalModels[$modelKey];
+        // Ensure models.txt entries reflect the correct, canonical filename format
         $newFilename = buildCorrectFilename($version, $modelInfo['id'], $modelInfo['suffix']);
 
         $updatedEntries[] = ['model_key' => $modelKey, 'filename' => $newFilename];
@@ -198,7 +230,7 @@ function buildUpdatedEntries($entries, $version, $canonicalModels) {
  * Write updated entries back to models.txt, sorted by model ID
  */
 function writeModelsFile($modelsFile, $entries, $canonicalModels) {
-    // Sort entries by model ID
+    // Sort entries by model ID for consistent models.txt order
     usort($entries, function($a, $b) use ($canonicalModels) {
         $idA = isset($canonicalModels[$a['model_key']]) ? $canonicalModels[$a['model_key']]['id'] : 999;
         $idB = isset($canonicalModels[$b['model_key']]) ? $canonicalModels[$b['model_key']]['id'] : 999;
