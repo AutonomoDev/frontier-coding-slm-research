@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontier Coding LLMs Efficiency in Non-Specialized Languages</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            font-weight: 600;
+        }
+        .chart-container {
+            position: relative;
+            height: 600px;
+            margin-bottom: 30px;
+        }
+        .info-panel {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        .stat-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .stat-value {
+            font-size: 1.1em;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Frontier Coding LLMs Efficiency in Non-Specialized Languages</h1>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #e74c3c;"></div>
+                <span>Cloud Models</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #3498db;"></div>
+                <span>Local Models</span>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="efficiencyChart"></canvas>
+        </div>
+        
+        <div class="info-panel">
+            <h3 style="margin-top: 0; color: #2c3e50;">Analysis</h3>
+            <p><strong>Efficiency Calculation:</strong></p>
+            <ul>
+                <li><strong>Local Models:</strong> Efficiency = Grade ÷ Time (seconds)</li>
+                <li><strong>Cloud Models:</strong> Efficiency = Grade ÷ (Cost × 10,000)</li>
+            </ul>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-title">Top Performer</div>
+                    <div class="stat-value">Gemini 2.5-pro (142.9)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Best Local Model</div>
+                    <div class="stat-value">qwen3-coder (58.3)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Best Value Cloud</div>
+                    <div class="stat-value">GPT-4.1-mini (85.0)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Highest Grade</div>
+                    <div class="stat-value">Gemini 2.5-pro & Grok-4 (100)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('efficiencyChart').getContext('2d');
+        
+        const data = [
+            // Cloud models
+            { name: 'Gemini 2.5-pro', grade: 100, efficiency: 142.9, type: 'cloud' },
+            { name: 'GPT-4.1-mini', grade: 85, efficiency: 85.0, type: 'cloud' },
+            { name: 'Grok-4', grade: 100, efficiency: 82.0, type: 'cloud' },
+            { name: 'o4-mini', grade: 85, efficiency: 23.6, type: 'cloud' },
+            { name: 'Claude 4 Sonnet', grade: 95, efficiency: 12.2, type: 'cloud' },
+            { name: 'Claude 4 Opus', grade: 72, efficiency: 1.8, type: 'cloud' },
+            
+            // Local models
+            { name: 'qwen3-coder', grade: 82, efficiency: 58.3, type: 'local' },
+            { name: 'codestral', grade: 88, efficiency: 50.6, type: 'local' },
+            { name: 'deepseek-coder-v2', grade: 60, efficiency: 47.3, type: 'local' },
+            { name: 'llama4-scout', grade: 80, efficiency: 45.8, type: 'local' },
+            { name: 'phi4:14b', grade: 75, efficiency: 45.7, type: 'local' },
+            { name: 'deepseek-v3-qwen2.5', grade: 85, efficiency: 43.8, type: 'local' },
+            { name: 'DeepSeek-R1:14B', grade: 55, efficiency: 32.0, type: 'local' },
+            { name: 'mistral-small', grade: 60, efficiency: 28.6, type: 'local' },
+            { name: 'codellama:13b', grade: 45, efficiency: 28.0, type: 'local' },
+            { name: 'codellama:34b', grade: 50, efficiency: 26.0, type: 'local' }
+        ];
+
+        const cloudData = data.filter(d => d.type === 'cloud');
+        const localData = data.filter(d => d.type === 'local');
+
+        const chart = new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        label: 'Cloud Models',
+                        data: cloudData.map(d => ({ x: d.grade, y: d.efficiency, label: d.name })),
+                        backgroundColor: '#e74c3c',
+                        borderColor: '#c0392b',
+                        borderWidth: 2,
+                        pointRadius: 8,
+                        pointHoverRadius: 10
+                    },
+                    {
+                        label: 'Local Models',
+                        data: localData.map(d => ({ x: d.grade, y: d.efficiency, label: d.name })),
+                        backgroundColor: '#3498db',
+                        borderColor: '#2980b9',
+                        borderWidth: 2,
+                        pointRadius: 8,
+                        pointHoverRadius: 10
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: false
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(context) {
+                                return context[0].raw.label;
+                            },
+                            label: function(context) {
+                                return [
+                                    `Grade: ${context.parsed.x}/100`,
+                                    `Efficiency: ${context.parsed.y.toFixed(1)}`
+                                ];
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Grade (/100)',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        min: 40,
+                        max: 105,
+                        grid: {
+                            color: '#ecf0f1'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Efficiency Score',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        min: 0,
+                        max: 150,
+                        grid: {
+                            color: '#ecf0f1'
+                        }
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeInOutQuart'
+                }
+            },
+            plugins: [{
+                afterDatasetsDraw: function(chart) {
+                    const ctx = chart.ctx;
+                    chart.data.datasets.forEach((dataset, datasetIndex) => {
+                        const meta = chart.getDatasetMeta(datasetIndex);
+                        meta.data.forEach((point, index) => {
+                            const position = point.getProps(['x', 'y'], true);
+                            const label = dataset.data[index].label;
+                            
+                            ctx.save();
+                            ctx.font = 'bold 11px Arial';
+                            ctx.fillStyle = '#2c3e50';
+                            ctx.textAlign = 'left';
+                            ctx.textBaseline = 'middle';
+                            
+                            // Add background to text for better readability
+                            const textWidth = ctx.measureText(label).width;
+                            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                            ctx.fillRect(position.x + 12, position.y - 8, textWidth + 6, 16);
+                            
+                            ctx.fillStyle = '#2c3e50';
+                            ctx.fillText(label, position.x + 15, position.y);
+                            ctx.restore();
+                        });
+                    });
+                }
+            }]
+        });
+    </script>
+</body>
+</html>

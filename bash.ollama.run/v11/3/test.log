@@ -1,0 +1,16 @@
+prompt.v11-10.meta_codellama_13b.sh FAILED: No suggestions after semicolon.
+prompt.v11-1.qwen3_coder_30b.sh PASSED: Perfect.
+prompt.v11-2.google_gemma3_27b.sh FAILED: No suggestions.
+prompt.v11-3.openai_gpt_oss_20b.sh PASSED: Perfect.
+prompt.v11-4.wizardcoder_33b.sh FAILED: No suggestions.
+prompt.v11-5.deepseek_coder_v2_16b.sh PASSED: Perfect.
+prompt.v11-6.deepseek_r1_14b.sh FAILED: No suggestions.
+prompt.v11-7.deepseek_r1_32b.sh PASSED: Perfect.
+prompt.v11-8.deepseek_v3_qwen2.5_32b.sh PASSED: Perfect.
+prompt.v11-9.google_gemma3_12b.sh FAILED: Lists every model at once, no filtering.
+prompt.v11-meta_codellama_34b.sh PASSED: Perfect.
+prompt.v11-microsoft_phi4_14b.sh PASSED: Perfect.
+prompt.v11-microsoft_phi4_reasoning_14b.sh PASSED: Perfect.
+prompt.v11-mistral_codestral_22b.sh FAILED: No suggestions.
+prompt.v11-mistral_small_24b.sh FAILED: No suggestions.
+prompt.v11-phind_codellama_34b.sh PASSED: Perfect.

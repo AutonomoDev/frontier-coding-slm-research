@@ -1,0 +1,15 @@
+prompt.v7-google_gemma3_12b.sh FAILED: line 22: syntax error in conditional expression: unexpected token `+'
+prompt.v7-deepseek_r1_14b.sh FAILED: No suggestions.
+prompt.v7-meta_codellama_13b.sh FAILED: No suggestions.
+prompt.v7-meta_codellama_34b.sh FAILED: No suggestions.
+prompt.v7-qwen3_coder_30b.sh FAILED: No suggestions.
+prompt.v7-google_gemma3_27b.sh FAILED: Doesn't filter the models. Just one giant list.
+prompt.v7-mistral_small_24b.sh FAILED: Doesn't filter the models. Just one giant list.
+prompt.v7-deepseek_coder_v2_16b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v7-deepseek_r1_32b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v7-deepseek_v3_qwen2.5_32b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v7-microsoft_phi4_14b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v7-mistral_codestral_22b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v7-openai_gpt_oss_20b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v7-phind_codellama_34b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v7-wizardcoder_33b.sh PASSED: When two or more models have the same name, it stops at the :.

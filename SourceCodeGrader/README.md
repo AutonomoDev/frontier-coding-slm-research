@@ -1,0 +1,52 @@
+# Standard Skeleton Project
+
+[![TravisCI]()]()
+[![Maintainability]()]()
+[![Test Coverage]()]()
+
+Skeleton Project is a PHP Experts, Inc., Project meant to ease the creation of new projects.
+
+It strives to conform to the Standard PHP Skeleton (https://github.com/php-pds/skeleton) wherever possible.
+
+Read [**On Structuring PHP Projects**](https://blog.nikolaposa.in.rs/2017/01/16/on-structuring-php-projects/)
+for more.
+
+The configurer was inspired by https://www.binpress.com/building-project-skeletons-composer/
+
+## Installation
+
+Via Composer
+
+```bash
+composer create-project phpexperts/skeleton NewProject
+```
+
+## Usage
+
+Install a project, then remove the directories you won't need, like `bin`.
+
+You should definitely edit the LICENSE and .travis.yml to be specific to your 
+project and update the tags at the top of the README.md.
+
+## Use cases
+
+ ✔ Rapidly start up a project right.  
+ ✔ Less time spent on boilerplating a git repo.  
+ ✔ Conforms to the most widely-deployed PHP layout.  
+ ✔ Fully compatible with the Bettergist Collective recommendation.  
+
+## Testing
+
+```bash
+phpunit --testdox
+```
+
+## Contributors
+
+[Theodore R. Smith](https://www.phpexperts.pro/]) <theodore.smith@autonomo.codes>  
+GPG Fingerprint: 6CAC F838 454C 8912 8AA2  26DB 89DC D8F1 3BB9 33B3  
+CEO: PHP Experts, Inc.
+
+## License
+
+MIT license. Please see the [license file](LICENSE) for more information.

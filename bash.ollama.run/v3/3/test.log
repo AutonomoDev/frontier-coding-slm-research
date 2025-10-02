@@ -1,0 +1,17 @@
+prompt.v3-dagbs_deepseek-coder-v2-lite-instruct:17b_q4_0_l.sh FAILED: bash_completion: _comp_get_words: `comp_line': unknown argument
+prompt.v3-dagbs_deepseek-coder-v2-lite-instruct:17b_q8_0_l.sh FAILED: It shows the full line of the model.
+prompt.v3-deepseek_coder_v2_16b.sh FAILED: The script completely fails to give any suggestions at all.
+prompt.v3-deepseek_r1_14b.sh FAILED: line 36: syntax error near unexpected token `}'
+prompt.v3-deepseek_r1_32b.sh FAILED: It shows the full line of the model.
+prompt.v3-deepseek_v3_qwen2.5_32b.sh FAILED: Shows the full output of `ollama list` every time TAB is pressed.
+prompt.v3-google_gemma3_12b.sh FAILED: The script completely fails to give any suggestions at all.
+prompt.v3-google_gemma3_27b.sh FAILED: It tries to autocomplete with the files in the PWD.
+prompt.v3-meta_codellama_13b.sh FAILED: bash_completion: _comp_get_words: -p: invalid variable name `1'
+prompt.v3-meta_codellama_34b.sh FAILED: It tries to autocomplete with the files in the PWD.
+prompt.v3-microsoft_phi4_14b.sh FAILED: It shows the entire output of `ollama list` when no search.
+prompt.v3-mistral_codestral_22b.sh FAILED: It shows the entire output of `ollama list` when no search.
+prompt.v3-mistral_small_24b.sh FAILED: It shows the entire output of `ollama list` when no search.
+prompt.v3-openai_gpt_oss_20b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v3-phind_codellama_34b.sh FAILED: The script completely fails to give any suggestions at all.
+prompt.v3-wizardcoder_33b.sh FAILED: The script completely fails to give any suggestions at all.
+prompt.v3-qwen3_coder_30b.sh PASSED: When two or more models have the same name, it stops at the :.

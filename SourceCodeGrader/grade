@@ -1,0 +1,75 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+// Require the Composer autoloader to load our classes
+if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
+    echo "Error: Composer autoloader not found. Please run 'composer install'." . PHP_EOL;
+    exit(1);
+}
+require __DIR__ . '/vendor/autoload.php';
+
+use Autonomo\SourceCodeGrader\SourceCodeGrader;
+
+// Define the expected command-line options
+$long_options = [
+    "prompt-file:",  // Required value
+    "author:",       // Required value
+    "time:",         // Required value
+    "condition:",    // Required value
+    "code-file:",    // Required value
+    "help",          // No value
+];
+$options = getopt("h", $long_options);
+
+// --- Help Message ---
+function display_help(): void {
+    echo "Source Code Grader CLI" . PHP_EOL;
+    echo "Usage: ./grade-cli.sh [options]" . PHP_EOL;
+    echo PHP_EOL;
+    echo "Options:" . PHP_EOL;
+    echo "  --prompt-file=<path>   Path to the grading instruction prompt file." . PHP_EOL;
+    echo "  --author=<name>        Name of the code author." . PHP_EOL;
+    echo "  --time=<HH:MM:SS>      Time taken to develop the code." . PHP_EOL;
+    echo "  --condition=<string>   Test condition ('pass' or failure reason)." . PHP_EOL;
+    echo "  --code-file=<path>     Path to the author's source code file." . PHP_EOL;
+    echo "  -h, --help             Display this help message." . PHP_EOL;
+    echo PHP_EOL;
+}
+
+if (isset($options['h']) || isset($options['help'])) {
+    display_help();
+    exit(0);
+}
+
+// --- Validate Inputs ---
+$required_args = ['prompt-file', 'author', 'time', 'condition', 'code-file'];
+foreach ($required_args as $arg) {
+    if (!isset($options[$arg])) {
+        echo "Error: Missing required option --$arg" . PHP_EOL . PHP_EOL;
+        display_help();
+        exit(1);
+    }
+}
+
+// --- Execute Grading ---
+try {
+    // 1. Instantiate the grader
+    // In a real app, you would inject a configured ChatGPTSpeaker instance here.
+    $grader = new SourceCodeGrader($options['prompt-file']);
+
+    // 2. Call the grade method with the provided options
+    $result = $grader->grade(
+        $options['author'],
+        $options['time'],
+        $options['condition'],
+        $options['code-file']
+    );
+
+    // 3. Output the result as pretty-printed JSON
+    echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    echo PHP_EOL;
+
+} catch (Exception $e) {
+    echo "An error occurred: " . $e->getMessage() . PHP_EOL;
+    exit(1);
+}

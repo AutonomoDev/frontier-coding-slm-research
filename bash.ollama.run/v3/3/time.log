@@ -1,0 +1,17 @@
+dagbs/deepseek-coder-v2-lite-instruct:q4_k_l: 00:54
+dagbs/deepseek-coder-v2-lite-instruct:q8_0_l: 01:14
+deepseek-coder-v2:16b: 00:22
+deepseek-r1:14b: 01:33
+deepseek-r1:32b: 07:40
+xiaowangge/deepseek-v3-qwen2.5:32b: 02:58
+codellama:13b: 00:48
+codellama:34b: 03:40
+gemma3:27b: 03:58
+gemma3:12b: 01:07
+gpt-oss:20b: 10:47
+phind-codellama:34b: 03:55
+wizardcoder:33b: 03:13
+phi4:14b: 01:32
+codestral:22b: 01:30
+mistral-small:24b: 01:43
+qwen3-coder:30b: 00:35

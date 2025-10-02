@@ -1,0 +1,16 @@
+deepseek-coder-v2:16b => prompt.v4-deepseek_coder_v2_16b.sh
+deepseek-r1:14b => prompt.v4-deepseek_r1_14b.sh
+deepseek-r1:32b => prompt.v4-deepseek_r1_32b.sh
+xiaowangge/deepseek-v3-qwen2.5:32b => prompt.v4-deepseek_v3_qwen2.5_32b.sh
+codellama:13b => prompt.v4-meta_codellama_13b.sh
+codellama:34b => prompt.v4-meta_codellama_34b.sh
+gemma3:27b => prompt.v4-google_gemma3_27b.sh
+gemma3:12b => prompt.v4-google_gemma3_12b.sh
+gpt-oss:20b => prompt.v4-openai_gpt_oss_20b.sh
+phind-codellama:34b => prompt.v4-phind_codellama_34b.sh
+codestral:22b => prompt.v4-mistral_codestral_22b.sh
+mistral-small:24b => prompt.v4-mistral_small_24b.sh
+wizardcoder:33b => prompt.v4-wizardcoder_33b.sh
+phi4:14b => prompt.v4-microsoft_phi4_14b.sh
+qwen3-coder:30b => prompt.v4-qwen3_coder_30b.sh
+phi4-reasoning:14b => prompt.v4-microsoft_phi4_reasoning_14b.sh

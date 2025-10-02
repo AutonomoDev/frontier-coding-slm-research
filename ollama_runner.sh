@@ -1,17 +1,21 @@
 #!/bin/env bash
 
 # Check for correct number of arguments
-if [[ $# -ne 3 ]]; then
-    echo "Usage: $0 <DESTINATION> <PROMPT_FILE> <MAX_ITERATIONS>"
+if [[ $# -lt 1 || $# -gt 2 ]]; then
+    echo "Usage: $0 <DESTINATION> [MAX_ITERATIONS=1]"
     exit 1
 fi
 
 DESTINATION="$1"
-PROMPT_FILE="$2"
-MAX_ITERATIONS="$3"
+VERSION=$(echo "$DESTINATION" | grep -o 'v[[:digit:]]*' || true)
+PROMPT_FILE="$(dirname "$DESTINATION")/prompt.${VERSION}.md"
+MAX_ITERATIONS="${2:-1}" # default to 1 if not provided
+
+echo PROMPT FILE: $PROMPT_FILE
 
 # Check for models.txt in the parent directory of DESTINATION
 MODELS_FILE="$DESTINATION/models.txt"
+echo "MODELS File: $MODELS_FILE"
 if [[ ! -f "$MODELS_FILE" ]]; then
     echo "Error: models.txt file not found at $MODELS_FILE"
     exit 1
@@ -24,11 +28,11 @@ if [[ ! -f "$PROMPT_FILE" ]]; then
 fi
 
 # Ensure the destination directory exists
-    mkdir -p "$DESTINATION"
+mkdir -p "$DESTINATION"
 
 # Count non-empty lines in MODELS_FILE
 MODEL_COUNT=$(grep -v '^[[:space:]]*$' "$MODELS_FILE" | wc -l)
-
+echo "MODELS Count: $MODEL_COUNT"
 ITERATION=1
 # Check if any iterations exist
 if [ ! -d "$DESTINATION/1" ]; then
@@ -57,17 +61,23 @@ while [[ $ITERATION -le $MAX_ITERATIONS ]]; do
     TIME_LOG="$DESTINATION/$ITERATION/time.log"
     touch "$TIME_LOG"
 
-
     # Process each model in models.txt
-    while IFS='=>' read -r model _ output_file; do
-        model=$(echo "$model" | xargs)
-        output_file=$(echo "$output_file" | xargs)
-        #echo "$model -> $output_file"; continue;
-
-        # Skip empty lines or invalid entries
-        if [[ -z "$model" ]]; then
+    while IFS='=>' read -r model _ output_file || [[ -n "$model" ]]; do
+        # Skip empty lines or lines without proper separator
+        if [[ -z "$model" || -z "$output_file" ]]; then
             continue
         fi
+
+        model=$(echo "$model" | xargs)
+        output_file=$(echo "$output_file" | xargs)
+
+        # Skip if model or output_file is empty after trimming
+        if [[ -z "$model" || -z "$output_file" ]]; then
+            continue
+        fi
+
+        echo "Output file: $output_file"
+        #echo "$model -> $output_file"; continue;
 
         CURRENT_OUTPUT="$DESTINATION/$ITERATION/$output_file"
         FAILED_OUTPUT="$DESTINATION/$ITERATION/failed/$output_file"
@@ -85,7 +95,6 @@ while [[ $ITERATION -le $MAX_ITERATIONS ]]; do
         # Run the ollama command with timing and save output to the specified file
         start_time=$(date +%s)
         if ! ollama run "$model" "$(cat "$PROMPT_FILE")" < /dev/null | tee "$CURRENT_OUTPUT"; then
-
             echo "Error: Command failed for model $model"
             cleanup
         fi

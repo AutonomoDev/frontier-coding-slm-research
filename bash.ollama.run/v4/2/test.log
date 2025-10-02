@@ -1,0 +1,16 @@
+prompt.v4-deepseek_coder_v2_16b.sh FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+prompt.v4-deepseek_r1_14b.sh FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+prompt.v4-deepseek_r1_32b.sh FAILED: Shows every single model on one line and fails hard.
+prompt.v4-deepseek_v3_qwen2.5_32b.sh FAILED: When two or more models have the same name, it stops at the :.
+prompt.v4-google_gemma3_12b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v4-google_gemma3_27b.sh FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+prompt.v4-meta_codellama_13b.sh FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+prompt.v4-meta_codellama_34b.sh FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+prompt.v4-microsoft_phi4_14b.sh FAILED: No suggestions.
+prompt.v4-microsoft_phi4_reasoning_14b.sh FAILED: Bash syntax error.
+prompt.v4-mistral_codestral_22b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v4-mistral_small_24b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v4-openai_gpt_oss_20b.sh FAILED: Only autocompleted the first model in `ollama list`.
+prompt.v4-phind_codellama_34b.sh FAILED: Bash syntax error. Unknown flag: --no-trunc
+prompt.v4-qwen3_coder_30b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v4-wizardcoder_33b.sh PASSED: When two or more models have the same name, it stops at the :.

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+_ollama_run_completions() {
+  local cur prev opts
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+  if [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]]; then
+    return 1
+  fi
+
+  if [[ "$cur" == -* ]]; then
+    return 0
+  fi
+
+  opts=$(ollama list | tail -n +2 | grep -v '^$' | awk '{print $1}')
+
+  COMPREPLY=( $(compgen -W "$opts" -- "$cur") )
+
+  __ltrim_colon_completions "$cur"
+}
+
+complete -F _ollama_run_completions ollama run

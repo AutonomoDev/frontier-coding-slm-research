@@ -9,8 +9,14 @@ fi
 # Attempt to cd into it, or exit on failure
 cd "$1" || { echo "Error: Cannot change directory to '$1'." >&2; exit 1; }
 
-for script in prompt.*.sh; do
+# Get scripts sorted by the numeric part after vXX-
+sorted_scripts=$(find . -maxdepth 1 -name 'prompt.*.sh' -printf '%f\n' |
+          sed 's/prompt\.v\([0-9]*\)-\([0-9]*\)\..*/\1 \2 &/' |
+          sort -k1,1n -k2,2n |
+          cut -d' ' -f3-)
+for script in $sorted_scripts; do
     clear
+
     echo "==== Testing $script ===="
 
     # Create a temporary rc file to load the completion in the subshell
@@ -42,6 +48,7 @@ for script in prompt.*.sh; do
         echo "$script FAILED: $comments" >> test.log
         mv -v "$script" "failed/$script"
     fi
+#done < <(find . -maxdepth 1 -name 'prompt.*.sh' -printf '%f\n' | sort -t- -k1.8,1.9n -k2n)
 done
 
 echo "✔️ All done!"

@@ -1,0 +1,17 @@
+prompt.v5-deepseek_coder_v2_16b.sh FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+prompt.v5-deepseek_r1_14b.sh FAILED: Shows the full output of `ollama list` every time TAB is pressed even with queries.
+prompt.v5-deepseek_r1_32b.sh FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+prompt.v5-deepseek_v3_qwen2.5_32b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v5-deepseek_v5_qwen2.5_32b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v5-google_gemma3_12b.sh FAILED: Throws every model onto the command line in a giant mess.
+prompt.v5-google_gemma3_27b.sh FAILED: Din't create an actual code completion.
+prompt.v5-meta_codellama_13b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v5-meta_codellama_34b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v5-microsoft_phi4_14b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v5-mistral_codestral_22b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v5-mistral_small_24b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v5-openai_gpt_oss_20b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v5-phind_codellama_34b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v5-wizardcoder_33b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v5-microsoft_phi4_reasoning_14b.sh PASSED: When two or more models have the same name, it repeats the search after the colon.
+prompt.v5-qwen3_coder_30b.sh PASSED: When two or more models have the same name, it stops at the :.

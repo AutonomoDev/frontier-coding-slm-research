@@ -1,0 +1,6 @@
+prompt.v3-cloud-anthropic_claude_4_opus.sh FAILED: Didnt work perfectly
+prompt.v3-cloud-anthropic_claude_4_sonnet.sh FAILED: Nope
+prompt.v3-cloud-google_gemini_2_5_pro.sh FAILED: Nope
+prompt.v3-cloud-openai_chatgpt_gpt5.sh PASSED: Worked great.
+prompt.v3-cloud-openai_o3.sh FAILED: Nope
+prompt.v3-google_gemma3_12b.sh FAILED: Nope

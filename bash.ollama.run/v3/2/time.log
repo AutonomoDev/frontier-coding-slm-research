@@ -10,7 +10,7 @@ phind-codellama:34b: 02:24
 dagbs/deepseek-coder-v2-lite-instruct:q8_0_l: 00:47
 gpt-oss:20b: 06:12
 codestral:22b: 01:33
-qwen3-coder:latest: 00:56
 mistral-small:24b: 01:36
 phi4:14b: 00:58
 wizardcoder:33b: 02:51
+qwen3-coder:30b: 00:42
