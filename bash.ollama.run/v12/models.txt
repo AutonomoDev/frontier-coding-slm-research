@@ -13,4 +13,4 @@ phi4:14b => prompt.v12-12.microsoft_phi4_14b.sh
 codestral:22b => prompt.v12-13.mistral_codestral_22b.sh
 mistral-small:24b => prompt.v12-14.mistral_small_24b.sh
 phind-codellama:34b => prompt.v12-15.phind_codellama_34b.sh
-phi4-reasoning:14b => prompt.v12-17.microsoft_phi4_reasoning_14b.sh
+phi4-reasoning:14b => prompt.v12-16.microsoft_phi4_reasoning_14b.sh
