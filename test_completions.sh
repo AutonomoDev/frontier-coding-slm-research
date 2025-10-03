@@ -32,23 +32,39 @@ for script in $sorted_scripts; do
 
     rm "$temp_rc"
 
-    # Ask for grade and comments
+# Ask for grade and comments
     echo
     echo "Grade the test (pass/fail): "
     read grade
-    echo "Comments: "
-    read -r comments
 
-    if [[ "$grade" = "pass" ]] || [[ "$grade" = "p" ]]; then
-        mkdir -p "passed"
+    # Handle "P" grade - automatically set to "Passed" with "Perfect." comment
+    if [[ "$grade" = "P" ]]; then
+        grade="Passed"
+        comments="Perfect."
+        mkdir -p "perfect"
         echo "$script PASSED: $comments" >> test.log
-        mv -v "$script" "passed/$script"
+        mv -v "$script" "perfect/$script"
     else
-        mkdir -p "failed"
-        echo "$script FAILED: $comments" >> test.log
-        mv -v "$script" "failed/$script"
+        echo "Comments: "
+        read -r comments
+
+        # Handle "p" grade with "Perfect." comment
+        if [[ "$grade" = "p" ]] && [[ "$comments" = "Perfect." ]]; then
+            mkdir -p "perfect"
+            echo "$script PASSED: $comments" >> test.log
+            mv -v "$script" "perfect/$script"
+        # Handle regular pass
+        elif [[ "$grade" = "pass" ]] || [[ "$grade" = "p" ]]; then
+            mkdir -p "passed"
+            echo "$script PASSED: $comments" >> test.log
+            mv -v "$script" "passed/$script"
+        # Handle fail
+        else
+            mkdir -p "failed"
+            echo "$script FAILED: $comments" >> test.log
+            mv -v "$script" "failed/$script"
+        fi
     fi
-#done < <(find . -maxdepth 1 -name 'prompt.*.sh' -printf '%f\n' | sort -t- -k1.8,1.9n -k2n)
 done
 
 echo "✔️ All done!"
