@@ -1,6 +1,6 @@
+# [[HUMAN COMMENTED-OUT]]
+#Here is the final version of the code that completes model names for the `ollama run` command:
 
-Here is the final version of the code that completes model names for the `ollama run` command:
-```bash
 #!/bin/bash
 
 _ollama_completions() {
@@ -27,8 +27,9 @@ _ollama_completions() {
   fi
 }
 complete -F _ollama_completions ollama
-```
-This script defines a function `_ollama_completions` that is called by the `complete` command to provide completion suggestions for the `ollama run` subcommand. The function uses the `_get_comp_words_by_ref` helper function to re-parse the command line with a modified word break character, which allows it to handle colons correctly in model names. The script also registers the `_ollama_completions` function as the completion for the `ollama run` subcommand using the `complete -F` command.
 
-You can save this code to a file (e.g., `ollama-run-completion.sh`) and source it in your `.bashrc` file or use it directly in your terminal session.
+# [[HUMAN COMMENTED-OUT]]
+#This script defines a function `_ollama_completions` that is called by the `complete` command to provide completion suggestions for the `ollama run` subcommand. The function uses the `_get_comp_words_by_ref` helper function to re-parse the command line with a modified word break character, which allows it to handle colons correctly in model names. The script also registers the `_ollama_completions` function as the completion for the `ollama run` subcommand using the `complete -F` command.
+#
+#You can save this code to a file (e.g., `ollama-run-completion.sh`) and source it in your `.bashrc` file or use it directly in your terminal session.
 

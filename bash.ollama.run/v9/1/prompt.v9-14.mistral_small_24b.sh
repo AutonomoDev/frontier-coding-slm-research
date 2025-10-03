@@ -1,4 +1,3 @@
-```bash
 # Simple Static Completion: The simplest form of completion using a static word list.
 complete -W "option1 option2 option3" example_cmd
 
@@ -68,6 +67,3 @@ complete -F _ollama_completions ollama
 #         source "$f"
 #     done
 # fi
-
-```
-

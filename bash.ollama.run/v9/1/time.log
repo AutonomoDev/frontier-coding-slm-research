@@ -15,3 +15,5 @@ qwen3-coder:latest: 01:13
 wizardcoder:33b: 05:49
 qwen3-coder:30b: 00:01
 phi4-reasoning:14b: 00:01
+qwen3-coder:30b: 00:35
+phi4-reasoning:14b: 01:16

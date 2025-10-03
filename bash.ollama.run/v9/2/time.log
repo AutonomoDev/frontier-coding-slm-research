@@ -15,3 +15,4 @@ qwen3-coder:30b: 00:39
 wizardcoder:33b: 01:43
 phind-codellama:34b: 01:55
 phi4-reasoning:14b: 00:00
+phi4-reasoning:14b: 01:14

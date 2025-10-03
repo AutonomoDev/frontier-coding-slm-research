@@ -14,3 +14,4 @@ mistral-small:24b: 01:36
 phi4:14b: 00:58
 wizardcoder:33b: 02:51
 qwen3-coder:30b: 00:42
+phi4-reasoning:14b: 06:28

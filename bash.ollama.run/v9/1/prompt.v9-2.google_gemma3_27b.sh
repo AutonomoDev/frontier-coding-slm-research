@@ -75,5 +75,4 @@ complete -F _ollama_completions ollama
 # 4. Save this completion script (e.g., as ollama_completion.sh) in ~/.bash_completion.d/.
 #
 # This will enable Bash completion for ollama and other commands with completion files in ~/.bash_completion.d/.
-```
 

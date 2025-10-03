@@ -15,3 +15,4 @@ gemma3:27b: 04:07
 gemma3:12b: 01:10
 gpt-oss:20b: 07:05
 qwen3-coder:30b: 01:00
+phi4-reasoning:14b: 04:43

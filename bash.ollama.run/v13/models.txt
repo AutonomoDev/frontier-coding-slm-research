@@ -14,4 +14,3 @@ codestral:22b => 13.mistral_codestral_22b
 mistral-small:24b => 14.mistral_small_24b
 phind-codellama:34b => 15.phind_codellama_34b
 phi4-reasoning:14b => 16.microsoft_phi4_reasoning_14b
-olympus-coder:13b => 17.aadi19_olympus_coder_13b

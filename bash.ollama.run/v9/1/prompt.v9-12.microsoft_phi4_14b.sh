@@ -1,4 +1,3 @@
-```bash
 # 1. Simple Static Completion: Provide a static word list for the `example_cmd` command.
 complete -W "option1 option2 option3" example_cmd
 

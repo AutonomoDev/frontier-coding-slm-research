@@ -1,6 +1,6 @@
-Here is a Bash completion script for the `ollama run` command that dynamically completes model names retrieved from the `ollama list` command. This script follows the structure outlined in steps 5 of the task description and is compatible with the bash-completion framework (version 2 or later).
+# [[HUMAN COMMENTED-OUT]]
+#Here is a Bash completion script for the `ollama run` command that dynamically completes model names retrieved from the `ollama list` command. This script follows the structure outlined in steps 5 of the task description and is compatible with the bash-completion framework (version 2 or later).
 
-```bash
 # Bash completion script for ollama command
 
 # Completion function for ollama
@@ -22,23 +22,23 @@ _ollama_completions() {
 
 # Register completion function for ollama
 complete -F _ollama_completions ollama
-```
 
+# [[HUMAN COMMENTED-OUT]]
 ## Installation Instructions:
-1. Create a new directory named `bash_completion.d` in your home directory if it doesn't exist:
-   ```
-   mkdir -p ~/.bash_completion.d
-   ```
-2. Save the completion script to a file (e.g., `ollama`) in the `~/.bash_completion.d/` directory:
-   ```
-   cp /path/to/this/script ~/.bash_completion.d/ollama
-   ```
-3. Include the following line in your `~/.bashrc` file to automatically source completion files from `~/.bash_completion.d/`:
-   ```
-   for script in ~/.bash_completion.d/*; do source $script; done
-   ```
-4. Restart your terminal or run the following command to apply the changes:
-   ```
-   source ~/.bashrc
-   ```
+#1. Create a new directory named `bash_completion.d` in your home directory if it doesn't exist:
+#   ```
+#   mkdir -p ~/.bash_completion.d
+#   ```
+#2. Save the completion script to a file (e.g., `ollama`) in the `~/.bash_completion.d/` directory:
+#   ```
+#   cp /path/to/this/script ~/.bash_completion.d/ollama
+#   ```
+#3. Include the following line in your `~/.bashrc` file to automatically source completion files from `~/.bash_completion.d/`:
+#   ```
+#   for script in ~/.bash_completion.d/*; do source $script; done
+#   ```
+#4. Restart your terminal or run the following command to apply the changes:
+#   ```
+#   source ~/.bashrc
+#   ```
 

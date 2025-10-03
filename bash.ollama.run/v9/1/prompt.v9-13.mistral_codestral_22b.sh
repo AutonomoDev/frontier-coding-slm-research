@@ -1,4 +1,3 @@
- ```bash
    # Simple Static Completion: Provide a static word list for `example_cmd`.
    complete -W "option1 option2 option3" example_cmd
 
@@ -61,5 +60,3 @@
        done
        unset file
    fi
-   ```
-
