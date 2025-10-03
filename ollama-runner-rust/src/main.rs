@@ -10,7 +10,7 @@ use clap::Parser;
 use regex::Regex;
 use std::{
     fs::{self, File, OpenOptions},
-    io::{self, BufRead, Write},
+    io::{self, Read, Write},
     path::{Path, PathBuf},
     process::{Command, Stdio},
     sync::{
@@ -277,27 +277,28 @@ fn process_model(
         .stdout
         .take()
         .context("Child process did not have a stdout handle")?;
-    let mut reader = io::BufReader::new(stdout);
-    let mut buffer = Vec::new();
+    let mut reader = std::io::BufReader::new(stdout);
+    let mut buffer = [0; 1024]; // Use a fixed-size buffer for reading chunks
 
     // Read from ollama's stdout and write to both console and file (tee behavior)
     loop {
         // Check for interrupt during processing
         check_interrupt()?;
 
-        buffer.clear();
-        let bytes_read = reader.read_until(b'\n', &mut buffer).context("Failed to read from ollama stdout")?;
+        let bytes_read = reader.read(&mut buffer).context("Failed to read from ollama stdout")?;
 
         if bytes_read == 0 {
             break; // EOF
         }
 
+        let data_slice = &buffer[..bytes_read];
+
         // Write to stdout
-        io::stdout().write_all(&buffer)?;
+        io::stdout().write_all(data_slice)?;
         io::stdout().flush()?;
 
         // Write to output file
-        output_file.write_all(&buffer)?;
+        output_file.write_all(data_slice)?;
         output_file.flush()?;
     }
 
