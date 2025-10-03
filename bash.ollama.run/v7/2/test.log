@@ -13,3 +13,4 @@ prompt.v5-openai_gpt_oss_20b.sh PASSED: When two or more models have the same na
 prompt.v5-phind_codellama_34b.sh PASSED: When two or more models have the same name, it stops at the :.
 prompt.v5-wizardcoder_33b.sh PASSED: When two or more models have the same name, it stops at the :.
 prompt.v7-qwen3_coder_30b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v7-16.microsoft_phi4_reasoning_14b.sh PASSED: When two or more models have the same name, it stops at the :.

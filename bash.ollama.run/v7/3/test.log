@@ -13,3 +13,6 @@ prompt.v7-mistral_codestral_22b.sh PASSED: When two or more models have the same
 prompt.v7-openai_gpt_oss_20b.sh PASSED: When two or more models have the same name, it stops at the :.
 prompt.v7-phind_codellama_34b.sh PASSED: When two or more models have the same name, it stops at the :.
 prompt.v7-wizardcoder_33b.sh PASSED: When two or more models have the same name, it stops at the :.
+prompt.v7-16.microsoft_phi4_reasoning_14b.sh PASSED: Perfect.
+prompt.v7-16.microsoft_phi4_reasoning_14b.sh PASSED: Perfect.
+prompt.v7-16.microsoft_phi4_reasoning_14b.sh PASSED: Perfect.
