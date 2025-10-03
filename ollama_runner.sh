@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+echo "WARNING!!! This is deprecated!!! Use the Rust ./ollama-runner instead!"
+exit 42
+
 # Global variable to store the path of the current output file being processed.
 # Used by the cleanup function.
 CURRENT_OUTPUT=""

@@ -1,1 +1,3 @@
 .idea/
+ollama-runner
+ollama-runner-rust/target/
