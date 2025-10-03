@@ -13,20 +13,57 @@ use std::{
     io::{self, BufRead, Write},
     path::{Path, PathBuf},
     process::{Command, Stdio},
-    sync::atomic::{AtomicBool, Ordering},
+    sync::{
+        atomic::{AtomicBool, Ordering},
+        Mutex,
+    },
     time::Instant,
 };
 
 // Global atomic flag for signal handling
 static SHOULD_CLEANUP: AtomicBool = AtomicBool::new(false);
 
+// Global mutex-protected path to track the current output file being processed
+static CURRENT_OUTPUT: Mutex<Option<PathBuf>> = Mutex::new(None);
+
 // Function to setup signal handler for CTRL+C and termination
 fn setup_signal_handler() -> Result<()> {
     ctrlc::set_handler(|| {
         eprintln!("\nReceived interrupt signal, cleaning up...");
         SHOULD_CLEANUP.store(true, Ordering::SeqCst);
+
+        // Perform cleanup
+        cleanup_current_output();
+
+        std::process::exit(1);
     })
     .context("Failed to set up signal handler")
+}
+
+// Function to clean up the current output file if it exists
+fn cleanup_current_output() {
+    if let Ok(mut current) = CURRENT_OUTPUT.lock() {
+        if let Some(path) = current.take() {
+            if path.exists() {
+                eprintln!("Cleaning up incomplete output file: {}", path.display());
+                let _ = fs::remove_file(&path);
+            }
+        }
+    }
+}
+
+// Function to set the current output file being processed
+fn set_current_output(path: PathBuf) {
+    if let Ok(mut current) = CURRENT_OUTPUT.lock() {
+        *current = Some(path);
+    }
+}
+
+// Function to clear the current output file (on successful completion)
+fn clear_current_output() {
+    if let Ok(mut current) = CURRENT_OUTPUT.lock() {
+        *current = None;
+    }
 }
 
 // CLI argument parser
@@ -154,9 +191,6 @@ fn prepare_iteration_directory(dest: &Path, iteration_num: usize) -> Result<Path
     println!("Preparing directory for iteration {}: {}", iteration_num, iteration_dir.display());
     fs::create_dir_all(&iteration_dir).context("Failed to create iteration directory")?;
 
-    // Initialize time log file for this iteration
-    File::create(iteration_dir.join("time.log")).context("Failed to create time.log")?;
-
     Ok(iteration_dir)
 }
 
@@ -222,6 +256,9 @@ fn process_model(
     // Create the output file early, so we can write to it immediately.
     let mut output_file = File::create(&output_path).context("Failed to create output file")?;
 
+    // Set the current output file for cleanup purposes
+    set_current_output(output_path.clone());
+
     let start_time = Instant::now();
 
     // Spawn the `ollama` command with stdout piped for `tee` behavior
@@ -269,7 +306,8 @@ fn process_model(
         .context(format!("Failed to wait for ollama process for model {}", model.name))?;
 
     if !status.success() {
-        let _ = fs::remove_file(&output_path); // Clean up incomplete output
+        // Clean up incomplete output file on command failure
+        cleanup_current_output();
         anyhow::bail!(
             "ollama command failed for model {}. Exit status: {:?}",
             model.name,
@@ -288,6 +326,9 @@ fn process_model(
         .open(time_log_path)
         .context("Failed to open time.log for appending")?;
     writeln!(time_log_file, "{}: {}", model.name, formatted_time)?;
+
+    // Clear the current output file since processing completed successfully
+    clear_current_output();
 
     println!("Output saved to {}", output_path.display());
     println!("Time taken: {}", formatted_time);
@@ -319,7 +360,11 @@ fn main() -> Result<()> {
     // Outer loop for iterations
     for iteration in 1..=max_iterations {
         // Check for interrupt before starting iteration
-        check_interrupt()?;
+        if let Err(e) = check_interrupt() {
+            eprintln!("{}", e);
+            cleanup_current_output();
+            return Err(e);
+        }
 
         // prepare_iteration_directory creates the iteration directory and time.log
         let _iteration_dir = prepare_iteration_directory(&dest_path_obj, iteration)?;
@@ -328,16 +373,24 @@ fn main() -> Result<()> {
         // Inner loop to process each model
         for model in &models {
             // Check for interrupt during model processing
-            check_interrupt()?;
+            if let Err(e) = check_interrupt() {
+                eprintln!("{}", e);
+                cleanup_current_output();
+                return Err(e);
+            }
 
-            process_model(
+            if let Err(e) = process_model(
                 model,
                 &dest_path_obj,
                 iteration,
                 &version,
                 &prompt_file,
                 &time_log_path,
-            )?;
+            ) {
+                eprintln!("Error processing model: {}", e);
+                cleanup_current_output();
+                return Err(e);
+            }
         }
     }
 
@@ -347,3 +400,4 @@ fn main() -> Result<()> {
 
 // Created by Gemini 2.5-flash.
 // Refactored by Grok 4-Fast, built by xAI.
+// Cleanup functionality by Anthropic Claude 4.5 Sonnet.
