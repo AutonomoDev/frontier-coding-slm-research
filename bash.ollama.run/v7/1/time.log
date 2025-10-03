@@ -12,3 +12,4 @@ mistral-small:24b: 02:11
 phind-codellama:34b: 02:54
 gpt-oss:20b: 09:04
 wizardcoder:33b: 05:19
+phi4-reasoning:14b: 01:45
