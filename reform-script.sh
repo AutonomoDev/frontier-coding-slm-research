@@ -96,8 +96,8 @@ ${file_content}
         exit 0
     fi
 
-    # Normal execution: pipe to parser, filtering out lines that begin with ```
-    if ! "$${fetch_cmd[@]}" | grep -v '^```' | "$$PARSE_SCRIPT" "$temp_output_file"; then
+    # Normal execution: pipe to parser, filtering out code fence lines (```), even with leading whitespace.
+    if ! "${fetch_cmd[@]}" | "$PARSE_SCRIPT" "$temp_output_file"; then
         echo "❌ API call or parsing failed for model $model" >&2
         return 1
     fi
