@@ -70,7 +70,7 @@ prepare_log() {
 ##################################################################
 show_interactive_guide() {
     local scenario="$1"
-    local result="$2"
+    local is_last="$2"
 
     echo
     echo "──────────────────────────────────────────────────────────────"
@@ -78,60 +78,45 @@ show_interactive_guide() {
     echo "──────────────────────────────────────────────────────────────"
     echo
 
+    if [[ "$is_last" == "true" ]]; then
+        echo "  💡 QUICK COMMANDS: n/next | p/pass | P/perfect | fail | bail"
+    else
+        echo "  💡 QUICK COMMANDS: n/next | p/pass | fail | bail"
+    fi
+    echo
+
     case "$scenario" in
         1)
             echo "  1. Type: ollama [TAB][TAB]"
             echo "     Expected: No completions (or only 'run' if other commands exist)"
-            if [[ -n "$result" ]]; then
-                echo "     Auto-test got: $result"
-            else
-                echo "     Auto-test got: (no suggestions) ✓"
-            fi
             ;;
         2)
             echo "  2. Type: ollama run [TAB][TAB]"
+            echo "     Copy and paste to run \`ollama list | awk '{print \$1}' | sort\`'"
             echo "     Expected: All available models:"
             printf "       %s\n" "${AUTO_TEST_EXPECTED_MODELS[@]}" | head -5
             if (( ${#AUTO_TEST_EXPECTED_MODELS[@]} > 5 )); then
                 echo "       ... and $((${#AUTO_TEST_EXPECTED_MODELS[@]} - 5)) more"
             fi
-            if [[ -n "$result" ]]; then
-                echo "     Auto-test got: ${result:0:60}..."
-            else
-                echo "     Auto-test got: (no suggestions) ✗"
-            fi
             ;;
         3)
             echo "  3. Type: ollama run code[TAB]"
+            echo "     Copy and paste to run \`ollama list | grep '^code' | awk '{print \$1}' | sort\`'"
             echo "     Expected: Models starting with 'code':"
             if (( ${#AUTO_TEST_EXPECTED_PREFIX[@]} > 0 )); then
                 printf "       %s\n" "${AUTO_TEST_EXPECTED_PREFIX[@]}"
             else
                 echo "       (none in your environment)"
             fi
-            if [[ -n "$result" ]]; then
-                echo "     Auto-test got: $result"
-            else
-                echo "     Auto-test got: (no suggestions)"
-            fi
             ;;
         4)
             if ! $AUTO_TEST_NO_COLON_TEST; then
                 echo "  4. Type: ollama run $AUTO_TEST_TARGET_BASE:[TAB][TAB]"
+                echo "     Copy and paste to run \`ollama list | grep '^code' | awk '{print \$1}' | sort | cut -d: -f2\`'"
                 echo "     Expected: Only tags (without '$AUTO_TEST_TARGET_BASE:' prefix):"
                 for tag in ${AUTO_TEST_BASE_TO_TAGS[$AUTO_TEST_TARGET_BASE]}; do
                     echo "       $tag"
                 done
-                if [[ -n "$result" ]]; then
-                    echo "     Auto-test got: $result"
-                    if [[ "$result" == *":"* ]]; then
-                        echo "     Note: Still contains colons (not perfect)"
-                    else
-                        echo "     Note: Clean tags only ✓"
-                    fi
-                else
-                    echo "     Auto-test got: (no suggestions) ✗"
-                fi
             else
                 echo "  4. (Skipped: No models with multiple tags found)"
             fi
@@ -148,8 +133,11 @@ show_interactive_guide() {
 ################################################################
 run_interactive_test() {
     local script="$1"
+    local is_last="$2"
 
     temp_rc="$(mktemp /tmp/test_completion.XXXXXX)"
+    _marker_dir="$(mktemp -d /tmp/test_markers.XXXXXX)"
+
     cat > "$temp_rc" << EOF
 # Load bash-completion
 [[ -f /usr/share/bash-completion/bash_completion ]] && source /usr/share/bash-completion/bash_completion
@@ -158,11 +146,79 @@ run_interactive_test() {
 # Source the completion script
 source '$(pwd)/$script'
 
-# Show reminder
-echo "Ready for testing. Type 'exit' or press Ctrl-D when done."
+# Quick command aliases with documentation
+alias p='echo "✓ Marking as PASS" && touch "$_marker_dir/pass" && exit'
+alias pass='echo "✓ Marking as PASS" && touch "$_marker_dir/pass" && exit'
+alias fail='echo "✗ Marking as FAIL" && touch "$_marker_dir/fail" && exit'
+alias bail='echo "⚠ BAILING OUT - exiting all tests" && touch "$_marker_dir/bail" && exit'
+EOF
+
+    if [[ "$is_last" == "true" ]]; then
+        cat >> "$temp_rc" << EOF
+alias n='echo "⚠ Use 'p/pass' or 'P/perfect' on the last scenario" && touch "$_marker_dir/next_on_last" && exit'
+alias next='echo "⚠ Use 'p/pass' or 'P/perfect' on the last scenario" && touch "$_marker_dir/next_on_last" && exit'
+alias P='echo "⭐ Marking as PERFECT" && touch "$_marker_dir/perfect" && exit'
+alias perfect='echo "⭐ Marking as PERFECT" && touch "$_marker_dir/perfect" && exit'
+EOF
+    else
+        cat >> "$temp_rc" << EOF
+alias n='echo "→ Moving to next scenario (passed)" && touch "$_marker_dir/next" && exit'
+alias next='echo "→ Moving to next scenario (passed)" && touch "$_marker_dir/next" && exit'
+alias P='echo "⚠ 'P' can only be used on the last scenario"'
+alias perfect='echo "⚠ 'perfect' can only be used on the last scenario"'
+EOF
+    fi
+
+    cat >> "$temp_rc" << EOF
+
+# Show reminder with command help
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "Ready for testing. Quick commands available:"
+EOF
+
+    if [[ "$is_last" == "true" ]]; then
+        cat >> "$temp_rc" << EOF
+echo "  • p/pass  = Mark script as passed and continue"
+echo "  • P/perfect = Mark script as perfect and continue"
+echo "  • fail    = Mark script as failed and continue"
+echo "  • bail    = Exit all testing immediately (no save)"
+EOF
+    else
+        cat >> "$temp_rc" << EOF
+echo "  • n/next  = Scenario passed, move to next scenario"
+echo "  • p/pass  = All scenarios passed, continue to next script"
+echo "  • fail    = Mark script as failed and continue"
+echo "  • bail    = Exit all testing immediately (no save)"
+EOF
+    fi
+
+    cat >> "$temp_rc" << EOF
+echo ""
+echo "Or press Ctrl-D when done testing manually."
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo
 EOF
+
     bash --rcfile "$temp_rc" -i
+
+    # Check what command was used
+    _quick_command=""
+    if [[ -f "$_marker_dir/next" ]]; then
+        _quick_command="next"
+    elif [[ -f "$_marker_dir/next_on_last" ]]; then
+        _quick_command="next_on_last"
+    elif [[ -f "$_marker_dir/perfect" ]]; then
+        _quick_command="perfect"
+    elif [[ -f "$_marker_dir/pass" ]]; then
+        _quick_command="pass"
+    elif [[ -f "$_marker_dir/fail" ]]; then
+        _quick_command="fail"
+    elif [[ -f "$_marker_dir/bail" ]]; then
+        _quick_command="bail"
+    fi
+
+    # Cleanup
+    rm -rf "$_marker_dir"
     rm -f "$temp_rc"
 }
 
@@ -170,32 +226,27 @@ EOF
 # GET USER OVERRIDE: Allow manual grade adjustment.              #
 ################################################################
 get_user_override() {
-    local grade="$1"
-    local reason="$2"
-
     echo
-    read -p "Auto-graded as $grade. Press Enter to accept, or type new grade [P/p/F]: " _user_grade_input
+    read -p "Grade this script [P/p/F]: " _user_grade_input
     _user_grade_input="${_user_grade_input,,}"  # to lowercase
-    grade_override="$grade"
-    comments="$reason"
-    if [[ -n "$_user_grade_input" ]]; then
-        case "$_user_grade_input" in
-            p | pass)
-                grade_override="Passed"
-                read -p "Comments: " -r _comments_input
-                [[ -z "$_comments_input" ]] && comments="$reason" || comments="$_comments_input"
-                ;;
-            f | fail)
-                grade_override="Failed"
-                read -p "Comments: " -r _comments_input
-                [[ -z "$_comments_input" ]] && comments="$reason" || comments="$_comments_input"
-                ;;
-            perfect)
-                grade_override="Passed"
-                comments="Perfect."
-                ;;
-        esac
-    fi
+    grade_override=""
+    comments=""
+    case "$_user_grade_input" in
+        p | pass)
+            grade_override="Passed"
+            read -p "Comments: " -r _comments_input
+            comments="$_comments_input"
+            ;;
+        f | fail)
+            grade_override="Failed"
+            read -p "Comments: " -r _comments_input
+            comments="$_comments_input"
+            ;;
+        perfect)
+            grade_override="Passed"
+            comments="Perfect."
+            ;;
+    esac
 }
 
 ################################################################
@@ -234,64 +285,140 @@ process_script() {
     fi
     echo "==== Testing $script ===="
 
-    # Run automated tests
-    if ! auto_test_run "$script"; then
-        # Failed (syntax or file not found)
-        echo "$script FAILED: $AUTO_TEST_REASON"
-        mkdir -p "failed"
-        echo "$script FAILED: $AUTO_TEST_REASON" >> "$log_file"
-        mv -f "$script" "failed/$script"
-        if $check_mode; then
-            echo "(Skipping interactive check due to error. Press Enter to continue.)"
-            read -r
-        fi
-        return
-    fi
-
     # Handle results based on mode
     if $check_mode; then
-        # Show each scenario interactively
-        show_interactive_guide 1 "$AUTO_TEST_RES1"
-        run_interactive_test "$script"
+        # Reset quick command tracker
+        _quick_command=""
+        _final_decision=""
 
-        show_interactive_guide 2 "$AUTO_TEST_RES2"
-        run_interactive_test "$script"
-
-        show_interactive_guide 3 "$AUTO_TEST_RES3"
-        run_interactive_test "$script"
-
-        if ! $AUTO_TEST_NO_COLON_TEST; then
-            show_interactive_guide 4 "$AUTO_TEST_RES4"
-            run_interactive_test "$script"
-        fi
-
-        # Show final grade
-        case "$AUTO_TEST_GRADE" in
-            Perfect) echo "OVERALL GRADE: PERFECT - $AUTO_TEST_REASON" ;;
-            Passed)  echo "OVERALL GRADE: PASSED - $AUTO_TEST_REASON" ;;
-            Failed)  echo "OVERALL GRADE: FAILED - $AUTO_TEST_REASON" ;;
-        esac
-
-        get_user_override "$AUTO_TEST_GRADE" "$AUTO_TEST_REASON"
-        log_and_categorize "$script" "$grade_override" "$comments"
-    else
-        # Non-interactive: log and move automatically
-        if [[ "$AUTO_TEST_GRADE" == "Failed" ]]; then
-            mkdir -p "failed"
-            echo "$script FAILED: $AUTO_TEST_REASON" >> "$log_file"
-            mv -f "$script" "failed/$script"
-            echo "$script: FAILED ($AUTO_TEST_REASON)"
-        elif [[ "$AUTO_TEST_GRADE" == "Perfect" ]]; then
-            mkdir -p "perfect"
-            echo "$script PASSED: Perfect." >> "$log_file"
-            mv -f "$script" "perfect/$script"
-            echo "$script: PASSED (Perfect)"
+        # Determine the last scenario
+        local last_scenario
+        if $AUTO_TEST_NO_COLON_TEST; then
+            last_scenario=3
         else
-            mkdir -p "passed"
-            echo "$script PASSED: $AUTO_TEST_REASON" >> "$log_file"
-            mv -f "$script" "passed/$script"
-            echo "$script: PASSED"
+            last_scenario=4
         fi
+
+        # Show each scenario interactively
+        local current_scenario=1
+        show_interactive_guide 1 "false"
+        run_interactive_test "$script" "false"
+
+        # Check for bail immediately
+        if [[ "$_quick_command" == "bail" ]]; then
+            echo "Bailing out of all tests..."
+            exit 0
+        fi
+
+        # If pass/fail used, record it and skip remaining tests
+        if [[ "$_quick_command" == "pass" || "$_quick_command" == "fail" || "$_quick_command" == "perfect" ]]; then
+            _final_decision="$_quick_command"
+        fi
+
+        # Continue with scenario 2 only if "next" was used or no decision made
+        if [[ -z "$_final_decision" ]]; then
+            current_scenario=2
+            local is_last="false"
+            [[ $current_scenario -eq $last_scenario ]] && is_last="true"
+
+            show_interactive_guide 2 "$is_last"
+            run_interactive_test "$script" "$is_last"
+
+            if [[ "$_quick_command" == "bail" ]]; then
+                echo "Bailing out of all tests..."
+                exit 0
+            fi
+
+            if [[ "$_quick_command" == "next_on_last" ]]; then
+                # User tried to use next on last scenario, ask for clarification
+                echo
+                read -p "This is the last scenario. Is it Perfect or Pass? [perfect/pass]: " _last_decision
+                _last_decision="${_last_decision,,}"
+                case "$_last_decision" in
+                    perfect) _final_decision="perfect" ;;
+                    *) _final_decision="pass" ;;
+                esac
+            elif [[ "$_quick_command" == "pass" || "$_quick_command" == "fail" || "$_quick_command" == "perfect" ]]; then
+                _final_decision="$_quick_command"
+            fi
+        fi
+
+        # Continue with scenario 3
+        if [[ -z "$_final_decision" ]]; then
+            current_scenario=3
+            local is_last="false"
+            [[ $current_scenario -eq $last_scenario ]] && is_last="true"
+
+            show_interactive_guide 3 "$is_last"
+            run_interactive_test "$script" "$is_last"
+
+            if [[ "$_quick_command" == "bail" ]]; then
+                echo "Bailing out of all tests..."
+                exit 0
+            fi
+
+            if [[ "$_quick_command" == "next_on_last" ]]; then
+                # User tried to use next on last scenario, ask for clarification
+                echo
+                read -p "This is the last scenario. Is it Perfect or Pass? [perfect/pass]: " _last_decision
+                _last_decision="${_last_decision,,}"
+                case "$_last_decision" in
+                    perfect) _final_decision="perfect" ;;
+                    *) _final_decision="pass" ;;
+                esac
+            elif [[ "$_quick_command" == "pass" || "$_quick_command" == "fail" || "$_quick_command" == "perfect" ]]; then
+                _final_decision="$_quick_command"
+            fi
+        fi
+
+        # Continue with scenario 4 if applicable
+        if [[ -z "$_final_decision" ]] && ! $AUTO_TEST_NO_COLON_TEST; then
+            current_scenario=4
+            local is_last="true"
+
+            show_interactive_guide 4 "$is_last"
+            run_interactive_test "$script" "$is_last"
+
+            if [[ "$_quick_command" == "bail" ]]; then
+                echo "Bailing out of all tests..."
+                exit 0
+            fi
+
+            if [[ "$_quick_command" == "next_on_last" ]]; then
+                # User tried to use next on last scenario, ask for clarification
+                echo
+                read -p "This is the last scenario. Is it Perfect or Pass? [perfect/pass]: " _last_decision
+                _last_decision="${_last_decision,,}"
+                case "$_last_decision" in
+                    perfect) _final_decision="perfect" ;;
+                    *) _final_decision="pass" ;;
+                esac
+            elif [[ "$_quick_command" == "pass" || "$_quick_command" == "fail" || "$_quick_command" == "perfect" ]]; then
+                _final_decision="$_quick_command"
+            fi
+        fi
+
+        # Handle quick command if used
+        if [[ "$_final_decision" == "perfect" ]]; then
+            grade_override="Passed"
+            comments="Perfect."
+            log_and_categorize "$script" "$grade_override" "$comments"
+            return
+        elif [[ "$_final_decision" == "pass" ]]; then
+            grade_override="Passed"
+            comments="Manually marked as passed"
+            log_and_categorize "$script" "$grade_override" "$comments"
+            return
+        elif [[ "$_final_decision" == "fail" ]]; then
+            grade_override="Failed"
+            comments="Manually marked as failed"
+            log_and_categorize "$script" "$grade_override" "$comments"
+            return
+        fi
+
+        # Show final grade (only if no quick decision was made)
+        get_user_override
+        log_and_categorize "$script" "$grade_override" "$comments"
     fi
 }
 
