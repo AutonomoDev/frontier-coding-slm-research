@@ -6,5 +6,8 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0"
 clap = { version = "4.5", features = ["derive"] }
+crossterm = "0.27"  # Added for terminal control
 ctrlc = "3.4"
 regex = "1.10"
+llm_metrics = { path = "./llm_metrics" }
+

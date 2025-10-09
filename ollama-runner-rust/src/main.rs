@@ -10,15 +10,18 @@ use clap::Parser;
 use regex::Regex;
 use std::{
     fs::{self, File, OpenOptions},
-    io::{self, Read, Write},
+    io::Write,
     path::{Path, PathBuf},
-    process::{Command, Stdio},
     sync::{
         atomic::{AtomicBool, Ordering},
         Mutex,
     },
-    time::Instant,
 };
+
+mod providers;
+
+use providers::LLMProvider;
+use providers::ollama::OllamaProvider;
 
 // Global atomic flag for signal handling
 static SHOULD_CLEANUP: AtomicBool = AtomicBool::new(false);
@@ -37,7 +40,7 @@ fn setup_signal_handler() -> Result<()> {
 
         std::process::exit(1);
     })
-    .context("Failed to set up signal handler")
+        .context("Failed to set up signal handler")
 }
 
 // Function to clean up the current output file if it exists
@@ -68,7 +71,7 @@ fn clear_current_output() {
 
 // CLI argument parser
 #[derive(Parser, Debug)]
-#[command(version, about = "Run Ollama models with prompts across iterations", long_about = None)]
+#[command(version, about = "Run LLM models with prompts across iterations", long_about = None)]
 struct Args {
     /// Path to the run directory (e.g., 'v9/my-run/'). Must contain a 'vX' pattern for version extraction.
     destination: String,
@@ -76,6 +79,10 @@ struct Args {
     /// Number of times to run the models. Defaults to 1. Must be a positive integer without leading zeros.
     #[arg(default_value = "1")]
     max_iterations: String,
+
+    /// LLM provider to use (ollama, openai, anthropic, etc.)
+    #[arg(long, default_value = "ollama")]
+    provider: String,
 }
 
 // Validate max_iterations: positive integer, no leading zeros for multi-digit.
@@ -96,10 +103,10 @@ fn validate_max_iterations(iter_str: &str) -> Result<usize> {
 }
 
 // Parse and validate command-line arguments using Clap.
-fn parse_arguments() -> Result<(String, usize)> {
+fn parse_arguments() -> Result<(String, usize, String)> {
     let args = Args::parse();
     let max_iterations = validate_max_iterations(&args.max_iterations)?;
-    Ok((args.destination, max_iterations))
+    Ok((args.destination, max_iterations, args.provider))
 }
 
 // Function to extract the version (e.g., 'v9') from the destination path using regex.
@@ -211,6 +218,17 @@ fn format_duration(duration: std::time::Duration) -> String {
     format!("{:02}:{:02}", minutes, seconds)
 }
 
+// Function to get the appropriate provider based on CLI argument
+fn get_provider(provider_name: &str) -> Result<Box<dyn LLMProvider>> {
+    match provider_name.to_lowercase().as_str() {
+        "ollama" => Ok(Box::new(OllamaProvider::new())),
+        // Future providers can be added here:
+        // "openai" => Ok(Box::new(OpenAIProvider::new())),
+        // "anthropic" => Ok(Box::new(AnthropicProvider::new())),
+        _ => anyhow::bail!("Unknown provider: {}. Available providers: ollama", provider_name),
+    }
+}
+
 // Function to process a single model.
 fn process_model(
     model: &ModelEntry,
@@ -219,10 +237,10 @@ fn process_model(
     version: &str,
     prompt_file: &Path,
     time_log_path: &Path,
+    provider: &dyn LLMProvider,
 ) -> Result<()> {
     let current_iteration_dir = dest.join(iteration_num.to_string());
 
-    // Automatically prepend 'prompt.vX-' to the output filename.
     let prefixed_output_file_name = format!("prompt.{}-{}.sh", version, model.output_file_base);
 
     let output_path = current_iteration_dir.join(&prefixed_output_file_name);
@@ -232,7 +250,6 @@ fn process_model(
 
     println!("Effective Output file (derived): {}", prefixed_output_file_name);
 
-    // Skip if output file already exists in any relevant directory
     if output_path.exists() || failed_path.exists() || passed_path.exists() || perfect_path.exists() {
         println!(
             "Skipping {} - output file already exists in output, failed, passed, or perfect directory: {}",
@@ -241,11 +258,11 @@ fn process_model(
         return Ok(());
     }
 
-    // Check for interrupt before starting
     check_interrupt()?;
 
     println!(
-        "Running ollama with model: {} and prompt: {}",
+        "Running {} with model: {} and prompt: {}",
+        provider.name(),
         model.name,
         prompt_file.display()
     );
@@ -253,74 +270,20 @@ fn process_model(
 
     let prompt_content = fs::read_to_string(prompt_file).context("Failed to read prompt file")?;
 
-    // Create the output file early, so we can write to it immediately.
     let mut output_file = File::create(&output_path).context("Failed to create output file")?;
 
-    // Set the current output file for cleanup purposes
     set_current_output(output_path.clone());
 
-    let start_time = Instant::now();
+    // Run the model using the provider
+    let (time_taken, tokens_per_sec) = provider
+        .run_model(&model.name, &prompt_content, &mut output_file, &check_interrupt)
+        .map_err(|e| {
+            cleanup_current_output();
+            e
+        })?;
 
-    // Spawn the `ollama` command with stdout piped for `tee` behavior
-    let mut command = Command::new("ollama")
-        .arg("run")
-        .arg(&model.name)
-        .arg(&prompt_content)
-        .stdin(Stdio::null()) // Equivalent to < /dev/null
-        .stdout(Stdio::piped())
-        .stderr(Stdio::inherit()) // Inherit stderr to see ollama's error messages immediately
-        .spawn()
-        .context(format!("Failed to spawn ollama for model {}", model.name))?;
-
-    // Get the stdout pipe from the child process
-    let stdout = command
-        .stdout
-        .take()
-        .context("Child process did not have a stdout handle")?;
-    let mut reader = std::io::BufReader::new(stdout);
-    let mut buffer = [0; 1024]; // Use a fixed-size buffer for reading chunks
-
-    // Read from ollama's stdout and write to both console and file (tee behavior)
-    loop {
-        // Check for interrupt during processing
-        check_interrupt()?;
-
-        let bytes_read = reader.read(&mut buffer).context("Failed to read from ollama stdout")?;
-
-        if bytes_read == 0 {
-            break; // EOF
-        }
-
-        let data_slice = &buffer[..bytes_read];
-
-        // Write to stdout
-        io::stdout().write_all(data_slice)?;
-        io::stdout().flush()?;
-
-        // Write to output file
-        output_file.write_all(data_slice)?;
-        output_file.flush()?;
-    }
-
-    let status = command
-        .wait()
-        .context(format!("Failed to wait for ollama process for model {}", model.name))?;
-
-    if !status.success() {
-        // Clean up incomplete output file on command failure
-        cleanup_current_output();
-        anyhow::bail!(
-            "ollama command failed for model {}. Exit status: {:?}",
-            model.name,
-            status.code()
-        );
-    }
-
-    let end_time = Instant::now();
-    let time_taken = end_time.duration_since(start_time);
     let formatted_time = format_duration(time_taken);
 
-    // Log the time taken upon successful execution
     let mut time_log_file = OpenOptions::new()
         .append(true)
         .create(true)
@@ -328,11 +291,11 @@ fn process_model(
         .context("Failed to open time.log for appending")?;
     writeln!(time_log_file, "{}: {}", model.name, formatted_time)?;
 
-    // Clear the current output file since processing completed successfully
     clear_current_output();
 
     println!("Output saved to {}", output_path.display());
     println!("Time taken: {}", formatted_time);
+    println!("Tokens/sec: {:.1}", tokens_per_sec);
     println!("----------------------------------------");
 
     Ok(())
@@ -343,8 +306,12 @@ fn main() -> Result<()> {
     setup_signal_handler()?;
 
     // Parse arguments
-    let (destination, max_iterations) = parse_arguments()?;
+    let (destination, max_iterations, provider_name) = parse_arguments()?;
     let dest_path_obj = PathBuf::from(&destination);
+
+    // Get the appropriate provider
+    let provider = get_provider(&provider_name)?;
+    println!("Using provider: {}", provider.name());
 
     // Extract version
     let version = extract_version(&destination)?;
@@ -387,6 +354,7 @@ fn main() -> Result<()> {
                 &version,
                 &prompt_file,
                 &time_log_path,
+                provider.as_ref(),
             ) {
                 eprintln!("Error processing model: {}", e);
                 cleanup_current_output();
@@ -402,3 +370,4 @@ fn main() -> Result<()> {
 // Created by Gemini 2.5-flash.
 // Refactored by Grok 4-Fast, built by xAI.
 // Cleanup functionality by Anthropic Claude 4.5 Sonnet.
+// Multi-provider architecture by Anthropic Claude 4.5 Sonnet.
