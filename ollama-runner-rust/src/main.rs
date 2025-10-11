@@ -1,3 +1,4 @@
+// ==== ./src/main.rs ====
 // Cargo.toml dependencies for this refactored version:
 // [dependencies]
 // anyhow = "1.0"
@@ -40,7 +41,7 @@ fn setup_signal_handler() -> Result<()> {
 
         std::process::exit(1);
     })
-        .context("Failed to set up signal handler")
+    .context("Failed to set up signal handler")
 }
 
 // Function to clean up the current output file if it exists
@@ -76,13 +77,18 @@ struct Args {
     /// Path to the run directory (e.g., 'v9/my-run/'). Must contain a 'vX' pattern for version extraction.
     destination: String,
 
-    /// Number of times to run the models. Defaults to 1. Must be a positive integer without leading zeros.
-    #[arg(default_value = "1")]
+    /// Number of times to run the models. Defaults to 3. Must be a positive integer without leading zeros.
+    #[arg(default_value = "3")] // THE FIX IS HERE
     max_iterations: String,
 
     /// LLM provider to use (ollama, openai, anthropic, etc.)
     #[arg(long, default_value = "ollama")]
     provider: String,
+
+    /// Run models serially: complete all models for one iteration before starting the next.
+    /// By default (without this flag), the tool runs one model for all iterations before moving to the next model.
+    #[arg(long)]
+    serially: bool,
 }
 
 // Validate max_iterations: positive integer, no leading zeros for multi-digit.
@@ -94,19 +100,32 @@ fn validate_max_iterations(iter_str: &str) -> Result<usize> {
         anyhow::bail!("MAX_ITERATIONS must be a positive integer. Got '0'.");
     }
     if iter_str.len() > 1 && iter_str.starts_with('0') {
-        anyhow::bail!("MAX_ITERATIONS cannot have leading zeros for multi-digit numbers. Got '{}'.", iter_str);
+        anyhow::bail!(
+            "MAX_ITERATIONS cannot have leading zeros for multi-digit numbers. Got '{}'.",
+            iter_str
+        );
     }
     if !iter_str.chars().all(char::is_numeric) {
-        anyhow::bail!("MAX_ITERATIONS must be a positive integer. Got '{}'.", iter_str);
+        anyhow::bail!(
+            "MAX_ITERATIONS must be a positive integer. Got '{}'.",
+            iter_str
+        );
     }
-    iter_str.parse::<usize>().context("Failed to parse MAX_ITERATIONS")
+    iter_str
+        .parse::<usize>()
+        .context("Failed to parse MAX_ITERATIONS")
 }
 
 // Parse and validate command-line arguments using Clap.
-fn parse_arguments() -> Result<(String, usize, String)> {
+fn parse_arguments() -> Result<(String, usize, String, bool)> {
     let args = Args::parse();
     let max_iterations = validate_max_iterations(&args.max_iterations)?;
-    Ok((args.destination, max_iterations, args.provider))
+    Ok((
+        args.destination,
+        max_iterations,
+        args.provider,
+        args.serially,
+    ))
 }
 
 // Function to extract the version (e.g., 'v9') from the destination path using regex.
@@ -123,7 +142,10 @@ fn extract_version(dest_path: &str) -> Result<String> {
 
     // Double-check: starts with 'v' and rest are digits
     if !version.starts_with('v') || version[1..].chars().any(|c| !c.is_ascii_digit()) {
-        anyhow::bail!("Extracted version '{}' is invalid: must be 'v' followed by digits.", version);
+        anyhow::bail!(
+            "Extracted version '{}' is invalid: must be 'v' followed by digits.",
+            version
+        );
     }
 
     Ok(version)
@@ -135,12 +157,20 @@ fn setup_paths(dest: &str, version: &str) -> Result<(PathBuf, PathBuf)> {
     let dest_path_buf = PathBuf::from(dest);
     let parent_dir = dest_path_buf
         .parent()
-        .context(format!("Invalid destination path: {}. Could not determine parent directory.", dest))?;
+        .context(format!(
+            "Invalid destination path: {}. Could not determine parent directory.",
+            dest
+        ))?;
 
     let prompt_file = parent_dir.join(format!("prompt.{}.md", version));
     let models_file = dest_path_buf.join("models.txt");
 
-    println!("PROMPT FILE: {} (Derived from {} and {})", prompt_file.display(), dest, version);
+    println!(
+        "PROMPT FILE: {} (Derived from {} and {})",
+        prompt_file.display(),
+        dest,
+        version
+    );
     println!("MODELS File: {}", models_file.display());
 
     // Verify that models.txt exists
@@ -191,16 +221,6 @@ fn parse_models(models_file: &Path) -> Result<Vec<ModelEntry>> {
     Ok(models)
 }
 
-// Function to prepare directories for an iteration.
-// Arguments: destination path, iteration number.
-fn prepare_iteration_directory(dest: &Path, iteration_num: usize) -> Result<PathBuf> {
-    let iteration_dir = dest.join(iteration_num.to_string());
-    println!("Preparing directory for iteration {}: {}", iteration_num, iteration_dir.display());
-    fs::create_dir_all(&iteration_dir).context("Failed to create iteration directory")?;
-
-    Ok(iteration_dir)
-}
-
 // Check for cleanup signal and return Err if set
 fn check_interrupt() -> Result<()> {
     if SHOULD_CLEANUP.load(Ordering::SeqCst) {
@@ -225,28 +245,32 @@ fn get_provider(provider_name: &str) -> Result<Box<dyn LLMProvider>> {
         // Future providers can be added here:
         // "openai" => Ok(Box::new(OpenAIProvider::new())),
         // "anthropic" => Ok(Box::new(AnthropicProvider::new())),
-        _ => anyhow::bail!("Unknown provider: {}. Available providers: ollama", provider_name),
+        _ => anyhow::bail!(
+            "Unknown provider: {}. Available providers: ollama",
+            provider_name
+        ),
     }
 }
 
 // Function to process a single model.
+// `output_dir` is the specific directory where files for this run (e.g., output.sh, time.log) should be placed.
 fn process_model(
     model: &ModelEntry,
-    dest: &Path,
-    iteration_num: usize,
+    output_dir: &Path, // This is now the *exact* directory for this model's iteration output
     version: &str,
     prompt_file: &Path,
-    time_log_path: &Path,
     provider: &dyn LLMProvider,
 ) -> Result<()> {
-    let current_iteration_dir = dest.join(iteration_num.to_string());
+    // Ensure the output_dir exists.
+    fs::create_dir_all(output_dir)
+        .context(format!("Failed to create output directory: {}", output_dir.display()))?;
 
     let prefixed_output_file_name = format!("prompt.{}-{}.sh", version, model.output_file_base);
 
-    let output_path = current_iteration_dir.join(&prefixed_output_file_name);
-    let failed_path = current_iteration_dir.join("failed").join(&prefixed_output_file_name);
-    let passed_path = current_iteration_dir.join("passed").join(&prefixed_output_file_name);
-    let perfect_path = current_iteration_dir.join("perfect").join(&prefixed_output_file_name);
+    let output_path = output_dir.join(&prefixed_output_file_name);
+    let failed_path = output_dir.join("failed").join(&prefixed_output_file_name);
+    let passed_path = output_dir.join("passed").join(&prefixed_output_file_name);
+    let perfect_path = output_dir.join("perfect").join(&prefixed_output_file_name);
 
     println!("Effective Output file (derived): {}", prefixed_output_file_name);
 
@@ -284,11 +308,16 @@ fn process_model(
 
     let formatted_time = format_duration(time_taken);
 
+    // time.log is always placed in the specific output_dir for this run
+    let time_log_path = output_dir.join("time.log");
     let mut time_log_file = OpenOptions::new()
         .append(true)
         .create(true)
-        .open(time_log_path)
-        .context("Failed to open time.log for appending")?;
+        .open(&time_log_path)
+        .context(format!(
+            "Failed to open time.log for appending in {}",
+            time_log_path.display()
+        ))?;
     writeln!(time_log_file, "{}: {}", model.name, formatted_time)?;
 
     clear_current_output();
@@ -306,7 +335,7 @@ fn main() -> Result<()> {
     setup_signal_handler()?;
 
     // Parse arguments
-    let (destination, max_iterations, provider_name) = parse_arguments()?;
+    let (destination, max_iterations, provider_name, serially_mode) = parse_arguments()?;
     let dest_path_obj = PathBuf::from(&destination);
 
     // Get the appropriate provider
@@ -325,40 +354,66 @@ fn main() -> Result<()> {
     // Parse models once
     let models = parse_models(&models_file)?;
 
-    // Outer loop for iterations
-    for iteration in 1..=max_iterations {
-        // Check for interrupt before starting iteration
-        if let Err(e) = check_interrupt() {
-            eprintln!("{}", e);
-            cleanup_current_output();
-            return Err(e);
-        }
+    if serially_mode {
+        // Original behavior: Process all models for a given iteration, then move to the next iteration.
+        println!("\nRunning in SERIAL mode (--serially flag present): Iteration by iteration, then model by model.");
+        println!("Output structure: {}/<iteration_num>/", dest_path_obj.display());
 
-        // prepare_iteration_directory creates the iteration directory and time.log
-        let _iteration_dir = prepare_iteration_directory(&dest_path_obj, iteration)?;
-        let time_log_path = _iteration_dir.join("time.log");
-
-        // Inner loop to process each model
-        for model in &models {
-            // Check for interrupt during model processing
-            if let Err(e) = check_interrupt() {
-                eprintln!("{}", e);
-                cleanup_current_output();
-                return Err(e);
+        for iteration in 1..=max_iterations {
+            check_interrupt()?;
+            let current_output_base_dir = dest_path_obj.join(iteration.to_string());
+            
+            for model in &models {
+                check_interrupt()?;
+                if let Err(e) = process_model(
+                    model,
+                    &current_output_base_dir,
+                    &version,
+                    &prompt_file,
+                    provider.as_ref(),
+                ) {
+                    eprintln!("Error processing model: {}", e);
+                    cleanup_current_output();
+                    return Err(e);
+                }
             }
+        }
+    } else {
+        // New default behavior: Process one model for all iterations, then move to the next model.
+        // The OUTPUT DIRECTORY is still based on the iteration number.
+        println!("\nRunning in DEFAULT mode (optimized for model load times): Model by model, then iteration by iteration.");
+        println!(
+            "Output structure remains fixed: {}/<iteration_num>/",
+            dest_path_obj.display()
+        );
 
-            if let Err(e) = process_model(
-                model,
-                &dest_path_obj,
-                iteration,
-                &version,
-                &prompt_file,
-                &time_log_path,
-                provider.as_ref(),
-            ) {
-                eprintln!("Error processing model: {}", e);
-                cleanup_current_output();
-                return Err(e);
+        for model in &models {
+            check_interrupt()?;
+            println!(
+                "\n--- Processing model: {} across {} iterations ---",
+                model.name, max_iterations
+            );
+
+            for iteration in 1..=max_iterations {
+                check_interrupt()?;
+                println!("  Starting iteration {} for model {}", iteration, model.name);
+
+                // The output directory is determined by the iteration number,
+                // NOT the model. This puts all iteration '1' files in the '1' folder,
+                // regardless of which model is running.
+                let current_output_base_dir = dest_path_obj.join(iteration.to_string());
+
+                if let Err(e) = process_model(
+                    model,
+                    &current_output_base_dir,
+                    &version,
+                    &prompt_file,
+                    provider.as_ref(),
+                ) {
+                    eprintln!("Error processing model: {}", e);
+                    cleanup_current_output();
+                    return Err(e);
+                }
             }
         }
     }
@@ -366,8 +421,3 @@ fn main() -> Result<()> {
     println!("All models processed across {} iterations.", max_iterations);
     Ok(())
 }
-
-// Created by Gemini 2.5-flash.
-// Refactored by Grok 4-Fast, built by xAI.
-// Cleanup functionality by Anthropic Claude 4.5 Sonnet.
-// Multi-provider architecture by Anthropic Claude 4.5 Sonnet.
