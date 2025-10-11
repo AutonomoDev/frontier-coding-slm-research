@@ -12,6 +12,12 @@ source "$SCRIPT_DIR/test_completions_auto.sh"
 
 ################################################################
 # MY_FUNCTION: Handles scenario selection for pass/fail.         #
+#                                                              #
+# Arguments:                                                   #
+#   $1 - The outcome ("passed" or "failed") for which to       #
+#        select a scenario message.                            #
+#                                                              #
+# Echoes: The selected scenario message (or custom message).   #
 ################################################################
 my_function() {
     local OUTCOME=$1
@@ -48,6 +54,7 @@ my_function() {
 
     read -p "Enter your choice (1-$((${#scenarios[@]}+1))): " choice
 
+    local selected_message=""
     if [[ $choice -ge 1 && $choice -le ${#scenarios[@]} ]]; then
         selected_message="$prefix: ${scenarios[$((choice-1))]}"
     elif [[ $choice -eq $((${#scenarios[@]}+1)) ]]; then
@@ -63,9 +70,16 @@ my_function() {
 
 ################################################################
 # PARSE ARGUMENTS: Process command line flags and path.         #
+#                                                              #
+# Arguments:                                                   #
+#   $@ - All command-line arguments.                           #
+#                                                              #
+# Sets global variables:                                       #
+#   check_mode - true if --check is present, false otherwise.  #
+#   target     - The path to the script or directory to test.  #
 ################################################################
 parse_arguments() {
-    check_mode=false
+    check_mode=false # Global variable
     if [[ "$1" == "--check" ]]; then
         check_mode=true
         shift
@@ -76,49 +90,64 @@ parse_arguments() {
         exit 1
     fi
 
-    target="$1"
+    target="$1" # Global variable
 }
 
 ################################################################
 # FIND TEST SCRIPTS: Locate prompt*.sh files to test.           #
+#                                                              #
+# Arguments:                                                   #
+#   $1 - The target path (file or directory).                  #
+#                                                              #
+# Sets global array:                                           #
+#   scripts_to_test - An array of script filenames found.      #
+#                                                              #
+# Changes current directory to the target path if it's a dir.  #
 ################################################################
 find_test_scripts() {
-    local target="$1"
+    local target_path="$1" # Renamed to avoid confusion with global `target`
 
-    if [[ -f "$target" ]]; then
+    if [[ -f "$target_path" ]]; then
         # Single file mode
-        dir="$(dirname "$target")"
-        file="$(basename "$target")"
+        local dir="$(dirname "$target_path")"
+        local file="$(basename "$target_path")"
         cd "$dir" || { echo "Error: Cannot change directory to '$dir'." >&2; exit 1; }
-        scripts_to_test=("$file")
-    elif [[ -d "$target" ]]; then
-        cd "$target" || { echo "Error: Cannot change directory to '$target'." >&2; exit 1; }
+        scripts_to_test=("$file") # Global array
+    elif [[ -d "$target_path" ]]; then
+        cd "$target_path" || { echo "Error: Cannot change directory to '$target_path'." >&2; exit 1; }
         # Find prompt.*.sh files in the directory, sort by version numbers
         mapfile -t scripts_to_test < <(find . -maxdepth 1 -name 'prompt.*.sh' -printf '%f\n' \
             | sed -E 's/prompt\.v([0-9]+)-([0-9]+)\..*/\1 \2 &/' \
             | sort -k1,1n -k2,2n \
-            | cut -d' ' -f3-)
+            | cut -d' ' -f3-) # Global array
         if [[ ${#scripts_to_test[@]} -eq 0 ]]; then
-            echo "No prompt*.sh scripts found in '$target'."
+            echo "No prompt*.sh scripts found in '$target_path'."
             exit 0
         fi
     else
-        echo "Error: '$target' is not a file or directory." >&2
+        echo "Error: '$target_path' is not a file or directory." >&2
         exit 1
     fi
 }
 
 ################################################################
 # PREPARE LOG: Initialize the test log file.                     #
+#                                                              #
+# Sets global variable:                                        #
+#   log_file - The name of the log file.                       #
 ################################################################
 prepare_log() {
-    log_file="test.log"
+    log_file="test.log" # Global variable
     touch "$log_file" 2>/dev/null || { echo "Error: Cannot write to $log_file in $(pwd)." >&2; exit 1; }
     echo "=== Test run on $(date) ===" >> "$log_file"
 }
 
 ##################################################################
 # SHOW INTERACTIVE GUIDE: Display manual testing instructions.   #
+#                                                                #
+# Arguments:                                                     #
+#   $1 - The scenario number (e.g., 1, 2, 3, 4).                 #
+#   $2 - "true" if it's the last scenario, "false" otherwise.    #
 ##################################################################
 show_interactive_guide() {
     local scenario="$1"
@@ -182,13 +211,20 @@ show_interactive_guide() {
 
 ################################################################
 # RUN INTERACTIVE TEST: Launch subshell for manual testing.      #
+#                                                              #
+# Arguments:                                                   #
+#   $1 - The name of the script being tested.                  #
+#   $2 - "true" if it's the last scenario, "false" otherwise.  #
+#                                                              #
+# Sets the global variable '_quick_command' based on user      #
+# input (e.g., "next", "pass", "fail", "bail", "perfect").     #
 ################################################################
 run_interactive_test() {
     local script="$1"
     local is_last="$2"
 
-    temp_rc="$(mktemp /tmp/test_completion.XXXXXX)"
-    _marker_dir="$(mktemp -d /tmp/test_markers.XXXXXX)"
+    local temp_rc="$(mktemp /tmp/test_completion.XXXXXX)"
+    local _marker_dir="$(mktemp -d /tmp/test_markers.XXXXXX)"
 
     cat > "$temp_rc" << EOF
 # Load bash-completion
@@ -255,7 +291,7 @@ EOF
     bash --rcfile "$temp_rc" -i
 
     # Check what command was used
-    _quick_command=""
+    _quick_command="" # Reset before checking
     if [[ -f "$_marker_dir/next" ]]; then
         _quick_command="next"
     elif [[ -f "$_marker_dir/next_on_last" ]]; then
@@ -277,6 +313,11 @@ EOF
 
 ################################################################
 # GET USER OVERRIDE: Allow manual grade adjustment.              #
+#                                                              #
+# Prompts the user for a grade (Pass/Fail/Perfect).            #
+# Sets global variables:                                       #
+#   grade_override - The determined grade ("Passed" or "Failed").#
+#   comments       - Additional comments for the grade.        #
 ################################################################
 get_user_override() {
     local outcome=""
@@ -286,9 +327,8 @@ get_user_override() {
 
     _user_grade_input="${_user_grade_input,,}"  # to lowercase
 
-    grade_override=""
-
-    comments=""
+    grade_override="" # Global variable
+    comments=""       # Global variable
 
     case "$_user_grade_input" in
         p | pass)
@@ -306,6 +346,7 @@ get_user_override() {
             ;;
     esac
 
+    # If a grade was set, but comments are not "Perfect.", ask for specific scenario.
     if [[ -n "$outcome" && "$comments" != "Perfect." ]]; then
         clear
         comments=$(my_function "$outcome")
@@ -314,6 +355,13 @@ get_user_override() {
 
 ################################################################
 # LOG AND CATEGORIZE: Record results and move script file.       #
+#                                                              #
+# Arguments:                                                   #
+#   $1 - The name of the script file.                          #
+#   $2 - The grade ("Passed" or "Failed").                     #
+#   $3 - The comments for the grade.                           #
+#                                                              #
+# Uses global variable: log_file                               #
 ################################################################
 log_and_categorize() {
     local script="$1"
@@ -339,6 +387,11 @@ log_and_categorize() {
 
 ################################################################
 # DISPLAY TESTING HEADER: Show the testing header with version. #
+#                                                               #
+# Arguments:                                                    #
+#   $1 - The name of the script being tested (e.g., prompt.v6-1.qwen3_coder_30b.sh). #
+#                                                               #
+# Uses global variable: check_mode                              #
 ################################################################
 display_testing_header() {
     local script="$1" # e.g., prompt.v6-1.qwen3_coder_30b.sh
@@ -349,7 +402,6 @@ display_testing_header() {
         local current_dir="$(pwd)" # e.g., /code/autonomo/frontier-coding-llm-research/bash.ollama.run/v6/3
 
         # 1. Attempt to parse version from current directory path
-        #    Removed the trailing '/' from the regex to match '/v6/3' correctly.
         if [[ "$current_dir" =~ /v([0-9]+)/([0-9]+) ]]; then
             local major="${BASH_REMATCH[1]}"
             local minor="${BASH_REMATCH[2]}"
@@ -366,7 +418,112 @@ display_testing_header() {
 }
 
 ################################################################
+# GET LAST SCENARIO NUMBER: Determines the total number of    #
+#                            interactive scenarios.            #
+#                                                              #
+# Echoes: The number of the last scenario (3 or 4).           #
+# Uses global variable: AUTO_TEST_NO_COLON_TEST               #
+################################################################
+_get_last_scenario_number() {
+    if $AUTO_TEST_NO_COLON_TEST; then
+        echo 3
+    else
+        echo 4
+    fi
+}
+
+################################################################
+# RESOLVE NEXT ON LAST SCENARIO: Prompts user for clarification #
+#                                when 'next' is used on the   #
+#                                final interactive scenario.  #
+#                                                              #
+# Echoes: The resolved decision ("perfect" or "pass").        #
+################################################################
+_resolve_next_on_last_scenario() {
+    local _resolved_decision=""
+    echo
+    read -p "This is the last scenario. Is it Perfect or Pass? [perfect/pass]: " _last_decision
+    _last_decision="${_last_decision,,}" # to lowercase
+    case "$_last_decision" in
+        perfect) _resolved_decision="perfect" ;;
+        *) _resolved_decision="pass" ;; # Default to pass if anything else is entered
+    esac
+    echo "$_resolved_decision" # This serves as the return value via echo
+}
+
+################################################################
+# EXECUTE INTERACTIVE SCENARIO: Runs and evaluates a single    #
+#                               interactive testing scenario.  #
+#                                                              #
+# Arguments:                                                   #
+#   $1 - The name of the script being tested.                  #
+#   $2 - The current scenario number.                          #
+#   $3 - The total number of scenarios.                        #
+#                                                              #
+# Sets the global variable '_quick_command' (via run_interactive_test).#
+################################################################
+_execute_interactive_scenario() {
+    local script="$1"
+    local scenario_num="$2"
+    local total_scenarios="$3"
+    local is_last="false"
+    [[ "$scenario_num" -eq "$total_scenarios" ]] && is_last="true"
+
+    show_interactive_guide "$scenario_num" "$is_last"
+    run_interactive_test "$script" "$is_last" # _quick_command is set as a global by run_interactive_test
+}
+
+################################################################
+# HANDLE SCRIPT FINAL DECISION: Processes the final decision   #
+#                                (perfect, pass, fail) for    #
+#                                a script after interactive   #
+#                                testing. Calls log_and_categorize. #
+#                                                              #
+# Arguments:                                                   #
+#   $1 - The name of the script file.                          #
+#   $2 - The type of final decision ("perfect", "pass", "fail").#
+################################################################
+_handle_script_final_decision() {
+    local script="$1"
+    local final_decision_type="$2" # e.g., "perfect", "pass", "fail"
+
+    local local_grade=""
+    local local_comments=""
+
+    case "$final_decision_type" in
+        perfect)
+            local_grade="Passed"
+            local_comments="Perfect."
+            ;;
+        pass)
+            clear
+            local_grade="Passed"
+            local_comments=$(my_function "passed") # Interactively get specific reason
+            ;;
+        fail)
+            clear
+            local_grade="Failed"
+            local_comments=$(my_function "failed") # Interactively get specific reason
+            ;;
+        *)
+            echo "Error: Unknown final decision type '$final_decision_type' for script '$script'." >&2
+            return 1
+            ;;
+    esac
+
+    log_and_categorize "$script" "$local_grade" "$local_comments"
+    return 0
+}
+
+
+################################################################
 # PROCESS SCRIPT: Main testing logic for a single script.        #
+#                                                              #
+# Arguments:                                                   #
+#   $1 - The name of the script file to test.                  #
+#                                                              #
+# Uses global variables: check_mode, _quick_command,          #
+#                        grade_override, comments               #
 ################################################################
 process_script() {
     local script="$1"
@@ -375,154 +532,63 @@ process_script() {
 
     # Handle results based on mode
     if $check_mode; then
-        # Reset quick command tracker
-        _quick_command=""
-        _final_decision=""          # Stores the explicit pass/fail/perfect command from interactive session
-        _current_script_grade=""    # Stores the final grade for the current script
-        _current_script_comments="" # Stores the final comments for the current script
+        # Reset quick command trackers for this script
+        _quick_command=""            # Global variable set by run_interactive_test
+        local _final_script_decision="" # Stores the explicit pass/fail/perfect/next_on_last command for the script
 
-        # Determine the last scenario
-        local last_scenario
-        if $AUTO_TEST_NO_COLON_TEST; then
-            last_scenario=3
+        local last_scenario=$(_get_last_scenario_number)
+
+        for (( current_scenario=1; current_scenario<=last_scenario; current_scenario++ )); do
+            _execute_interactive_scenario "$script" "$current_scenario" "$last_scenario"
+
+            # Check for bail immediately (user wants to exit all tests)
+            if [[ "$_quick_command" == "bail" ]]; then
+                echo "Bailing out of all tests..."
+                exit 0
+            fi
+
+            # If a script-level decision (pass/fail/perfect) was made, store it and break the loop
+            if [[ "$_quick_command" == "pass" || "$_quick_command" == "fail" || "$_quick_command" == "perfect" ]]; then
+                _final_script_decision="$_quick_command"
+                break
+            fi
+
+            # If 'next' was used on the last scenario, resolve it
+            if [[ "$_quick_command" == "next_on_last" ]]; then
+                _final_script_decision=$(_resolve_next_on_last_scenario)
+                break # A decision has been made
+            fi
+
+            # If 'next' was used on a non-last scenario, or Ctrl+D (empty _quick_command),
+            # the loop continues to the next scenario.
+        done
+
+        # After the loop, process the final decision for the script
+        if [[ -n "$_final_script_decision" ]]; then
+            _handle_script_final_decision "$script" "$_final_script_decision"
         else
-            last_scenario=4
-        fi
-
-        # Show each scenario interactively
-        local current_scenario=1
-        show_interactive_guide 1 "false"
-        run_interactive_test "$script" "false"
-
-        # Check for bail immediately
-        if [[ "$_quick_command" == "bail" ]]; then
-            echo "Bailing out of all tests..."
-            exit 0
-        fi
-
-        # If pass/fail used, record it and skip remaining tests
-        if [[ "$_quick_command" == "pass" || "$_quick_command" == "fail" || "$_quick_command" == "perfect" ]]; then
-            _final_decision="$_quick_command"
-        fi
-
-        # Continue with scenario 2 only if "next" was used or no decision made
-        if [[ -z "$_final_decision" ]]; then
-            current_scenario=2
-            local is_last="false"
-            [[ $current_scenario -eq $last_scenario ]] && is_last="true"
-
-            show_interactive_guide 2 "$is_last"
-            run_interactive_test "$script" "$is_last"
-
-            if [[ "$_quick_command" == "bail" ]]; then
-                echo "Bailing out of all tests..."
-                exit 0
-            fi
-
-            if [[ "$_quick_command" == "next_on_last" ]]; then
-                # User tried to use next on last scenario, ask for clarification
-                echo
-                read -p "This is the last scenario. Is it Perfect or Pass? [perfect/pass]: " _last_decision
-                _last_decision="${_last_decision,,}"
-                case "$_last_decision" in
-                    perfect) _final_decision="perfect" ;;
-                    *) _final_decision="pass" ;;
-                esac
-            elif [[ "$_quick_command" == "pass" || "$_quick_command" == "fail" || "$_quick_command" == "perfect" ]]; then
-                _final_decision="$_quick_command"
-            fi
-        fi
-
-        # Continue with scenario 3
-        if [[ -z "$_final_decision" ]]; then
-            current_scenario=3
-            local is_last="false"
-            [[ $current_scenario -eq $last_scenario ]] && is_last="true"
-
-            show_interactive_guide 3 "$is_last"
-            run_interactive_test "$script" "$is_last"
-
-            if [[ "$_quick_command" == "bail" ]]; then
-                echo "Bailing out of all tests..."
-                exit 0
-            fi
-
-            if [[ "$_quick_command" == "next_on_last" ]]; then
-                # User tried to use next on last scenario, ask for clarification
-                echo
-                read -p "This is the last scenario. Is it Perfect or Pass? [perfect/pass]: " _last_decision
-                _last_decision="${_last_decision,,}"
-                case "$_last_decision" in
-                    perfect) _final_decision="perfect" ;;
-                    *) _final_decision="pass" ;;
-                esac
-            elif [[ "$_quick_command" == "pass" || "$_quick_command" == "fail" || "$_quick_command" == "perfect" ]]; then
-                _final_decision="$_quick_command"
-            fi
-        fi
-
-        # Continue with scenario 4 if applicable
-        if [[ -z "$_final_decision" ]] && ! $AUTO_TEST_NO_COLON_TEST; then
-            current_scenario=4
-            local is_last="true"
-
-            show_interactive_guide 4 "$is_last"
-            run_interactive_test "$script" "$is_last"
-
-            if [[ "$_quick_command" == "bail" ]]; then
-                echo "Bailing out of all tests..."
-                exit 0
-            fi
-
-            if [[ "$_quick_command" == "next_on_last" ]]; then
-                # User tried to use next on last scenario, ask for clarification
-                echo
-                read -p "This is the last scenario. Is it Perfect or Pass? [perfect/pass]: " _last_decision
-                _last_decision="${_last_decision,,}"
-                case "$_last_decision" in
-                    perfect) _final_decision="perfect" ;;
-                    *) _final_decision="pass" ;;
-                esac
-            elif [[ "$_quick_command" == "pass" || "$_quick_command" == "fail" || "$_quick_command" == "perfect" ]]; then
-                _final_decision="$_quick_command"
-            fi
-        fi
-
-        # Handle quick command if used
-        if [[ "$_final_decision" == "perfect" ]]; then
-            grade_override="Passed"
-            comments="Perfect."
+            # If no quick command was used at all (e.g., Ctrl+D on every scenario)
+            # leading to no explicit _final_script_decision, prompt for manual override.
+            get_user_override # This sets global grade_override and comments
             log_and_categorize "$script" "$grade_override" "$comments"
-            return
-        elif [[ "$_final_decision" == "pass" ]]; then
-            clear
-            grade_override="Passed"
-            comments=$(my_function "passed")
-            log_and_categorize "$script" "$grade_override" "$comments"
-            return
-        elif [[ "$_final_decision" == "fail" ]]; then
-            clear
-            grade_override="Failed"
-            comments=$(my_function "failed")
-            log_and_categorize "$script" "$grade_override" "$comments"
-            return
         fi
-
-        # Show final grade (only if no quick decision was made)
-        get_user_override
-        log_and_categorize "$script" "$grade_override" "$comments"
-    fi
+    fi # End of $check_mode block
 }
 
 ################################################################
 # MAIN: Entry point and orchestration.                          #
+#                                                              #
+# Arguments:                                                   #
+#   $@ - All command-line arguments, passed to parse_arguments.#
+#                                                              #
+# Uses global variables: target, scripts_to_test               #
 ################################################################
 main() {
     parse_arguments "$@"
     find_test_scripts "$target"
     prepare_log
 
-    # Initialize automated testing
+    # Initialize automated testing from test_completions_auto.sh
     echo "Initializing automated tests..."
     auto_test_init
 
