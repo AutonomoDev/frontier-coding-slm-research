@@ -338,15 +338,40 @@ log_and_categorize() {
 }
 
 ################################################################
+# DISPLAY TESTING HEADER: Show the testing header with version. #
+################################################################
+display_testing_header() {
+    local script="$1" # e.g., prompt.v6-1.qwen3_coder_30b.sh
+    local display_name=""
+    local dir_version_prefix="" # Stores the "vX/Y/" part from the directory
+
+    if $check_mode; then
+        local current_dir="$(pwd)" # e.g., /code/autonomo/frontier-coding-llm-research/bash.ollama.run/v6/3
+
+        # 1. Attempt to parse version from current directory path
+        #    Removed the trailing '/' from the regex to match '/v6/3' correctly.
+        if [[ "$current_dir" =~ /v([0-9]+)/([0-9]+) ]]; then
+            local major="${BASH_REMATCH[1]}"
+            local minor="${BASH_REMATCH[2]}"
+            dir_version_prefix="v${major}/${minor}/"
+        fi
+
+        # 2. Construct the final display_name by combining the directory prefix
+        #    (if found) with the full script name.
+        display_name="${dir_version_prefix}${script}"
+
+        clear # Ensure a clean screen before displaying script name
+        echo "==== Testing $display_name ====" # Display script name with version and iteration
+    fi
+}
+
+################################################################
 # PROCESS SCRIPT: Main testing logic for a single script.        #
 ################################################################
 process_script() {
     local script="$1"
 
-    if $check_mode; then
-        clear # Ensure a clean screen before displaying script name
-        echo "==== Testing $script ====" # Display script name
-    fi
+    display_testing_header "$script"
 
     # Handle results based on mode
     if $check_mode; then
