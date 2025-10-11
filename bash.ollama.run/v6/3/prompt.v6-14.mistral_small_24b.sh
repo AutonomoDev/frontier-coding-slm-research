@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 
 # Function to provide completions for `ollama run` command
@@ -48,5 +47,3 @@ _get_comp_words_by_ref() {
 if [[ ${BASH_SOURCE[0]} == "${0}" ]]; then
     source "$0"
 fi
-```
-

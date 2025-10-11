@@ -20,20 +20,6 @@ complete -F _ollama_models ollama run
 # [[HUMAN COMMENTED-OUT]]
 # 
 # [[HUMAN COMMENTED-OUT]]
-# The installation snippet is:
-
-eval "$(< /dev/stdin)" <<'__EOF__'
-_ollama_models() {
-    local models
-    if ! IFS=$'\n' read -r -d '' -a models < <(ollama list --format="%{name}"); then
-        return 0
-    fi
-    COMPREPLY=( "${models[@]}" )
-}
-complete -F _ollama_models ollama run
-__EOF__
-
-# [[HUMAN COMMENTED-OUT]]
 # This snippet uses the `eval` builtin to evaluate the output of the `_ollama_models` function as a Bash script. The `__EOF__` marker is used to indicate the end of the input, and the `< /dev/stdin` redirection specifies that the input should come from standard input.
 # [[HUMAN COMMENTED-OUT]]
 # 

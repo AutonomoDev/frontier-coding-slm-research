@@ -1,4 +1,3 @@
-```bash
 # Bash completion for 'ollama run' command
 # Based on https://github.com/scop/bash-completion
 
@@ -25,5 +24,3 @@ _ollama_run() {
 
 # Register completion function for 'ollama' command
 complete -F _ollama_run ollama
-```
-

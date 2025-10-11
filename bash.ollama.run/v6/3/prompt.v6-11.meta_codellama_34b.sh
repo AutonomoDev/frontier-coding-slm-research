@@ -1,4 +1,3 @@
-```bash
 # Bash completion for ollama run
 
 _ollama_run() {
@@ -30,5 +29,3 @@ _ollama_run() {
     COMPREPLY=($(printf '%s\n' "${COMPREPLY[@]}" | sort -u))
 }
 complete -F _ollama_run ollama
-```
-

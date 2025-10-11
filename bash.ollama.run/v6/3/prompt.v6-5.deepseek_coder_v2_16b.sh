@@ -1,4 +1,3 @@
- ```bash
 # This is a self-contained Bash completion script for the `ollama run` command.
 # It provides autocompletion suggestions for model names.
 
@@ -20,5 +19,3 @@ _ollama_run_completion() {
 }
 
 complete -F _ollama_run_completion ollama run
-```
-

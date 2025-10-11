@@ -1,4 +1,3 @@
-```bash
 # Bash completion script for `ollama run` command
 # This script provides autocompletion for model names from `ollama list`
 
@@ -32,5 +31,5 @@ _ollama_run_completion() {
 
 # Register the completion function for ollama
 complete -F _ollama_run_completion ollama
-```
+
 

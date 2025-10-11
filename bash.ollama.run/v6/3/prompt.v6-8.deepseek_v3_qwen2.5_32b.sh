@@ -66,4 +66,3 @@ _ollama_run_completion() {
 
 # Register the completion function for the 'ollama run' command.
 complete -F _ollama_run_completion ollama
-

@@ -28,3 +28,7 @@ prompt.v3-cloud-anthropic_claude_4_sonnet.sh PASSED: Didn't autocomplete numbers
 prompt.v3-cloud-openai_chatgpt_gpt5_mini.sh FAILED: Showed the whole `ollama list` output, including NAME row.
 prompt.v3-cloud-openai_chatgpt_gpt5.sh PASSED: Bug when running ollama without any arguments, tries to autocomplete with files in PWD.
 prompt.v3-cloud-openai_o3.sh PASSED: Duplicated the first matches after :.
+=== Test run on Fri Oct 10 08:54:07 PM CDT 2025 ===
+=== Test run on Fri Oct 10 11:47:22 PM CDT 2025 ===
+=== Test run on Fri Oct 10 11:48:06 PM CDT 2025 ===
+prompt.v3-16.microsoft_phi4_reasoning_14b.sh FAILED: FAILED: It shows the entire output of ollama list when no search.

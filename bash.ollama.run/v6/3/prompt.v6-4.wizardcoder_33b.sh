@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 # This is a robust Bash completion script for ollama run command.
 
@@ -19,6 +18,5 @@ if [ "$prev" = "run" ]; then
     # Filter based on what the user has already typed.
     COMPREPLY=($(compgen -W "$models" -- $cur))
 fi
-```
-This script will only provide completions for `ollama run` subcommand and only suggests model names from `ollama list` output as per your requirements. It correctly parses `ollama list` output to extract model names, skips the header line and handles model names containing colons. 
-
+# [[HUMAN COMMENTED-OUT]]
+# This script will only provide completions for `ollama run` subcommand and only suggests model names from `ollama list` output as per your requirements. It correctly parses `ollama list` output to extract model names, skips the header line and handles model names containing colons.

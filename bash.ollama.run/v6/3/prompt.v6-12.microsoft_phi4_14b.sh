@@ -1,4 +1,3 @@
-```bash
 # Define a function for ollama run command completion
 _ollama_run_completion() {
     # Ensure COMP_WORDS and COMP_CWORD are set; they should be provided by bash-completion environment
@@ -36,6 +35,3 @@ fi
 
 # Register the completion function with bash-completion framework
 complete -F _ollama_run_completion ollama
-
-```
-

@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 # This script provides bash completion for the `ollama run` command.
 # It parses the output of `ollama list` to provide suggestions for model names.
@@ -47,5 +46,3 @@ _ollama_run_complete() {
 
 # Register the completion function
 complete -F _ollama_run_complete ollama
-```
-

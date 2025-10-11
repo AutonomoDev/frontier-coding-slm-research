@@ -8,10 +8,10 @@
 # ## Usage
 
 # To use this script, you can source it in your `.bashrc` or `.bash_profile` file:
-source /path/to/ollama-run-completion.sh
+# source /path/to/ollama-run-completion.sh
 # [[HUMAN COMMENTED-OUT]]
 # Or you can install it by running the following command:
-curl -s https://raw.githubusercontent.com/username/repo/main/ollama-run-completion.sh | sudo bash
+# curl -s https://raw.githubusercontent.com/username/repo/main/ollama-run-completion.sh | sudo bash
 # [[HUMAN COMMENTED-OUT]]
 # ## Explanation
 # [[HUMAN COMMENTED-OUT]]

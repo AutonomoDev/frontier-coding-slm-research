@@ -23,11 +23,11 @@ complete -F _ollama ollama
 # This script will dynamically list model names as completions for `ollama run <model>` command after pressing Tab. Please note, it assumes that the 'ollama' command is in your system PATH and executable without needing any third-party dependencies or additional libraries. 
 # [[HUMAN COMMENTED-OUT]]
 # Now to make bash aware of this completion function, add these lines to your ~/.bashrc file:
-if [ -f /path/to/your_script.sh ]; then
-    . /path/to/your_script.sh
-fi
+# if [ -f /path/to/your_script.sh ]; then
+#     . /path/to/your_script.sh
+# fi
 # [[HUMAN COMMENTED-OUT]]
 # Replace `/path/to/your_script.sh` with the actual path of your bash completion script. After doing this, open a new shell or run:
-source ~/.bashrc
+# source ~/.bashrc
 # [[HUMAN COMMENTED-OUT]]
 # This will load the completion function into your current shell and make it work for `ollama run <model>` command.

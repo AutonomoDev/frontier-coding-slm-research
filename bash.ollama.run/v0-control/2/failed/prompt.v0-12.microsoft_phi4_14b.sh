@@ -26,10 +26,10 @@ complete -F _ollama_run_completion ollama
 # 
 # 2. Add the following lines to your `.bashrc` or `.bash_profile` to source the completion script:
 
-   # Load Ollama command completion
-   if [[ -f /path/to/ollama-completion.bash ]]; then
-       . /path/to/ollama-completion.bash
-   fi
+#    # Load Ollama command completion
+#    if [[ -f /path/to/ollama-completion.bash ]]; then
+#        . /path/to/ollama-completion.bash
+#    fi
 
 # [[HUMAN COMMENTED-OUT]]
 # 
@@ -37,7 +37,7 @@ complete -F _ollama_run_completion ollama
 # 
 # 4. Reload your shell configuration:
 
-   source ~/.bashrc  # or source ~/.bash_profile
+#    source ~/.bashrc  # or source ~/.bash_profile
 
 # [[HUMAN COMMENTED-OUT]]
 # 

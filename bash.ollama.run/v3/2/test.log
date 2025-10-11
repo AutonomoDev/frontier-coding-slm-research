@@ -13,3 +13,6 @@ prompt.v3-mistral_small_24b.sh FAILED: It shows the entire output of `ollama lis
 prompt.v3-openai_gpt_oss_20b.sh FAILED: Shows the models but won't reduce list based on user search.
 prompt.v3-phind_codellama_34b.sh FAILED: No suggestions.
 prompt.v3-wizardcoder_33b.sh FAILED: No suggestions.
+=== Test run on Fri Oct 10 08:54:38 PM CDT 2025 ===
+=== Test run on Fri Oct 10 11:48:27 PM CDT 2025 ===
+prompt.v3-16.microsoft_phi4_reasoning_14b.sh FAILED: FAILED: It shows the entire output of ollama list when no search.
