@@ -4,18 +4,18 @@
 === Test run on Sat Oct 11 12:16:53 AM CDT 2025 ===
 === Test run on Sat Oct 11 12:17:07 AM CDT 2025 ===
 prompt.v6-1.qwen3_coder_30b.sh PASSED: PASSED: When two or more models have the same name, it repeats the search after the colon.
-prompt.v6-2.google_gemma3_27b.sh FAILED: FAILED: No suggestions.
+prompt.v6-2.google_gemma3_27b.sh FAILED: No suggestions.
 prompt.v6-3.openai_gpt_oss_20b.sh PASSED: PASSED: When two or more models have the same name, it repeats the search after the colon.
 prompt.v6-4.wizardcoder_33b.sh PASSED: PASSED: When two or more models have the same name, it repeats the search after the colon.
-prompt.v6-5.deepseek_coder_v2_16b.sh FAILED: FAILED: No suggestions.
+prompt.v6-5.deepseek_coder_v2_16b.sh FAILED: No suggestions.
 prompt.v6-6.deepseek_r1_14b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
-prompt.v6-7.deepseek_r1_32b.sh FAILED: FAILED: It shows the entire output of ollama list when no search.
+prompt.v6-7.deepseek_r1_32b.sh FAILED: It shows the entire output of ollama list when no search.
 prompt.v6-8.deepseek_v3_qwen2.5_32b.sh PASSED: PASSED: When two or more models have the same name, it repeats the search after the colon.
-prompt.v6-9.google_gemma3_12b.sh FAILED: FAILED: It tries to autocomplete with the files in the PWD.
+prompt.v6-9.google_gemma3_12b.sh FAILED: It tries to autocomplete with the files in the PWD.
 prompt.v6-10.meta_codellama_13b.sh PASSED: 
-prompt.v6-11.meta_codellama_34b.sh FAILED: FAILED: Bash syntax error.
+prompt.v6-11.meta_codellama_34b.sh FAILED: Bash syntax error.
 prompt.v6-12.microsoft_phi4_14b.sh PASSED: PASSED: When two or more models have the same name, it repeats the search after the colon.
-prompt.v6-13.mistral_codestral_22b.sh FAILED: FAILED: It tries to autocomplete with the files in the PWD.
-prompt.v6-14.mistral_small_24b.sh FAILED: FAILED: No suggestions.
-prompt.v6-15.phind_codellama_34b.sh FAILED: FAILED: Bash syntax error.
-prompt.v6-16.microsoft_phi4_reasoning_14b.sh FAILED: FAILED: Bash syntax error.
+prompt.v6-13.mistral_codestral_22b.sh FAILED: It tries to autocomplete with the files in the PWD.
+prompt.v6-14.mistral_small_24b.sh FAILED: No suggestions.
+prompt.v6-15.phind_codellama_34b.sh FAILED: Bash syntax error.
+prompt.v6-16.microsoft_phi4_reasoning_14b.sh FAILED: Bash syntax error.

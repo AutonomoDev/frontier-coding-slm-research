@@ -31,4 +31,4 @@ prompt.v3-cloud-openai_o3.sh PASSED: Duplicated the first matches after :.
 === Test run on Fri Oct 10 08:54:07 PM CDT 2025 ===
 === Test run on Fri Oct 10 11:47:22 PM CDT 2025 ===
 === Test run on Fri Oct 10 11:48:06 PM CDT 2025 ===
-prompt.v3-16.microsoft_phi4_reasoning_14b.sh FAILED: FAILED: It shows the entire output of ollama list when no search.
+prompt.v3-16.microsoft_phi4_reasoning_14b.sh FAILED: It shows the entire output of ollama list when no search.

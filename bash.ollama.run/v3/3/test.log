@@ -17,4 +17,4 @@ prompt.v3-wizardcoder_33b.sh FAILED: The script completely fails to give any sug
 prompt.v3-qwen3_coder_30b.sh PASSED: When two or more models have the same name, it stops at the :.
 === Test run on Fri Oct 10 08:54:39 PM CDT 2025 ===
 === Test run on Fri Oct 10 11:48:44 PM CDT 2025 ===
-prompt.v3-16.microsoft_phi4_reasoning_14b.sh FAILED: FAILED: It shows the entire output of ollama list when no search.
+prompt.v3-16.microsoft_phi4_reasoning_14b.sh FAILED: It shows the entire output of ollama list when no search.

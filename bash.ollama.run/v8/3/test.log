@@ -1,1 +1,24 @@
 === Test run on Fri Oct 10 08:54:54 PM CDT 2025 ===
+=== Test run on Sat Oct 11 01:05:04 AM CDT 2025 ===
+prompt.v5-qwen3_coder_30b.sh FAILED: Doesn't filter the models. Just one giant list.
+prompt.v8-1.qwen3_coder_30b.sh FAILED: Doesn't filter the models. Just one giant list.
+prompt.v8-2.google_gemma3_27b.sh FAILED: No suggestions.
+prompt.v8-3.openai_gpt_oss_20b.sh PASSED: PASSED: When two or more models have the same name, it repeats the search after the colon.
+prompt.v8-4.wizardcoder_33b.sh FAILED: It tries to autocomplete with the files in the PWD.
+prompt.v8-5.deepseek_coder_v2_16b.sh FAILED: No suggestions.
+prompt.v8-6.deepseek_r1_14b.sh FAILED: Bash syntax error.
+prompt.v8-7.deepseek_r1_32b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v8-8.deepseek_v3_qwen2.5_32b.sh PASSED: PASSED: When two or more models have the same name, it repeats the search after the colon.
+prompt.v8-9.google_gemma3_12b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v8-10.meta_codellama_13b.sh FAILED: No suggestions.
+prompt.v8-11.meta_codellama_34b.sh FAILED: No suggestions.
+=== Test run on Sat Oct 11 01:07:20 AM CDT 2025 ===
+prompt.v8-12.microsoft_phi4_14b.sh FAILED: No suggestions.
+=== Test run on Sat Oct 11 01:08:50 AM CDT 2025 ===
+prompt.v8-13.mistral_codestral_22b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v8-14.mistral_small_24b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v8-15.phind_codellama_34b.sh PASSED: PASSED: When two or more models have the same name, it repeats the search after the colon.
+=== Test run on Sat Oct 11 01:12:54 AM CDT 2025 ===
+=== Test run on Sat Oct 11 01:15:48 AM CDT 2025 ===
+=== Test run on Sat Oct 11 01:16:02 AM CDT 2025 ===
+prompt.v8-16.microsoft_phi4_reasoning_14b.sh FAILED: No suggestions.

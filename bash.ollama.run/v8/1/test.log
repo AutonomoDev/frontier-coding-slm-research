@@ -14,3 +14,5 @@ prompt.v5-mistral_small_24b.sh PASSED: When two or more models have the same nam
 prompt.v5-qwen3_coder_30b.sh PASSED: When two or more models have the same name, it stops at the :.
 prompt.v5-deepseek_v3_qwen2.5_32b.sh PASSED: When two or more models have the same name, it stops at the :.
 === Test run on Fri Oct 10 08:54:52 PM CDT 2025 ===
+=== Test run on Sat Oct 11 01:04:06 AM CDT 2025 ===
+prompt.v8-16.microsoft_phi4_reasoning_14b.sh PASSED: Perfect.

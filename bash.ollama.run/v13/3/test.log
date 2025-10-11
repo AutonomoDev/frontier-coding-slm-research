@@ -1,1 +1,20 @@
 === Test run on Fri Oct 10 08:53:56 PM CDT 2025 ===
+=== Test run on Sat Oct 11 01:24:14 AM CDT 2025 ===
+=== Test run on Sat Oct 11 01:28:30 AM CDT 2025 ===
+prompt.v13-1.qwen3_coder_30b.sh PASSED: Perfect.
+prompt.v13-2.google_gemma3_27b.sh FAILED: Bash syntax error.
+prompt.v13-3.openai_gpt_oss_20b.sh PASSED: Perfect.
+prompt.v13-4.wizardcoder_33b.sh PASSED: Perfect.
+prompt.v13-5.deepseek_coder_v2_16b.sh FAILED: It tries to autocomplete with the files in the PWD.
+prompt.v13-6.deepseek_r1_14b.sh FAILED: Bash syntax error.
+prompt.v13-7.deepseek_r1_32b.sh FAILED: Bash syntax error.
+prompt.v13-8.deepseek_v3_qwen2.5_32b.sh FAILED: No suggestions.
+prompt.v13-9.google_gemma3_12b.sh FAILED: It shows the entire output of ollama list when no search.
+prompt.v13-10.meta_codellama_13b.sh FAILED: It tries to autocomplete with the files in the PWD.
+prompt.v13-11.meta_codellama_34b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v13-12.microsoft_phi4_14b.sh FAILED: Bash syntax error.
+prompt.v13-13.mistral_codestral_22b.sh FAILED: Bash syntax error.
+prompt.v13-14.mistral_small_24b.sh FAILED: No suggestions.
+prompt.v13-15.phind_codellama_34b.sh FAILED: Doesn't filter the models. Just one giant list.
+prompt.v13-16.microsoft_phi4_reasoning_14b.sh PASSED: Perfect.
+prompt.v13-17.aadi19_olympus_coder_13b.sh FAILED: No suggestions.
