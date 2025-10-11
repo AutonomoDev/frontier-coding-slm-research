@@ -380,7 +380,7 @@ log_and_categorize() {
         fi
     elif [[ "$grade" == "Failed" ]]; then
         mkdir -p "failed"
-        echo "$script FAILED: $comments" >> "$log_file"
+        echo "$script $comments" >> "$log_file"
         mv -f "$script" "failed/$script"
     fi
 }
