@@ -1,0 +1,422 @@
+FAILED: All of the models even without a query.
+FAILED: Bad awk regex syntax.
+FAILED: bash_completion: _comp_get_words: `comp_line': unknown argument
+FAILED: bash_completion: _comp_get_words: `ollama': unknown argument
+FAILED: bash_completion: _comp_get_words: -p: invalid variable name `1'
+FAILED: Bash syntax error.
+FAILED: Bash syntax error.
+FAILED: Bash syntax error.
+FAILED: Bash syntax error.function `ollama_run_completion` no found
+FAILED: Bash syntax error. Unknown flag: --no-trunc
+FAILED: Breaks ollama execution: bash_completion: _comp_get_words: `ollama': unknown argument
+FAILED: couldn't edit param
+FAILED: Didnd't provide edit lane.
+FAILED: Din't create an actual code completion.
+FAILED: Doesn't autocomplete after colon.
+FAILED: Doesn't filter.
+FAILED: Doesn't filter the models. Just one giant list.
+FAILED: Doesn't filter the models. Just one giant list.
+FAILED: Entire ollama list output.
+FAILED: Error: unknown flag: --no-trunc
+FAILED: Failed hard. Broke the CLI.
+FAILED: _get_comp_words_by_ref_nosplit not found.
+FAILED: Hallucinated non-existant `ollama run` argument `--output-format`.
+FAILED: Hard failed: many "command not found"s.
+FAILED: Included every single model as a really long CLI argument.
+FAILED: Included every single model as a really long CLI argument.
+FAILED: Incorrectly parsed `ollama list`.
+FAILED: It always shows all of the models, never filters.
+FAILED: It only tries to autocomplete every part of `ollama list` except the model names (hashs, disk space, etc.).
+FAILED: It shows much of the output of `ollama list`. When two or more models have the same characters, it prints the similar things twice.
+FAILED: It shows the entire output of `ollama list` when no search.
+FAILED: It shows the entire output of `ollama list` when no search.
+FAILED: It shows the entire output of `ollama list` when no search.
+FAILED: It shows the entire output of `ollama list` when no search.
+FAILED: It shows the entire output of `ollama list` when no search.
+FAILED: It shows the entire output of `ollama list` when no search.
+FAILED: It shows the entire output of `ollama list` when no search.
+FAILED: It shows the entire output of `ollama list` when no search.
+FAILED: It shows the entire output of `ollama list` when no search.
+FAILED: It shows the entire output of `ollama list` when no search.
+FAILED: It shows the entire output of `ollama list` when no search.
+FAILED: It shows the entire output of `ollama list` when no search. It shows the full line of the model.
+FAILED: It shows the entire output of `ollama list` when no search. It shows the full line of the model.
+FAILED: It shows the entire output of `ollama list` when no search. It shows the full line of the model.
+FAILED: It shows the full line of the model.
+FAILED: It shows the full line of the model.
+FAILED: It tries to autocomplete with the files in the PWD.
+FAILED: It tries to autocomplete with the files in the PWD.
+FAILED: It tries to autocomplete with the files in the PWD.
+FAILED: It tries to autocomplete with the files in the PWD.
+FAILED: It tries to autocomplete with the files in the PWD.
+FAILED: It tries to autocomplete with the files in the PWD.
+FAILED: It tries to autocomplete with the files in the PWD.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+FAILED: line 22: syntax error in conditional expression: unexpected token `+'
+FAILED: line 36: syntax error near unexpected token `}'
+FAILED: Lists all the models every time, even without the `run` command.
+FAILED: Lists every model at once, no filtering.
+FAILED: Manually marked as failed
+FAILED: Manually marked as failed
+FAILED: No code generated.
+FAILED: No suggestions
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions.
+FAILED: No suggestions after semicolon.
+FAILED: Not a bash-completition.
+FAILED: Not even a bash script. Complete failure.
+FAILED: ollama bash_completion: _comp_get_words: `ollama': unknown argument
+FAILED: ollama run bash: _get_comp_words-By_ref: command not found
+FAILED: Only autocompleted the first model in `ollama list`.
+FAILED: Showed all models as hint.
+FAILED: Showed entire output of `ollama list`.
+FAILED: Showed the whole `ollama list` output, including NAME row.
+FAILED: Shows all models.
+FAILED: Shows all models.
+FAILED: Shows every single model on one line and fails hard.
+FAILED: Shows the full output of `ollama list` every time TAB is pressed.
+FAILED: Shows the full output of `ollama list` every time TAB is pressed.
+FAILED: Shows the full output of `ollama list` every time TAB is pressed even with queries.
+FAILED: Shows the full output of `ollama list` every time TAB is pressed even with queries.
+FAILED: Shows the full output of `ollama list` every time TAB is pressed even with queries even without "run".
+FAILED: Shows the models but won't reduce list based on user search.
+FAILED: syntax error
+FAILED: Syntax errors.
+FAILED: Syntax errors.
+FAILED: Syntax errors.
+FAILED: The script catastrophically runs in an infinite loop, killing bash.
+FAILED: The script completely fails to give any suggestions at all.
+FAILED: The script completely fails to give any suggestions at all.
+FAILED: The script completely fails to give any suggestions at all.
+FAILED: The script completely fails to give any suggestions at all.
+FAILED: The script completely fails to give any suggestions at all.
+FAILED: The script completely fails to give any suggestions at all.
+FAILED: The script completely fails to give any suggestions at all.
+FAILED: The script completely fails to give any suggestions at all.
+FAILED: The script completely fails to give any suggestions at all.
+FAILED: The script completely fails to give any suggestions at all. When the critical bug is fixed, it shows the entire output of `ollama list`.
+FAILED: Throws every model onto the command line in a giant mess.
+FAILED: totally fails
+FAILED: Tries to autocompelete without the run command.
+FAILED: When two or more models have the same name, it stops at the :.
+FAILED: When two or more models have the same name, it stops at the :.
+FAILED: When two or more models have the same name, it stops at the :.
+FAILED: When two or more models have the same name, it stops at the :.
+FAILED: Won't actually filter. Lists every model every time.
+FAILED: Won't filter search.
+FAILED: Won't filter search.
+PASSED: Bug when running ollama without any arguments, tries to autocomplete with files in PWD.
+PASSED: Created on its own support for "rm" and "cp" showing advanced initiative and intelligence.
+PASSED: Didn't autocomplete numbers.
+PASSED: Did the entire line.
+PASSED: Duplicated the first matches after :.
+PASSED: Duplicated the first matches after :.
+PASSED: Even went the extra mile with extra command listing and functionality for rm, run
+PASSED: It can't progress if two or more models have the same initial characters.
+PASSED: It can't progress if two or more models have the same initial characters.
+PASSED: ```markdown
+PASSED: No version completition.
+PASSED: Perfect
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Perfect.
+PASSED: Returns qwen3:qwen3: instead of 14b, 30b, etc.
+PASSED: Showed more than the model name.
+PASSED: When two models have the same name, it completely ignores everything from the :.
+PASSED: When two or more models have the same characters, it prints the similar things twice.
+PASSED: When two or more models have the same characters, it prints the similar things twice.
+PASSED: When two or more models have the same characters, it prints the similar things twice.
+PASSED: When two or more models have the same characters, it prints the similar things twice.
+PASSED: When two or more models have the same name, it repeats the search after the colon.
+PASSED: When two or more models have the same name, it repeats the search after the colon.
+PASSED: When two or more models have the same name, it repeats the search after the colon.
+PASSED: When two or more models have the same name, it repeats the search after the colon.
+PASSED: When two or more models have the same name, it repeats the search after the colon.
+PASSED: When two or more models have the same name, it repeats the search after the colon.
+PASSED: When two or more models have the same name, it repeats the search after the colon.
+PASSED: When two or more models have the same name, it repeats the search after the colon.
+PASSED: When two or more models have the same name, it repeats the search after the colon.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.
+PASSED: When two or more models have the same name, it stops at the :.

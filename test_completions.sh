@@ -1,4 +1,5 @@
 #!/bin/bash
+# ==== test_completions.sh ====
 # test_completions.sh
 #
 # Usage: test_completions.sh [--check] <path>
@@ -8,6 +9,56 @@
 # Source the automated testing library
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/test_completions_auto.sh"
+
+################################################################
+# MY_FUNCTION: Handles scenario selection for pass/fail.         #
+################################################################
+my_function() {
+    local OUTCOME=$1
+    declare -a FAIL_SCENARIOS=(
+        "No suggestions."
+        "It tries to autocomplete with the files in the PWD, even with no run command."
+        "It shows the entire output of ollama list when no search."
+        "The script completely fails to give any suggestions at all."
+        "It tries to autocomplete with the files in the PWD."
+    )
+
+    declare -a PASS_SCENARIOS=(
+        "When two or more models have the same name, it stops at the :."
+        "When two or more models have the same name, it repeats the search after the colon."
+    )
+
+    local scenarios=()
+    local prefix=""
+    
+    if [[ "$OUTCOME" == "passed" ]]; then
+        scenarios=("${PASS_SCENARIOS[@]}")
+        prefix="PASSED"
+    else
+        scenarios=("${FAIL_SCENARIOS[@]}")
+        prefix="FAILED"
+    fi
+
+    echo "Select a scenario:" >&2
+    for i in "${!scenarios[@]}"; do
+        echo "$((i+1))) $prefix: ${scenarios[$i]}" >&2
+    done
+    echo "$((${#scenarios[@]}+1))) Other" >&2
+
+    read -p "Enter your choice (1-$((${#scenarios[@]}+1))): " choice
+
+    if [[ $choice -ge 1 && $choice -le ${#scenarios[@]} ]]; then
+        selected_message="$prefix: ${scenarios[$((choice-1))]}"
+    elif [[ $choice -eq $((${#scenarios[@]}+1)) ]]; then
+        read -p "Enter your own message: " custom_message
+        selected_message="$custom_message"
+    else
+        echo "Invalid choice. Returning empty." >&2
+        selected_message=""
+    fi
+
+    echo "$selected_message"  # This serves as the return value via echo
+}
 
 ################################################################
 # PARSE ARGUMENTS: Process command line flags and path.         #
@@ -226,27 +277,37 @@ EOF
 # GET USER OVERRIDE: Allow manual grade adjustment.              #
 ################################################################
 get_user_override() {
-    echo
+    local outcome=""
+
+    clear
     read -p "Grade this script [P/p/F]: " _user_grade_input
+
     _user_grade_input="${_user_grade_input,,}"  # to lowercase
+
     grade_override=""
+
     comments=""
+
     case "$_user_grade_input" in
         p | pass)
+            outcome="passed"
             grade_override="Passed"
-            read -p "Comments: " -r _comments_input
-            comments="$_comments_input"
             ;;
         f | fail)
+            outcome="failed"
             grade_override="Failed"
-            read -p "Comments: " -r _comments_input
-            comments="$_comments_input"
             ;;
         perfect)
+            outcome="passed"
             grade_override="Passed"
             comments="Perfect."
             ;;
     esac
+
+    if [[ -n "$outcome" && "$comments" != "Perfect." ]]; then
+        clear
+        comments=$(my_function "$outcome")
+    fi
 }
 
 ################################################################
@@ -408,13 +469,15 @@ process_script() {
             log_and_categorize "$script" "$grade_override" "$comments"
             return
         elif [[ "$_final_decision" == "pass" ]]; then
+            clear
             grade_override="Passed"
-            comments="Manually marked as passed"
+            comments=$(my_function "passed")
             log_and_categorize "$script" "$grade_override" "$comments"
             return
         elif [[ "$_final_decision" == "fail" ]]; then
+            clear
             grade_override="Failed"
-            comments="Manually marked as failed"
+            comments=$(my_function "failed")
             log_and_categorize "$script" "$grade_override" "$comments"
             return
         fi

@@ -1,0 +1,8 @@
+70 FAILED: No suggestions.
+22 FAILED: It tries to autocomplete with the files in the PWD, even with no `run` command.
+11 FAILED: It shows the entire output of `ollama list` when no search.
+9 FAILED: The script completely fails to give any suggestions at all.
+7 FAILED: It tries to autocomplete with the files in the PWD.
+133 PASSED: When two or more models have the same name, it stops at the :.
+9 PASSED: When two or more models have the same name, it repeats the search after the colon.
+65 PASSED: Perfect.
