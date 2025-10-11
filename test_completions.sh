@@ -19,8 +19,9 @@ my_function() {
         "No suggestions."
         "It tries to autocomplete with the files in the PWD, even with no run command."
         "It shows the entire output of ollama list when no search."
-        "The script completely fails to give any suggestions at all."
+        "Bash syntax error."
         "It tries to autocomplete with the files in the PWD."
+        "Doesn't filter the models. Just one giant list."
     )
 
     declare -a PASS_SCENARIOS=(
@@ -200,6 +201,7 @@ source '$(pwd)/$script'
 # Quick command aliases with documentation
 alias p='echo "✓ Marking as PASS" && touch "$_marker_dir/pass" && exit'
 alias pass='echo "✓ Marking as PASS" && touch "$_marker_dir/pass" && exit'
+alias f='echo "✗ Marking as FAIL" && touch "$_marker_dir/fail" && exit'
 alias fail='echo "✗ Marking as FAIL" && touch "$_marker_dir/fail" && exit'
 alias bail='echo "⚠ BAILING OUT - exiting all tests" && touch "$_marker_dir/bail" && exit'
 EOF
@@ -238,7 +240,7 @@ EOF
         cat >> "$temp_rc" << EOF
 echo "  • n/next  = Scenario passed, move to next scenario"
 echo "  • p/pass  = All scenarios passed, continue to next script"
-echo "  • fail    = Mark script as failed and continue"
+echo "  • f/fail    = Mark script as failed and continue"
 echo "  • bail    = Exit all testing immediately (no save)"
 EOF
     fi
@@ -344,7 +346,6 @@ process_script() {
     if $check_mode; then
         clear # Ensure a clean screen before displaying script name
         echo "==== Testing $script ====" # Display script name
-        sleep 1 # Briefly show the script name before clearing for the first scenario
     fi
 
     # Handle results based on mode
