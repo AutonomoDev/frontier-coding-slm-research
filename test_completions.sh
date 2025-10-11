@@ -281,15 +281,18 @@ process_script() {
     local script="$1"
 
     if $check_mode; then
-        clear
+        clear # Ensure a clean screen before displaying script name
+        echo "==== Testing $script ====" # Display script name
+        sleep 1 # Briefly show the script name before clearing for the first scenario
     fi
-    echo "==== Testing $script ===="
 
     # Handle results based on mode
     if $check_mode; then
         # Reset quick command tracker
         _quick_command=""
-        _final_decision=""
+        _final_decision=""          # Stores the explicit pass/fail/perfect command from interactive session
+        _current_script_grade=""    # Stores the final grade for the current script
+        _current_script_comments="" # Stores the final comments for the current script
 
         # Determine the last scenario
         local last_scenario
