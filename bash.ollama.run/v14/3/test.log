@@ -1,0 +1,21 @@
+=== Test run on Sat Oct 11 10:08:11 PM CDT 2025 ===
+prompt.v14-1.qwen3_coder_30b.sh PASSED: Perfect.
+prompt.v14-2.google_gemma3_27b.sh FAILED: No suggestions.
+=== Test run on Sat Oct 11 10:11:15 PM CDT 2025 ===
+=== Test run on Sat Oct 11 10:12:07 PM CDT 2025 ===
+prompt.v14-3.openai_gpt_oss_20b.sh PASSED: Perfect.
+prompt.v14-4.wizardcoder_33b.sh PASSED: Perfect.
+prompt.v14-5.deepseek_coder_v2_16b.sh FAILED: No suggestions.
+prompt.v14-6.deepseek_r1_14b.sh PASSED: Perfect.
+prompt.v14-7.deepseek_r1_32b.sh PASSED: Perfect.
+=== Test run on Sat Oct 11 10:16:39 PM CDT 2025 ===
+=== Test run on Sat Oct 11 10:17:09 PM CDT 2025 ===
+prompt.v14-8.deepseek_v3_qwen2.5_32b.sh PASSED: Perfect.
+prompt.v14-9.google_gemma3_12b.sh PASSED: Perfect.
+prompt.v14-10.meta_codellama_13b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v14-11.meta_codellama_34b.sh PASSED: Perfect.
+prompt.v14-12.microsoft_phi4_14b.sh FAILED: No suggestions.
+prompt.v14-13.mistral_codestral_22b.sh PASSED: Perfect.
+prompt.v14-14.mistral_small_24b.sh FAILED: No suggestions.
+prompt.v14-15.phind_codellama_34b.sh PASSED: Perfect.
+prompt.v14-16.microsoft_phi4_reasoning_14b.sh PASSED: Perfect.
