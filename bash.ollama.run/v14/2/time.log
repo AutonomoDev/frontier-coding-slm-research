@@ -1,0 +1,16 @@
+qwen3-coder:30b: 00:07
+gemma3:27b: 00:30
+gpt-oss:20b: 00:18
+wizardcoder:33b: 00:27
+deepseek-coder-v2:16b: 00:02
+deepseek-r1:14b: 00:29
+deepseek-r1:32b: 01:45
+xiaowangge/deepseek-v3-qwen2.5:32b: 00:37
+gemma3:12b: 00:11
+codellama:13b: 00:06
+codellama:34b: 00:31
+phi4:14b: 00:20
+codestral:22b: 00:13
+mistral-small:24b: 00:23
+phind-codellama:34b: 00:35
+phi4-reasoning:14b: 02:00
