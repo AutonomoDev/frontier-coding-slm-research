@@ -37,7 +37,7 @@ my_function() {
 
     local scenarios=()
     local prefix=""
-    
+
     if [[ "$OUTCOME" == "passed" ]]; then
         scenarios=("${PASS_SCENARIOS[@]}")
         prefix="PASSED"
@@ -159,11 +159,7 @@ show_interactive_guide() {
     echo "──────────────────────────────────────────────────────────────"
     echo
 
-    if [[ "$is_last" == "true" ]]; then
-        echo "  💡 QUICK COMMANDS: n/next | p/pass | P/perfect | fail | bail"
-    else
-        echo "  💡 QUICK COMMANDS: n/next | p/pass | fail | bail"
-    fi
+    echo "  💡 QUICK COMMANDS: n/next | p/pass | P/perfect | fail | bail"
     echo
 
     case "$scenario" in
@@ -240,21 +236,19 @@ alias pass='echo "✓ Marking as PASS" && touch "$_marker_dir/pass" && exit'
 alias f='echo "✗ Marking as FAIL" && touch "$_marker_dir/fail" && exit'
 alias fail='echo "✗ Marking as FAIL" && touch "$_marker_dir/fail" && exit'
 alias bail='echo "⚠ BAILING OUT - exiting all tests" && touch "$_marker_dir/bail" && exit'
+alias P='echo "⭐ Marking as PERFECT" && touch "$_marker_dir/perfect" && exit'
+alias perfect='echo "⭐ Marking as PERFECT" && touch "$_marker_dir/perfect" && exit'
 EOF
 
     if [[ "$is_last" == "true" ]]; then
         cat >> "$temp_rc" << EOF
 alias n='echo "⚠ Use 'p/pass' or 'P/perfect' on the last scenario" && touch "$_marker_dir/next_on_last" && exit'
 alias next='echo "⚠ Use 'p/pass' or 'P/perfect' on the last scenario" && touch "$_marker_dir/next_on_last" && exit'
-alias P='echo "⭐ Marking as PERFECT" && touch "$_marker_dir/perfect" && exit'
-alias perfect='echo "⭐ Marking as PERFECT" && touch "$_marker_dir/perfect" && exit'
 EOF
     else
         cat >> "$temp_rc" << EOF
 alias n='echo "→ Moving to next scenario (passed)" && touch "$_marker_dir/next" && exit'
 alias next='echo "→ Moving to next scenario (passed)" && touch "$_marker_dir/next" && exit'
-alias P='echo "⚠ 'P' can only be used on the last scenario"'
-alias perfect='echo "⚠ 'perfect' can only be used on the last scenario"'
 EOF
     fi
 
@@ -267,17 +261,18 @@ EOF
 
     if [[ "$is_last" == "true" ]]; then
         cat >> "$temp_rc" << EOF
-echo "  • p/pass  = Mark script as passed and continue"
+echo "  • p/pass    = Mark script as passed and continue"
 echo "  • P/perfect = Mark script as perfect and continue"
-echo "  • fail    = Mark script as failed and continue"
-echo "  • bail    = Exit all testing immediately (no save)"
+echo "  • fail      = Mark script as failed and continue"
+echo "  • bail      = Exit all testing immediately (no save)"
 EOF
     else
         cat >> "$temp_rc" << EOF
-echo "  • n/next  = Scenario passed, move to next scenario"
-echo "  • p/pass  = All scenarios passed, continue to next script"
+echo "  • n/next    = Scenario passed, move to next scenario"
+echo "  • p/pass    = All scenarios passed, continue to next script"
+echo "  • P/perfect = Mark script as perfect and continue"
 echo "  • f/fail    = Mark script as failed and continue"
-echo "  • bail    = Exit all testing immediately (no save)"
+echo "  • bail      = Exit all testing immediately (no save)"
 EOF
     fi
 
