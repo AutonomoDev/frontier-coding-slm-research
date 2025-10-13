@@ -1,4 +1,5 @@
-```bash
+#!/bin/bash
+
 _ollama_run_completions() {
     # Save original COMP_WORDBREAKS
     local orig_comp_wordbreaks="$COMP_WORDBREAKS"
@@ -19,12 +20,10 @@ _ollama_run_completions() {
         local models
         models=$(ollama list | awk 'NR>1 {print $1}' 2>/dev/null)
 
-        # Generate completions from the model list
+        # Generate completions
         COMPREPLY=($(compgen -W "$models" -- "$cur"))
     fi
 }
 
 # Register the completion function for 'ollama'
 complete -F _ollama_run_completions ollama
-```
-

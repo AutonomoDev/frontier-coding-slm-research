@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 # This completion script assumes 'ollama' is installed and in the user's PATH
 
@@ -29,5 +28,3 @@ _ollama_run_completions() {
     COMPREPLY=($(compgen -W "${models[*]}" -- "$cur"))
 }
 complete -F _ollama_run_completions ollama
-```
-

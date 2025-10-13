@@ -1,4 +1,3 @@
-```
 _ollama_run_completions() {
     # Temporarily modify COMP_WORDBREAKS to include colons
     local old_comp_wordbreaks="$COMP_WORDBREAKS"
@@ -23,5 +22,3 @@ _ollama_run_completions() {
 }
 
 complete -F _ollama_run_completions ollama
-```
-

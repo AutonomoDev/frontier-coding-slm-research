@@ -1,6 +1,6 @@
-Here is an example of a Bash completion script for `ollama run`:
+# [[HUMAN COMMENTED-OUT]]
+# Here is an example of a Bash completion script for `ollama run`:
 
-```bash
 # This function will provide completions for the "ollama run" command.
 _ollama_run_completions() {
     # Save original word breaks and set new ones, so colons don't split words.
@@ -28,6 +28,6 @@ _ollama_run_completions() {
 
 # Register this function for completion with "ollama run".
 complete -F _ollama_run_completions ollama
-```
-This script provides the necessary logic to handle `ollama run` commands, dynamically fetches model names from `ollama list`, and correctly handles model names containing colons.
 
+# [[HUMAN COMMENTED-OUT]]
+# This script provides the necessary logic to handle `ollama run` commands, dynamically fetches model names from `ollama list`, and correctly handles model names containing colons.

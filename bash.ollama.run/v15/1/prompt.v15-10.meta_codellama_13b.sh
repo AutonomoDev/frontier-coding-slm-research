@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 
 _ollama_run_completions() {
@@ -23,6 +22,6 @@ _ollama_run_completions() {
 }
 
 complete -F _ollama_run_completions ollama
-```
-This script should work as expected, dynamically fetching model names from `ollama list` and correctly handling model names containing colons.
 
+# [[HUMAN COMMENTED-OUT]]
+# This script should work as expected, dynamically fetching model names from `ollama list` and correctly handling model names containing colons.

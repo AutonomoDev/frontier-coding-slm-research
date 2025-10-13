@@ -1,4 +1,3 @@
-```bash
 _ollama_run_completions() {
     # Save original COMP_WORDBREAKS and modify it for colon handling
     local orig_worbreaks="$COMP_WORDBREAKS"
@@ -22,7 +21,7 @@ _ollama_run_completions() {
 
 # Register the completion function with 'complete' command for 'ollama run'
 complete -F _ollama_run_completions ollama
-```
 
-This script follows all specified requirements: it correctly handles Bash word splitting issues around colons, dynamically fetches model names from `ollama list`, and ensures completions are only provided when the `run` subcommand is used. The logic for modifying `COMP_WORDBREAKS` before parsing and restoring it immediately afterward ensures that colon-containing words like `codellama:13b` are handled correctly.
+# [[HUMAN COMMENTED-OUT]]
+# This script follows all specified requirements: it correctly handles Bash word splitting issues around colons, dynamically fetches model names from `ollama list`, and ensures completions are only provided when the `run` subcommand is used. The logic for modifying `COMP_WORDBREAKS` before parsing and restoring it immediately afterward ensures that colon-containing words like `codellama:13b` are handled correctly.
 

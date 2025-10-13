@@ -1,4 +1,3 @@
-```bash
 _ollama_run_completions() {
     # Save the original COMP_WORDBREAKS and modify it to exclude colons
     local orig_wbreaks="$COMP_WORDBREAKS"
@@ -23,7 +22,7 @@ _ollama_run_completions() {
 
 # Register the completion function for the `ollama run` command
 complete -F _ollama_run_completions ollama
-```
 
-This script provides a robust Bash completion logic specifically tailored to handle model names with colons using the `ollama run` subcommand. It ensures correct behavior by temporarily modifying the word break characters, thereby allowing seamless integration and handling of complex input scenarios.
+# [[HUMAN COMMENTED-OUT]]
+# This script provides a robust Bash completion logic specifically tailored to handle model names with colons using the `ollama run` subcommand. It ensures correct behavior by temporarily modifying the word break characters, thereby allowing seamless integration and handling of complex input scenarios.
 

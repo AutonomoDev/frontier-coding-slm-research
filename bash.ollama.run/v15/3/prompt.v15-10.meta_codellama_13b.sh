@@ -1,4 +1,3 @@
-```bash
 _ollama_run_completions() {
     local prev cur words cword split
     _get_comp_words_by_ref -n : cur prev words cword split
@@ -25,5 +24,4 @@ _ollama_run_completions() {
     fi
 }
 complete -F _ollama_run_completions ollama
-```
 

@@ -1,4 +1,3 @@
- ```bash
 # Define completion function for ollama run command
 _ollama_run_completions() {
     local cur prev words cword split
@@ -23,5 +22,3 @@ _ollama_run_completions() {
 
 # Register completion function for ollama run command
 complete -F _ollama_run_completions ollama
-   ```
-

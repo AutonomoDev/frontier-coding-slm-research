@@ -1,4 +1,3 @@
-```bash
 _ollama_run_completions() {
     # Save the original COMP_WORDBREAKS value
     local orig_worbreaks="$COMP_WORDBREAKS"
@@ -25,7 +24,6 @@ _ollama_run_completions() {
 
 # Register the completion function with the 'ollama' command, specifically for the 'run' subcommand
 complete -F _ollama_run_completions ollama
-```
 
-This script adheres to all specified requirements: it modifies `COMP_WORDBREAKS` temporarily to handle model names containing colons, ensures completions are triggered only for the `run` subcommand by checking the correct position in `COMP_WORDS`, and dynamically fetches and suggests model names from the output of `ollama list`. The completion function is registered using `complete -F _ollama_run_completions ollama`.
-
+# [[HUMAN COMMENTED-OUT]]
+# This script adheres to all specified requirements: it modifies `COMP_WORDBREAKS` temporarily to handle model names containing colons, ensures completions are triggered only for the `run` subcommand by checking the correct position in `COMP_WORDS`, and dynamically fetches and suggests model names from the output of `ollama list`. The completion function is registered using `complete -F _ollama_run_completions ollama`.

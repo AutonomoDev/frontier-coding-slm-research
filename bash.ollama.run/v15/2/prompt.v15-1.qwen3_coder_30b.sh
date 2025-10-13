@@ -1,4 +1,4 @@
-```bash
+# [[HUMAN COMMENTED-OUT]]
 _ollama_run_completions() {
     # Save original COMP_WORDBREAKS
     local orig_comp_wordbreaks="$COMP_WORDBREAKS"
@@ -26,5 +26,3 @@ _ollama_run_completions() {
 
 # Register the completion function for 'ollama'
 complete -F _ollama_run_completions ollama
-```
-

@@ -1,4 +1,3 @@
-```bash
 _ollama_run_completions() {
     local prev cur original_wordbreaks words models comp_line
     
@@ -20,5 +19,3 @@ _ollama_run_completions() {
 
 # Register the function with bash.
 complete -F _ollama_run_completions ollama
-``` 
-

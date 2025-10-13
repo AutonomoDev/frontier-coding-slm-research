@@ -1,4 +1,3 @@
- ```bash
 # Bash completion for 'ollama run' command.
 _ollama_run_completions() {
     local cur prev words cword
@@ -18,5 +17,3 @@ _ollama_run_completions() {
     fi
 }
 complete -F _ollama_run_completions ollama # Register the function for 'ollama'.
-```
-

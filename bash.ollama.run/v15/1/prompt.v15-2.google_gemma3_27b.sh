@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 # Bash completion for ollama run command
 
@@ -23,5 +22,3 @@ _ollama_run_completions() {
 }
 
 complete -F _ollama_run_completions ollama
-```
-

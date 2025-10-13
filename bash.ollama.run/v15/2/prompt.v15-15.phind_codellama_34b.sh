@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 # This is a Bash completion script for the 'ollama run' command. It dynamically fetches model names from 'ollama list' and correctly handles model names containing colons (e.g., 'codellama:13b').
 
@@ -26,5 +25,3 @@ _ollama_run_completions() {
 
 # Register the function for 'ollama' command and its 'run' subcommand completions
 complete -F _ollama_run_completions ollama
-```
-

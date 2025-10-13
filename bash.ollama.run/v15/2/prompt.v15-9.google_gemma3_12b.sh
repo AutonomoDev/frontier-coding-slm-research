@@ -1,4 +1,3 @@
-```bash
 _ollama_run_completions() {
   local cur prev words comp_words
   local saved_comp_wordbreaks
@@ -28,5 +27,3 @@ _ollama_run_completions() {
 
 # Register the completion function
 complete -F _ollama_run_completions ollama
-```
-

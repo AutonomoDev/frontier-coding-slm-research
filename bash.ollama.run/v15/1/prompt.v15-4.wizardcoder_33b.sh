@@ -1,4 +1,3 @@
-```bash
 # Bash programmable completion for 'ollama run'
 
 _get_comp_words_by_ref() { 
@@ -39,5 +38,3 @@ _ollama_run_completions() {
 
 # Register the function with compspec keyword 'ollama' and function _ollama_run_completions.
 complete -F _ollama_run_completions ollama
-``` 
-
