@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
+# ==== reform-script.sh ====
+# ==== reform-script.sh ====
 
 # A script to send a file to an OpenRouter LLM for refactoring into a functional Bash script.
 # Streams the model output live (token-by-token) while writing to a temporary file.
 # Includes automatic syntax checking and retry with different models on failure.
+# Supports processing individual files or all .sh files in a directory (recursively).
 
-set -e
+# set -e
 set -o pipefail
 
 # --- Configuration ---
@@ -28,12 +31,14 @@ SYSTEM_PROMPT="You are an expert Bash programmer. Your task is to rewrite the us
 # --- Function Definitions ---
 
 usage() {
-    echo "Usage: $0 <input_file_path> [initial_model_name] [--show-prompt]" >&2
+    echo "Usage: $0 <input_file_or_directory> [initial_model_name] [--show-prompt]" >&2
     echo "" >&2
     echo "Arguments:" >&2
-    echo "  <input_file_path>     : Path to the file to be refactored" >&2
-    echo "  [initial_model_name]  : First LLM model to try (default: $DEFAULT_MODEL)" >&2
-    echo "  --show-prompt         : Display the prompt and exit without executing" >&2
+    echo "  <input_file_or_directory> : Path to file or directory to process" >&2
+    echo "                              If directory, recursively processes all .sh files" >&2
+    echo "                              (skips files with existing .sh.orig)" >&2
+    echo "  [initial_model_name]      : First LLM model to try (default: $DEFAULT_MODEL)" >&2
+    echo "  --show-prompt             : Display the prompt and exit without executing" >&2
     exit 1
 }
 
@@ -66,7 +71,8 @@ You are an expert Bash programmer. Rewrite the user's text into a valid Bash scr
 1. **Marker processing first**:
    - For all lines *strictly between* \`Thinking...\` and \`...done thinking\`:
      → Prepend '#' to each line (comment them out)
-   - For all lines *strictly between* \`<think>\` and \`</think>\`:
+   - For all lines *strictly between* \`
+\`:
      → Prepend '#' to each line (comment them out)
    - **Keep the marker lines themselves, but commented out.**
 
@@ -76,8 +82,8 @@ You are an expert Bash programmer. Rewrite the user's text into a valid Bash scr
    - Do NOT add \`\`\`bash, \`\`\`sh, or any other code fence markers to the output
 
 3. **General non-Bash text**:
-   For any remaining non-Bash text (not covered by Rule 1):
-   → Comment it out with \`# [[HUMAN COMMENTED-OUT]]\` on the first line of the block
+   → Comment it out with \`# [[HUMAN COMMENTED-OUT]]\` on the line above such lines, a single time per block.
+
 
 --- FILE TO REWRITE ---
 \`\`\`
@@ -137,27 +143,144 @@ handle_final_result() {
         mv "$temp_output_file" "$input_file"
         echo "📄 New script saved as: $input_file"
         echo "💡 Make it executable with: chmod +x $input_file"
+        return 0
     else
         echo "💥 CRITICAL FAILURE: All $max_attempts attempts failed."
         [[ -f "$temp_output_file" ]] && rm -f "$temp_output_file"
-        if rm -f "$input_file"; then
-            echo "🗑️  Original input file '$input_file' has been deleted."
-        fi
-        exit 1
+        echo "⚠️  Keeping original input file '$input_file' due to failure."
+        return 1
     fi
+}
+
+process_single_file() {
+    local input_file="$1"
+    local initial_model="$2"
+    local show_prompt_flag="$3"
+
+    local orig_backup_file="${input_file}.orig"
+    if [[ -f "$orig_backup_file" ]] && [[ -z "$show_prompt_flag" ]]; then
+        echo "⏭️  Skipping '$input_file' - backup file already exists: '$orig_backup_file'"
+        return 2  # Special return code for "skipped"
+    fi
+
+    local temp_output_file="${input_file}.tmp"
+
+    echo "🔄 Starting script reform process..."
+    echo "📁 Input file: $input_file"
+    echo "🤖 Initial model: $initial_model"
+
+    # If --show-prompt, just show it and exit (happens inside call_openrouter)
+    if [[ -n "$show_prompt_flag" ]]; then
+        call_openrouter "$initial_model" "$input_file" "$temp_output_file" "$show_prompt_flag"
+        exit 0
+    fi
+
+    local max_attempts=$((${#MODEL_POOL[@]} + 1))
+    local success=false
+    local current_model=""
+
+    local shuffled_pool=()
+    mapfile -t shuffled_pool < <(shuffle_models "${MODEL_POOL[@]}")
+    local models_to_try=("$initial_model" "${shuffled_pool[@]}")
+
+    for i in "${!models_to_try[@]}"; do
+        current_model="${models_to_try[i]}"
+        local attempt_num=$((i + 1))
+
+        echo ""
+        echo "--- Attempt $attempt_num of $max_attempts ---"
+
+        if call_openrouter "$current_model" "$input_file" "$temp_output_file" ""; then
+            echo "📡 API call completed. Checking syntax..."
+            if check_bash_syntax "$temp_output_file"; then
+                success=true
+                break
+            else
+                echo "🔄 Syntax check failed. Will retry with different model..."
+                rm -f "$temp_output_file"
+            fi
+        else
+            echo "🔄 API call failed. Will retry..."
+        fi
+
+        if [[ $attempt_num -lt $max_attempts ]]; then
+            echo "⏳ Waiting 2 seconds..."
+            sleep 2
+        fi
+    done
+
+    if handle_final_result "$success" "$attempt_num" "$current_model" "$input_file" "$temp_output_file" "$max_attempts"; then
+        return 0  # Success
+    else
+        return 1  # Failure
+    fi
+}
+
+process_directory() {
+    local dir_path="$1"
+    local initial_model="$2"
+
+    echo "📂 Recursively processing directory: $dir_path"
+    echo ""
+
+    local processed_count=0
+    local skipped_count=0
+    local failed_count=0
+
+    # Find all .sh files recursively
+    while IFS= read -r -d '' sh_file; do
+        local orig_backup="${sh_file}.orig"
+
+        echo ""
+        echo "═══════════════════════════════════════════════════════════"
+        echo "Processing: $sh_file"
+        echo "═══════════════════════════════════════════════════════════"
+
+        # Call process_single_file and check return code
+        local result=0
+        {
+            # set +e
+            process_single_file "$sh_file" "$initial_model" ""
+            result=$?
+            # set -e
+        }
+
+        case $result in
+            0)
+                ((processed_count++))
+                ;;
+            2)
+                ((skipped_count++))
+                ;;
+            *)
+                ((failed_count++))
+                ;;
+        esac
+
+        echo ""
+    done < <(find "$dir_path" -type f -name "*.sh" -print0 | sort -z)
+
+    echo ""
+    echo "═══════════════════════════════════════════════════════════"
+    echo "📊 Directory Processing Summary"
+    echo "═══════════════════════════════════════════════════════════"
+    echo "✅ Successfully processed: $processed_count"
+    echo "⏭️  Skipped (backup exists): $skipped_count"
+    echo "❌ Failed: $failed_count"
+    echo "═══════════════════════════════════════════════════════════"
 }
 
 # --- Parse Arguments ---
 
-INPUT_FILE=""
+INPUT_PATH=""
 INITIAL_MODEL=""
 SHOW_PROMPT_FLAG=""
 
 for arg in "$@"; do
     if [[ "$arg" == "--show-prompt" ]]; then
         SHOW_PROMPT_FLAG="--show-prompt"
-    elif [[ -z "$INPUT_FILE" ]]; then
-        INPUT_FILE="$arg"
+    elif [[ -z "$INPUT_PATH" ]]; then
+        INPUT_PATH="$arg"
     elif [[ -z "$INITIAL_MODEL" ]]; then
         INITIAL_MODEL="$arg"
     fi
@@ -165,8 +288,8 @@ done
 
 # --- Prerequisite Checks ---
 
-if [[ -z "$INPUT_FILE" ]]; then
-    echo "Error: Input file not specified." >&2
+if [[ -z "$INPUT_PATH" ]]; then
+    echo "Error: Input file or directory not specified." >&2
     usage
 fi
 
@@ -195,63 +318,24 @@ if [[ -z "${OPENROUTER_API_KEY:-}" ]]; then
     exit 1
 fi
 
-if [[ ! -f "$INPUT_FILE" ]]; then
-    echo "Error: Input file not found: '$INPUT_FILE'" >&2
+if [[ ! -e "$INPUT_PATH" ]]; then
+    echo "Error: Input path not found: '$INPUT_PATH'" >&2
     exit 1
 fi
 
-ORIG_BACKUP_FILE="${INPUT_FILE}.orig"
-if [[ -f "$ORIG_BACKUP_FILE" ]] && [[ -z "$SHOW_PROMPT_FLAG" ]]; then
-    echo "Note: Skipping '$INPUT_FILE' - backup file already exists: '$ORIG_BACKUP_FILE'"
-    exit 0
-fi
-
-TEMP_OUTPUT_FILE="${INPUT_FILE}.tmp"
-
 # --- Main Execution ---
 
-echo "🔄 Starting script reform process..."
-echo "📁 Input file: $INPUT_FILE"
-echo "🤖 Initial model: $INITIAL_MODEL"
-
-# If --show-prompt, just show it and exit (happens inside call_openrouter)
-if [[ -n "$SHOW_PROMPT_FLAG" ]]; then
-    call_openrouter "$INITIAL_MODEL" "$INPUT_FILE" "$TEMP_OUTPUT_FILE" "$SHOW_PROMPT_FLAG"
-    exit 0
+if [[ -d "$INPUT_PATH" ]]; then
+    # Process directory recursively
+    if [[ -n "$SHOW_PROMPT_FLAG" ]]; then
+        echo "Error: --show-prompt flag cannot be used with directory input" >&2
+        exit 1
+    fi
+    process_directory "$INPUT_PATH" "$INITIAL_MODEL"
+elif [[ -f "$INPUT_PATH" ]]; then
+    # Process single file
+    process_single_file "$INPUT_PATH" "$INITIAL_MODEL" "$SHOW_PROMPT_FLAG"
+else
+    echo "Error: Input path is neither a file nor a directory: '$INPUT_PATH'" >&2
+    exit 1
 fi
-
-max_attempts=$((${#MODEL_POOL[@]} + 1))
-success=false
-current_model=""
-
-shuffled_pool=()
-mapfile -t shuffled_pool < <(shuffle_models "${MODEL_POOL[@]}")
-models_to_try=("$INITIAL_MODEL" "${shuffled_pool[@]}")
-
-for i in "${!models_to_try[@]}"; do
-    current_model="${models_to_try[i]}"
-    attempt_num=$((i + 1))
-
-    echo ""
-    echo "--- Attempt $attempt_num of $max_attempts ---"
-
-    if call_openrouter "$current_model" "$INPUT_FILE" "$TEMP_OUTPUT_FILE" ""; then
-        echo "📡 API call completed. Checking syntax..."
-        if check_bash_syntax "$TEMP_OUTPUT_FILE"; then
-            success=true
-            break
-        else
-            echo "🔄 Syntax check failed. Will retry with different model..."
-            rm -f "$TEMP_OUTPUT_FILE"
-        fi
-    else
-        echo "🔄 API call failed. Will retry..."
-    fi
-
-    if [[ $attempt_num -lt $max_attempts ]]; then
-        echo "⏳ Waiting 2 seconds..."
-        sleep 2
-    fi
-done
-
-handle_final_result "$success" "$attempt_num" "$current_model" "$INPUT_FILE" "$TEMP_OUTPUT_FILE" "$max_attempts"
