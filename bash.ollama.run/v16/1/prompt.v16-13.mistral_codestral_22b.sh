@@ -1,5 +1,4 @@
-# [[HUMAN COMMENTED-OUT]]
-# # Bash Completion Script for 'ollama run'
+# Bash Completion Script for 'ollama run'
 
 # Function Declaration
 _ollama_completions() {

@@ -1,13 +1,14 @@
-# Bash completion for 'ollama run' command with colon-aware model name completion
+# Bash completion script for 'ollama run' command
+# Handles model name completion with colon-separated tags (e.g., codellama:13b)
 
 _ollama_completions() {
-    local cur prev models
+    local cur prev models _old_wb
 
     # CRITICAL: Check if completing after "ollama run"
     [[ ${COMP_WORDS[0]} != "ollama" || ${COMP_WORDS[1]} != "run" ]] && { COMPREPLY=(); return 0; }
 
     # Handle colons: Temporarily remove ':' from word breaks to reparse correctly
-    local _old_wb=${COMP_WORDBREAKS}
+    _old_wb=${COMP_WORDBREAKS}
     COMP_WORDBREAKS=${COMP_WORDBREAKS//:/}
     _get_comp_words_by_ref -n : cur prev
     COMP_WORDBREAKS=${_old_wb}

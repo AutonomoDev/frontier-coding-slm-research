@@ -24,5 +24,4 @@ _ollama_completions() {
     return 0
 }
 # Register the completion function
-complete -F _ollama_completions ollama 
-
+complete -F _ollama_completions ollama

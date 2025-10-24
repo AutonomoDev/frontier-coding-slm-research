@@ -1,6 +1,6 @@
-Thinking...
-We need to output a bash completion script. They provided skeleton. We need to fill it. Just put function with skeleton code. Ensure exact lines. Must match index check exactly. Provide comments. Let's produce.
-...done thinking.
+#Thinking...
+#We need to output a bash completion script. They provided skeleton. We need to fill it. Just put function with skeleton code. Ensure exact lines. Must match index check exactly. Provide comments. Let's produce.
+#...done thinking.
 
 _ollama_completions() {
     # CRITICAL: Check if completing after "ollama run"
@@ -28,4 +28,3 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-

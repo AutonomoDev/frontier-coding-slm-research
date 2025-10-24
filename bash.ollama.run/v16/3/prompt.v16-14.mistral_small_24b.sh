@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
   # CRITICAL: Check if completing after "ollama run"
   [[ ${COMP_WORDS[0]} != "ollama" || ${COMP_WORDS[1]} != "run" ]] && { COMPREPLY=(); return 0; }
@@ -28,5 +27,3 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-```
-

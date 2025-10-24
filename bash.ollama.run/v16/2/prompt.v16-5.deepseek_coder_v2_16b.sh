@@ -1,4 +1,3 @@
- ```bash
 # Bash completion script for `ollama run` command
 _ollama_completions() {
     # CRITICAL: Check if completing after "ollama run"
@@ -26,5 +25,3 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-```
-
