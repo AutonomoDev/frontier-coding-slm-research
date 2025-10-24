@@ -1,0 +1,17 @@
+=== Test run on Fri Oct 24 06:51:27 AM CDT 2025 ===
+prompt.v16-1.qwen3_coder_30b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v16-2.google_gemma3_27b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v16-3.openai_gpt_oss_20b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v16-4.wizardcoder_33b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v16-5.deepseek_coder_v2_16b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v16-6.deepseek_r1_14b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v16-7.deepseek_r1_32b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v16-8.deepseek_v3_qwen2.5_32b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v16-9.google_gemma3_12b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v16-10.meta_codellama_13b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v16-11.meta_codellama_34b.sh FAILED: It tries to autocomplete with the files in the PWD.
+prompt.v16-12.microsoft_phi4_14b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v16-13.mistral_codestral_22b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v16-14.mistral_small_24b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v16-15.phind_codellama_34b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v16-16.microsoft_phi4_reasoning_14b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
