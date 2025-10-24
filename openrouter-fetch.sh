@@ -120,8 +120,11 @@ fi
 # --- Normal execution ---
 
 if [[ -z "${OPENROUTER_API_KEY:-}" ]]; then
-    echo "Error: OPENROUTER_API_KEY is not set." >&2
-    exit 1
+    source .env
+    if [[ -z "${OPENROUTER_API_KEY:-}" ]]; then
+        echo "Error: OPENROUTER_API_KEY is not set." >&2
+        exit 1
+    fi
 fi
 
 if ! command -v curl >/dev/null || ! command -v jq >/dev/null; then

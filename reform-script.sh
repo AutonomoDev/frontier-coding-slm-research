@@ -101,7 +101,7 @@ ${file_content}
         "${fetch_cmd[@]}"
         exit 0
     fi
-
+#echo "${fetch_cmd[@]}" _ "$PARSE_SCRIPT" "$temp_output_file"; exit
     # Normal execution: pipe to parser, filtering out code fence lines (```), even with leading whitespace.
     if ! "${fetch_cmd[@]}" | "$PARSE_SCRIPT" "$temp_output_file"; then
         echo "❌ API call or parsing failed for model $model" >&2
@@ -314,8 +314,11 @@ if ! command -v jq &> /dev/null; then
 fi
 
 if [[ -z "${OPENROUTER_API_KEY:-}" ]]; then
-    echo "Error: OPENROUTER_API_KEY environment variable is not set." >&2
-    exit 1
+    source .env
+    if [[ -z ${OPENROUTER_API_KEY} ]]; then
+        echo "Error: OPENROUTER_API_KEY environment variable is not set." >&2
+        exit 1
+    fi
 fi
 
 if [[ ! -e "$INPUT_PATH" ]]; then
