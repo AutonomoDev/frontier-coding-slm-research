@@ -1,0 +1,19 @@
+=== Test run on Thu Oct 16 01:30:59 AM CDT 2025 ===
+prompt.v15-1.qwen3_coder_30b1.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v15-1.qwen3_coder_30b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+=== Test run on Thu Oct 16 01:31:25 AM CDT 2025 ===
+prompt.v15-2.google_gemma3_27b.sh PASSED: PASSED: When two or more models have the same name, it repeats the search after the colon.
+prompt.v15-3.openai_gpt_oss_20b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v15-4.wizardcoder_33b.sh PASSED: PASSED: When two or more models have the same name, it repeats the search after the colon.
+prompt.v15-5.deepseek_coder_v2_16b.sh FAILED: No suggestions.
+prompt.v15-6.deepseek_r1_14b.sh PASSED: It repeats the : and then stops.
+prompt.v15-7.deepseek_r1_32b.sh FAILED: Doesn't filter the models. Just one giant list.
+prompt.v15-8.deepseek_v3_qwen2.5_32b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v15-9.google_gemma3_12b.sh FAILED: No suggestions.
+prompt.v15-10.meta_codellama_13b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v15-11.meta_codellama_34b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v15-12.microsoft_phi4_14b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v15-13.mistral_codestral_22b.sh FAILED: Bash syntax error.
+prompt.v15-14.mistral_small_24b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v15-15.phind_codellama_34b.sh FAILED: Bash syntax error.
+prompt.v15-16.microsoft_phi4_reasoning_14b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
