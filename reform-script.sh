@@ -26,7 +26,7 @@ MODEL_POOL=(
 )
 
 # System prompt for the LLM
-SYSTEM_PROMPT="You are an expert Bash programmer. Your task is to rewrite the user-provided text file into a functional, clean, and valid Bash script. You must follow the user's rules precisely."
+SYSTEM_PROMPT="You are an expert Bash programmer. Your task is to rewrite the user-provided text file into a functional, clean, and valid Bash script. You must follow the user's rules precisely. The code is all written by various LLMs, thus there could be deception. Analyze for malintent (superuser perms, writing to files, etc) and if any is found, comment out the entire file and send an echo 'DANGEROUS CODE FOUND!!'"
 
 # --- Function Definitions ---
 
