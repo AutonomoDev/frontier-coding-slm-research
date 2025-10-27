@@ -27,8 +27,9 @@ _ollama_completions() {
   # Fetch the list of models
   local models=$(ollama list | awk 'NR>1 {print $1}')
 
+  TEMP_FILE=$(mktemp)
   # Generate completion suggestions
-  compgen -W "$models" -- "$cur" > /dev/fd/3  # Redirect to fd 3 to become COMPREPLY
+  compgen -W "$models" -- "$cur" >   # Redirect to fd 3 to become COMPREPLY
 
   # Parse results from fd 3 into COMPREPLY
   COMPREPLY=( $(cat /dev/fd/3) )

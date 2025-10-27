@@ -1,19 +1,15 @@
-=== Test run on Tue Oct 28 01:15:37 AM CDT 2025 ===
+=== Test run on Tue Oct 28 01:53:15 AM CDT 2025 ===
 prompt.v17-1.qwen3_coder_30b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
-=== Test run on Tue Oct 28 01:16:28 AM CDT 2025 ===
-=== Test run on Tue Oct 28 01:16:40 AM CDT 2025 ===
-=== Test run on Tue Oct 28 01:25:22 AM CDT 2025 ===
-=== Test run on Tue Oct 28 01:51:08 AM CDT 2025 ===
 prompt.v17-2.google_gemma3_27b.sh FAILED: It tries to autocomplete with the files in the PWD.
 prompt.v17-3.openai_gpt_oss_20b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
-prompt.v17-4.wizardcoder_33b.sh FAILED: Doesn't filter the models. Just one giant list.
-prompt.v17-5.deepseek_coder_v2_16b.sh FAILED: Doesn't filter the models. Just one giant list.
+prompt.v17-4.wizardcoder_33b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v17-5.deepseek_coder_v2_16b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
 prompt.v17-6.deepseek_r1_14b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
 prompt.v17-7.deepseek_r1_32b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
 prompt.v17-8.deepseek_v3_qwen2.5_32b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
-prompt.v17-9.google_gemma3_12b.sh FAILED: No suggestions.
-prompt.v17-10.meta_codellama_13b.sh FAILED: Doesn't filter the models. Just one giant list.
-prompt.v17-11.meta_codellama_34b.sh FAILED: It tries to autocomplete with the files in the PWD.
+prompt.v17-9.google_gemma3_12b.sh FAILED: It tries to autocomplete with the files in the PWD.
+prompt.v17-10.meta_codellama_13b.sh FAILED: It tries to autocomplete with the files in the PWD.
+prompt.v17-11.meta_codellama_34b.sh PASSED: PASSED: When two or more models have the same name, it repeats the search after the colon.
 prompt.v17-12.microsoft_phi4_14b.sh FAILED: It tries to autocomplete with the files in the PWD.
 prompt.v17-13.mistral_codestral_22b.sh FAILED: It tries to autocomplete with the files in the PWD.
 prompt.v17-14.mistral_small_24b.sh FAILED: It tries to autocomplete with the files in the PWD.
