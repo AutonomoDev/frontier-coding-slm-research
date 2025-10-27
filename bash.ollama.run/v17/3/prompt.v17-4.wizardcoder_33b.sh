@@ -1,4 +1,3 @@
-```bash
 # The _ollama_completions function for 'ollama run' command
 function _ollama_completions {
     # If subcommand is not "run", exit the function immediately to prevent interference with other commands
@@ -31,5 +30,3 @@ function _ollama_completions {
 
 # Register the completion function for the 'ollama' command
 complete -F _ollama_completions ollama
-``` 
-

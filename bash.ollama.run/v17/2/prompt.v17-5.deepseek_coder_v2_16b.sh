@@ -1,4 +1,3 @@
- ```bash
 #! /usr/bin/env bash
 
 # 定义完整的补全函数
@@ -44,7 +43,6 @@ function _ollama_completions {
 
 # 注册补全函数
 complete -F _ollama_completions ollama
-```
 
-This Bash script provides a robust solution for handling the `ollama run` command's completion in a way that correctly manages the presence of colons and ensures that suggestions are displayed accurately. The script adheres to the outlined requirements, including immediate context checks, proper handling of COMP_WORDBREAKS, and careful management of completions after a colon is typed.
-
+# [[HUMAN COMMENTED-OUT]]
+# This Bash script provides a robust solution for handling the `ollama run` command's completion in a way that correctly manages the presence of colons and ensures that suggestions are displayed accurately. The script adheres to the outlined requirements, including immediate context checks, proper handling of COMP_WORDBREAKS, and careful management of completions after a colon is typed.

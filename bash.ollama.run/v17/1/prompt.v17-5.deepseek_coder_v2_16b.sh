@@ -1,4 +1,3 @@
- ```bash
 #! /usr/bin/env bash
 
 function _ollama_completions {
@@ -37,5 +36,3 @@ function _ollama_completions {
 
 # Register the completion function for ollama command
 complete -F _ollama_completions ollama
-```
-

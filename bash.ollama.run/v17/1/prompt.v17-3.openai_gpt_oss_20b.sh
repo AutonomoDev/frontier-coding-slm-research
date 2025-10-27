@@ -1,7 +1,3 @@
-Thinking...
-We need to respond with v17 code? The prompt says "Here's the proposed v17 prompt." Then we likely should produce the final code. The user might want us to output the code that follows that spec. They said "Excellent. This is a fascinating and important project... Let's analyze the data to create v17." They have provided analysis and the proposed prompt. So likely we need to produce the script per the specification. So produce code only, no markdown, no explanation, just Bash script. Ensure all details: function name _ollama_completions, check COMP_WORDS[1] == run, early return. Save original COMP_WORDBREAKS, modify, call _get_comp_words_by_ref -n : cur prev, restore. Then check command -v ollama. If not, return. Get model list: output of ollama list, skip header line, extract first column. Use compgen -W "$models" -- "$cur". Set COMPREPLY. Call __ltrim_colon_completions "$cur". Then complete -F _ollama_completions ollama. Include detailed comments. Ensure code only. Let's produce.
-...done thinking.
-
 #!/usr/bin/env bash
 
 # Bash completion script for the `ollama run` command.
@@ -74,5 +70,3 @@ _ollama_completions() {
 # Register the completion function for the `ollama` command.
 # ------------------------------------------------------------------
 complete -F _ollama_completions ollama
-
-

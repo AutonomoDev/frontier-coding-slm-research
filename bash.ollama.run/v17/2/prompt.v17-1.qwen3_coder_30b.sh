@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
     # Early exit if not called for 'ollama run'
     if [[ "${COMP_WORDS[1]}" != "run" ]]; then
@@ -34,5 +33,3 @@ _ollama_completions() {
 
 # Register the completion function for the 'ollama' command
 complete -F _ollama_completions ollama
-```
-

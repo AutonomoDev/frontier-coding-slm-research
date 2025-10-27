@@ -1,6 +1,6 @@
-Here is an example implementation in bash for a script that fits these guidelines:
+# [[HUMAN COMMENTED-OUT]]
+# Here is an example implementation in bash for a script that fits these guidelines:
 
-```bash
 _ollama_completions() {
     # Check if subcommand is 'run' otherwise return
     if [ "${COMP_WORDS[1]}" != "run" ]; then
@@ -36,5 +36,3 @@ _ollama_completions() {
 
 # Register the completion function for 'ollama' command.
 complete -F _ollama_completions ollama
-``` 
-

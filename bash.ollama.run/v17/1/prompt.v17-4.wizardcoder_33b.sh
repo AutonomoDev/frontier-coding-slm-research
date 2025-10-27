@@ -1,6 +1,7 @@
-Here is a basic framework for your script:
-```bash
 #!/bin/bash
+
+# [[HUMAN COMMENTED-OUT]]
+# Here is a basic framework for your script:
 
 _ollama_completions() {
     # If the command is not 'ollama run', return immediately to avoid interference with other commands
@@ -30,6 +31,6 @@ _ollama_completions() {
     __ltrim_colon_completions "$cur"
 }
 complete -F _ollama_completions ollama
-```
-Please note that this script assumes you have `bash`, `awk`, `compgen` and `__ltrim_colon_completions` available. Be sure to test it in a controlled environment before using it in your production environment. 
 
+# [[HUMAN COMMENTED-OUT]]
+# Please note that this script assumes you have `bash`, `awk`, `compgen` and `__ltrim_colon_completions` available. Be sure to test it in a controlled environment before using it in your production environment.
