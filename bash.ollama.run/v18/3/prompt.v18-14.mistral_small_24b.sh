@@ -1,4 +1,5 @@
-```bash
+#!/bin/bash
+
 # Function to handle completions for `ollama run`
 _ollama_completions() {
   # Check if the command is `ollama run` and the current word is the second argument
@@ -34,15 +35,14 @@ _ollama_completions() {
 
 # Register the completion function for `ollama`
 complete -F _ollama_completions ollama
-```
 
-### Explanation:
-1. **Index Check**: Ensures the script only activates for `ollama run`.
-2. **COMP_CWORD Check**: Ensures the script only runs when the second argument is being completed.
-3. **Colons Handling**: Uses `_get_comp_words_by_ref -n :` to handle colons correctly.
-4. **Parsing Models**: Parses the output of `ollama list` using `tail` and `awk`.
-5. **Sorting Models**: Sorts the models to ensure consistent completion order.
-6. **Completions**: Uses `compgen -W` to generate completions without manual loops or filters.
-7. **Fix Colons**: Calls `__ltrim_colon_completions` to handle colons correctly in the completion results.
-8. **Registration**: Registers the completion function for `ollama`.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Explanation:
+# 1. **Index Check**: Ensures the script only activates for `ollama run`.
+# 2. **COMP_CWORD Check**: Ensures the script only runs when the second argument is being completed.
+# 3. **Colons Handling**: Uses `_get_comp_words_by_ref -n :` to handle colons correctly.
+# 4. **Parsing Models**: Parses the output of `ollama list` using `tail` and `awk`.
+# 5. **Sorting Models**: Sorts the models to ensure consistent completion order.
+# 6. **Completions**: Uses `compgen -W` to generate completions without manual loops or filters.
+# 7. **Fix Colons**: Calls `__ltrim_colon_completions` to handle colons correctly in the completion results.
+# 8. **Registration**: Registers the completion function for `ollama`.

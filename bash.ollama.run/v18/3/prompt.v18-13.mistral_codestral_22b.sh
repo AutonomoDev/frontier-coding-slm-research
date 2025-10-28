@@ -1,15 +1,15 @@
- # Bash Completion Script for `ollama run`
+# [[HUMAN COMMENTED-OUT]]
+# # Bash Completion Script for `ollama run`
+#
+#    This script provides completion suggestions for the `ollama run <model>` command, ensuring a smooth user experience when selecting from available models. The script is designed to:
+#
+#    - Only activate for `ollama run`.
+#    - Handle colons in model names (e.g., `codellama:13b`).
+#    - Parse the output of `ollama list` correctly, even if `ollama` command is not installed or no models are available.
+#    - Complete only the model argument in `ollama run <model>`.
+#
+# Here's the complete Bash code with step-by-step comments:
 
-   This script provides completion suggestions for the `ollama run <model>` command, ensuring a smooth user experience when selecting from available models. The script is designed to:
-
-   - Only activate for `ollama run`.
-   - Handle colons in model names (e.g., `codellama:13b`).
-   - Parse the output of `ollama list` correctly, even if `ollama` command is not installed or no models are available.
-   - Complete only the model argument in `ollama run <model>`.
-
-Here's the complete Bash code with step-by-step comments:
-
-```bash
 # Define the completion function for ollama run
 _ollama_completions() {
   # Check if the command is 'ollama run' and it's the model argument that needs completion
@@ -42,16 +42,13 @@ _ollama_completions() {
 
 # Register the completion function for 'ollama run'
 complete -F _ollama_completions ollama
-```
 
-Follow these steps to set up the script:
-
-1. Copy the above code into your Bash profile (e.g., `~/.bashrc` or `~/.bash_profile`).
-2. Source the Bash profile to apply the changes:
-   ```
-   source ~/.bashrc
-   # OR
-   source ~/.bash_profile
-   ```
-3. Start using `ollama run` with completion suggestions for available models, even after colons (e.g., `codellama:`).
-
+# [[HUMAN COMMENTED-OUT]]
+# Follow these steps to set up the script:
+#
+# 1. Copy the above code into your Bash profile (e.g., `~/.bashrc` or `~/.bash_profile`).
+# 2. Source the Bash profile to apply the changes:
+#    source ~/.bashrc
+#    # OR
+#    source ~/.bash_profile
+# 3. Start using `ollama run` with completion suggestions for available models, even after colons (e.g., `codellama:`).

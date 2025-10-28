@@ -1,5 +1,6 @@
-Here is the completed bash completion script for `ollama run` command:
-```bash
+# [[HUMAN COMMENTED-OUT]]
+# Here is the completed bash completion script for `ollama run` command:
+
 #!/usr/bin/env bash
 
 # Function to complete 'ollama run'
@@ -38,6 +39,6 @@ _ollama_completions() {
 
 # Register our function for completion of 'ollama run'
 complete -F _ollama_completions ollama
-```
-The script checks if the user is typing `ollama run`, then gets the list of models from `ollama list` and completes with those model names. It also handles colons correctly by using `__ltrim_colon_completions`. 
 
+# [[HUMAN COMMENTED-OUT]]
+# The script checks if the user is typing `ollama run`, then gets the list of models from `ollama list` and completes with those model names. It also handles colons correctly by using `__ltrim_colon_completions`.

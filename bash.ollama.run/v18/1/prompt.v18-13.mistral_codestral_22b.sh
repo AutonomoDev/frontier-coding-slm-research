@@ -1,4 +1,3 @@
- ```bash
 # Bash completion for `ollama run`
 _ollama_completions() {
     # Check if command is 'ollama run' and position of cursor
@@ -31,5 +30,3 @@ _ollama_completions() {
 
 # Register the completion function
 complete -F _ollama_completions ollama
-   ```
-

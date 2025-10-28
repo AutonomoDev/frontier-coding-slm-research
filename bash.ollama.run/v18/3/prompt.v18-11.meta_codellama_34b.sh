@@ -1,36 +1,36 @@
+#!/bin/bash
 
-### Instructions
+# Function for ollama run command completions
+_ollama_completions() {
+    # Check if the current word is ollama and the previous word is run
+    [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return 0; }
+    [[ $COMP_CWORD -ne 2 ]] && return 0;
 
-To create a bash completion script for the `ollama run <model>` command, follow these steps:
+    # Get the current and previous words using _get_comp_words_by_ref
+    local cur prev
+    if type _get_comp_words_by_ref &>/dev/null; then
+        _get_comp_words_by_ref -n : cur prev
+    else
+        cur="${COMP_WORDS[COMP_CWORD]}"
+        prev="${COMP_WORDS[COMP_CWORD-1]}"
+    fi
 
-1. Define a function to handle the completions: `_ollama_completions()`
-2. Check if we're in the right context by checking `COMP_WORDS[0]` and `COMP_WORDS[1]`. If not, return 0.
-3. Handle colons with `_get_comp_words_by_ref -n :` to set `cur` and `prev`.
-4. Parse the output of `ollama list` to get a list of models: `models=($(ollama list 2>/dev/null | tail -n +2 | awk '{print $1}'))`
-5. Sort the list of models with `IFS=$'\n' models=($(sort <<<"${models[*]}")); unset IFS`
-6. Generate completions with `COMPREPLY=( $(compgen -W "${models[*]}" -- "$cur") )`
-7. Fix colons with `__ltrim_colon_completions "$cur"`
-8. Register the completion function with `complete -F _ollama_completions ollama`
+    # Parse the ollama list command to get a list of models
+    local models=()
+    if command -v ollama &>/dev/null; then
+        models=($(ollama list 2>/dev/null | tail -n +2 | awk '{print $1}'))
+    fi
 
-### Output Rules
+    # Sort the models and use compgen to generate completions for the current word
+    IFS=$'\n' models=($(sort <<<"${models[*]}"))
+    unset IFS
+    COMPREPLY=( $(compgen -W "${models[*]}" -- "$cur") )
 
-When creating the script, follow these rules:
+    # Fix colons in completions
+    if type __ltrim_colon_completions &>/dev/null; then
+        __ltrim_colon_completions "$cur"
+    fi
+}
 
-* ONLY BASH CODE – no extras
-* Inline comments for key parts
-* Handle edges (no ollama, no models)
-
-### Checklist
-
-To ensure that your completion script is complete and correct, check off each item in the following list:
-
-* [ ] Correct index check
-* [ ] COMP_CWORD check
-* [ ] _get_comp_words_by_ref -n :
-* [ ] __ltrim_colon_completions last
-* [ ] Parse with tail/awk
-* [ ] compgen -W (no manual)
-* [ ] Sort
-* [ ] Edges handled
-* [ ] Works after ":"
-
+# Register the _ollama_completions function for ollama command completions
+complete -F _ollama_completions ollama

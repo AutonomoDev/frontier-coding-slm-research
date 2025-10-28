@@ -1,4 +1,3 @@
-```bash
 # Function to handle completions for `ollama run`
 _ollama_completions() {
   # Check if the command is `ollama run` and the current word is the second argument
@@ -34,15 +33,14 @@ _ollama_completions() {
 
 # Register the completion function for `ollama`
 complete -F _ollama_completions ollama
-```
 
-### Explanation:
-1. **Index Check:** Ensures the script only runs when the command is `ollama run` and the current word is the second argument.
-2. **COMP_CWORD Check:** Returns early if the current word index is not 2, meaning it's not the model argument.
-3. **Colons Handling:** Uses `_get_comp_words_by_ref -n :` to handle colons correctly.
-4. **Parsing Models:** Extracts models from `ollama list`, skipping the header and parsing only the first column.
-5. **Sorting Models:** Sorts the models to ensure consistent completion order.
-6. **Generating Completions:** Uses `compgen -W` for generating completions based on the sorted model list.
-7. **Fixing Colons:** Calls `__ltrim_colon_completions` to handle colons correctly in the completions.
-8. **Registering Completion:** Registers `_ollama_completions` as the completion function for `ollama`.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Explanation:
+# 1. **Index Check:** Ensures the script only runs when the command is `ollama run` and the current word is the second argument.
+# 2. **COMP_CWORD Check:** Returns early if the current word index is not 2, meaning it's not the model argument.
+# 3. **Colons Handling:** Uses `_get_comp_words_by_ref -n :` to handle colons correctly.
+# 4. **Parsing Models:** Extracts models from `ollama list`, skipping the header and parsing only the first column.
+# 5. **Sorting Models:** Sorts the models to ensure consistent completion order.
+# 6. **Generating Completions:** Uses `compgen -W` for generating completions based on the sorted model list.
+# 7. **Fixing Colons:** Calls `__ltrim_colon_completions` to handle colons correctly in the completions.
+# 8. **Registering Completion:** Registers `_ollama_completions` as the completion function for `ollama`.

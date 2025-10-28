@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
   # Check if we're in the right context: `ollama run`
   [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return 0; }
@@ -33,5 +32,3 @@ _ollama_completions() {
 
 # Register the completion function
 complete -F _ollama_completions ollama
-```
-

@@ -14,3 +14,4 @@ codestral:22b: 00:22
 mistral-small:24b: 00:36
 phind-codellama:34b: 00:36
 phi4-reasoning:14b: 01:01
+codellama:34b: 02:22

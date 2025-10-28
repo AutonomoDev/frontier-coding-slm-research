@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
     # Correct index check
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return 0; }
@@ -21,5 +20,3 @@ _ollama_completions() {
 
 # Register completion function
 complete -F _ollama_completions ollama
-```
-

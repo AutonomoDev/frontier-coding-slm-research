@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
     # Ensure completion is for 'ollama run' and the model argument is the third word
     if [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]]; then
@@ -41,5 +40,3 @@ _ollama_completions() {
 
 # Register the completion function for 'ollama'
 complete -F _ollama_completions ollama
-```
-

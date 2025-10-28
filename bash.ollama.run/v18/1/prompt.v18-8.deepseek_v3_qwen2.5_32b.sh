@@ -1,4 +1,5 @@
-```bash
+# [[HUMAN COMMENTED-OUT]]
+# ```bash
 _ollama_completions() {
     # Only activate for 'ollama run'
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return 0; }
@@ -33,14 +34,13 @@ _ollama_completions() {
 
 # Register completion for 'ollama'
 complete -F _ollama_completions ollama
-```
 
-### Explanation:
-1. **Index Check**: The function checks if the command starts with `ollama run` and ensures that completions are only triggered when the third word is being entered (`$COMP_CWORD == 2`).
-2. **Colon Handling**: Uses `_get_comp_words_by_ref -n :` to handle colon-separated input correctly, setting `cur` properly even if part of a completion (e.g., `codellama:13b` becomes `codellama:` in `cur`).
-3. **Model Parsing**: Fetches model names from `ollama list`, skipping the header with `tail -n +2 | awk '{print $1}'`.
-4. **Sorting and Completion**: Models are sorted before generating completions, ensuring a clean alphabetical order.
-5. **Colon Trimming**: Ensures that colons are properly handled in the completion input/output.
-
-This script should work seamlessly for any valid model name format (including those with colons), providing accurate completions as expected.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Explanation:
+# 1. **Index Check**: The function checks if the command starts with `ollama run` and ensures that completions are only triggered when the third word is being entered (`$COMP_CWORD == 2`).
+# 2. **Colon Handling**: Uses `_get_comp_words_by_ref -n :` to handle colon-separated input correctly, setting `cur` properly even if part of a completion (e.g., `codellama:13b` becomes `codellama:` in `cur`).
+# 3. **Model Parsing**: Fetches model names from `ollama list`, skipping the header with `tail -n +2 | awk '{print $1}'`.
+# 4. **Sorting and Completion**: Models are sorted before generating completions, ensuring a clean alphabetical order.
+# 5. **Colon Trimming**: Ensures that colons are properly handled in the completion input/output.
+# 
+# This script should work seamlessly for any valid model name format (including those with colons), providing accurate completions as expected.

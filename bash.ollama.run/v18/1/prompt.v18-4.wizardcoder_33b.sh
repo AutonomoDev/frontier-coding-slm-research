@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
     # Check if first and second words are "ollama" and "run". If not, return without any completions.
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return 0; }
@@ -26,6 +25,5 @@ _ollama_completions() {
 
 # Register the function _ollama_completions to be called when completing words for ollama. 
 complete -F _ollama_completions ollama
-```
-This script assumes that `sort`, `awk`, `tail` and `compgen` are available in your system's PATH, which should be the case for most modern Unix-based systems. If not, you may need to adjust the command within $(...) accordingly. 
-
+# [[HUMAN COMMENTED-OUT]]
+# This script assumes that `sort`, `awk`, `tail` and `compgen` are available in your system's PATH, which should be the case for most modern Unix-based systems. If not, you may need to adjust the command within $(...) accordingly.

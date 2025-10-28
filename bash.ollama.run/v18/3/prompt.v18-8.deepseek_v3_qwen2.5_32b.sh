@@ -1,4 +1,3 @@
-```bash
 # Bash Completion for `ollama run <model>`
 
 _ollama_completions() {
@@ -39,6 +38,3 @@ _ollama_completions() {
 
 # Register completion for 'ollama'
 complete -F _ollama_completions ollama
-
-```
-

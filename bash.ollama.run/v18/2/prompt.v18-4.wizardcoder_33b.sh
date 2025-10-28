@@ -1,6 +1,6 @@
-Here is the bash completion script for `ollama run`. This script only activates for `ollama run <model>`, handles colons (e.g., `codellama:13b`), parses `ollama list` correctly and completes only model arg.
+# [[HUMAN COMMENTED-OUT]]
+# Here is the bash completion script for `ollama run`. This script only activates for `ollama run <model>`, handles colons (e.g., `codellama:13b`), parses `ollama list` correctly and completes only model arg.
 
-```bash
 _ollama_completions() {
     # 1. Check if command line starts with 'ollama run'.
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && \
@@ -38,7 +38,7 @@ _ollama_completions() {
 
 # 8. Register '_ollama_completions' for 'ollama run'.
 complete -F _ollama_completions ollama
-```
-Please note that this script assumes that `command -v` and `compgen` are available, and `_get_comp_words_by_ref` and `__ltrim_colon_completions` functions if they exist. If any of these assumptions don't hold true for your system, you might have to modify the script accordingly.
-Also note that this script should be sourced (i.e., `source <script-name>`) to take effect and it will not affect bash completions in other shell sessions or after a new terminal is opened. 
 
+# [[HUMAN COMMENTED-OUT]]
+# Please note that this script assumes that `command -v` and `compgen` are available, and `_get_comp_words_by_ref` and `__ltrim_colon_completions` functions if they exist. If any of these assumptions don't hold true for your system, you might have to modify the script accordingly.
+# Also note that this script should be sourced (i.e., `source <script-name>`) to take effect and it will not affect bash completions in other shell sessions or after a new terminal is opened.

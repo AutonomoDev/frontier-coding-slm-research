@@ -1,4 +1,3 @@
- ```bash
 # Function to provide completions for `ollama run <model>`
 _ollama_completions() {
     # Ensure the command is ollama run and COMP_CWORD is at the correct position
@@ -35,5 +34,3 @@ _ollama_completions() {
 
 # Register the completion function for ollama run command
 complete -F _ollama_completions ollama
-```
-

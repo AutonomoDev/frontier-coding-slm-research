@@ -1,6 +1,8 @@
-Here's a bash completion script for `ollama run`:
+#!/bin/bash
 
-```bash
+# [[HUMAN COMMENTED-OUT]]
+# Here's a bash completion script for `ollama run`:
+
 _ollama_completions() {
     # Check if we are in the correct mode
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return 0; }
@@ -28,11 +30,10 @@ _ollama_completions() {
     fi
 }
 complete -F _ollama_completions ollama
-```
 
-This script should work as follows:
-- Only activate for `ollama run`
-- Handle colons in model names (e.g., `codellama:13b`)
-- Parse the models from the output of `ollama list` correctly
-- Complete only the `<model>` argument after `ollama run`
-
+# [[HUMAN COMMENTED-OUT]]
+# This script should work as follows:
+# - Only activate for `ollama run`
+# - Handle colons in model names (e.g., `codellama:13b`)
+# - Parse the models from the output of `ollama list` correctly
+# - Complete only the `<model>` argument after `ollama run`

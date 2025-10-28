@@ -1,4 +1,3 @@
-```bash
 # Function to handle completions for `ollama run`
 _ollama_completions() {
   # Check if the command is `ollama run` and the current word is the second argument
@@ -34,7 +33,6 @@ _ollama_completions() {
 
 # Register the completion function for `ollama`
 complete -F _ollama_completions ollama
-```
 
-This script follows the specified steps exactly, ensuring that it handles colons correctly, parses the output of `ollama list` properly, and completes only the model argument. It also includes inline comments for key parts to explain each step.
-
+# [[HUMAN COMMENTED-OUT]]
+# This script follows the specified steps exactly, ensuring that it handles colons correctly, parses the output of `ollama list` properly, and completes only the model argument. It also includes inline comments for key parts to explain each step.

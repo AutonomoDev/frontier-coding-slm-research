@@ -1,5 +1,6 @@
-  Sure, here's an example of how to implement bash completion for the `ollama run` command:
-```bash
+# [[HUMAN COMMENTED-OUT]]
+# Sure, here's an example of how to implement bash completion for the `ollama run` command:
+
 _ollama_completions() {
   # Check if we are in the correct context
   [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return 0; }
@@ -30,8 +31,8 @@ _ollama_completions() {
 
 # Register the completion function
 complete -F _ollama_completions ollama
-```
-This code checks for the correct context (i.e., that `ollama run` is being entered), gets the current and previous words, parses the list of models using `ollama list`, completes the model name with `compgen -W`, and fixes colon completion with `__ltrim_colon_completions`. Finally, it registers the completion function with the `complete` command.
 
-Note that this code assumes that you have the `ollama` executable in your system path and that the `list` subcommand exists and returns a list of models. If you want to support other commands or different output formats, you'll need to modify the code accordingly.
-
+# [[HUMAN COMMENTED-OUT]]
+# This code checks for the correct context (i.e., that `ollama run` is being entered), gets the current and previous words, parses the list of models using `ollama list`, completes the model name with `compgen -W`, and fixes colon completion with `__ltrim_colon_completions`. Finally, it registers the completion function with the `complete` command.
+# 
+# Note that this code assumes that you have the `ollama` executable in your system path and that the `list` subcommand exists and returns a list of models. If you want to support other commands or different output formats, you'll need to modify the code accordingly.

@@ -1,22 +1,21 @@
-Thinking...
-The user wants Bash code for completion of `ollama run <model>`. Provide function `_ollama_completions` following the steps. Must check COMP_WORDS[0] etc. Should handle colon trimming, parse models from `ollama list` output. They want only Bash code output, no extraneous text. Include inline comments for key parts. Edge handling: no `ollama` binary, no models, return. Ensure sorting.
+# Thinking...
+# The user wants Bash code for completion of `ollama run <model>`. Provide function `_ollama_completions` following the steps. Must check COMP_WORDS[0] etc. Should handle colon trimming, parse models from `ollama list` output. They want only Bash code output, no extraneous text. Include inline comments for key parts. Edge handling: no `ollama` binary, no models, return. Ensure sorting.
+# 
+# Thus final answer: Provide Bash script. Let's craft it.
+# 
+# Use `complete -F _ollama_completions ollama`.
+# 
+# Implementation: function with local variables, etc.
+# 
+# Be careful about IFS sorting.
+# 
+# Return 0.
+# 
+# Also if no ollama binary, set COMPREPLY=() and return 0.
+# 
+# Ok. Provide code.
+# ...done thinking.
 
-Thus final answer: Provide Bash script. Let's craft it.
-
-Use `complete -F _ollama_completions ollama`.
-
-Implementation: function with local variables, etc.
-
-Be careful about IFS sorting.
-
-Return 0.
-
-Also if no ollama binary, set COMPREPLY=() and return 0.
-
-Ok. Provide code.
-...done thinking.
-
-```bash
 # Bash completion for `ollama run <model>`
 
 _ollama_completions() {
@@ -57,5 +56,3 @@ _ollama_completions() {
 
 # Register the completion function for the `ollama` command
 complete -F _ollama_completions ollama
-```
-

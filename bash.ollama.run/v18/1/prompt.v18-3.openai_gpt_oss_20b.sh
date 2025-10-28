@@ -1,22 +1,21 @@
-Thinking...
-We need to produce bash script code only, with comments inline, following the steps. It should define function _ollama_completions, with checks, colons handling, parse, compgen, sorting, ltrim, and register. Ensure proper quoting. Use local variables. Use correct array assignment. When using compgen, need to quote properly. Avoid manual loops. Provide comments. Ensure no extraneous text. Output just code.
+# Thinking...
+# We need to produce bash script code only, with comments inline, following the steps. It should define function _ollama_completions, with checks, colons handling, parse, compgen, sorting, ltrim, and register. Ensure proper quoting. Use local variables. Use correct array assignment. When using compgen, need to quote properly. Avoid manual loops. Provide comments. Ensure no extraneous text. Output just code.
+# 
+# Edge: need to use $(...) for command substitution. For array assignment: models=($(...)). For sorting, we can use sort <<<"${models[*]}" but need to handle quoting; maybe use mapfile or readarray? Simpler: IFS=$'\n'; models=($(sort <<<"${models[*]}")); unset IFS.
+# 
+# Make sure to handle no ollama command gracefully: check command -v ollama.
+# 
+# Also _get_comp_words_by_ref may not exist if older bash. Use fallback.
+# 
+# Also ltrim colons function may not exist; call if type.
+# 
+# Then register complete -F _ollama_completions ollama.
+# 
+# All good.
+# 
+# Let's produce code.
+# ...done thinking.
 
-Edge: need to use $(...) for command substitution. For array assignment: models=($(...)). For sorting, we can use sort <<<"${models[*]}" but need to handle quoting; maybe use mapfile or readarray? Simpler: IFS=$'\n'; models=($(sort <<<"${models[*]}")); unset IFS.
-
-Make sure to handle no ollama command gracefully: check command -v ollama.
-
-Also _get_comp_words_by_ref may not exist if older bash. Use fallback.
-
-Also ltrim colons function may not exist; call if type.
-
-Then register complete -F _ollama_completions ollama.
-
-All good.
-
-Let's produce code.
-...done thinking.
-
-```bash
 # Bash completion for "ollama run <model>"
 _ollama_completions() {
     # Ensure we are completing "ollama run" and only the second argument
@@ -56,5 +55,3 @@ _ollama_completions() {
 
 # Register the completion function for "ollama"
 complete -F _ollama_completions ollama
-```
-

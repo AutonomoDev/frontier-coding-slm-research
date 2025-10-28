@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
     # Check if the command is `ollama run`
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return 0; }
@@ -36,27 +35,26 @@ _ollama_completions() {
 
 # Register the function for autocomplete with ollama run command
 complete -F _ollama_completions ollama
-```
 
-### Explanation of Key Components:
-
-1. **Command Check**:
-   - The script first ensures that it only activates when `ollama run` is being used by checking `COMP_WORDS[0]` and `COMP_WORDS[1]`.
-   - It also verifies the cursor position (`COMP_CWORD`) to ensure we're completing the model argument specifically.
-
-2. **Colon Handling**:
-   - Utilizes `_get_comp_words_by_ref -n :` for proper handling of colons, enabling completions like `codellama:<TAB>` to work correctly.
-   - The function `__ltrim_colon_completions` is used after generating completions to adjust the input cursor position appropriately.
-
-3. **Model Parsing**:
-   - Retrieves the list of models using `ollama list`, parsing only relevant lines with `tail -n +2 | awk '{print $1}'`.
-
-4. **Sorting and Completions**:
-   - Models are sorted alphabetically for a more user-friendly completion experience.
-   - Uses `compgen` to generate possible completions from the sorted model list.
-
-5. **Edge Cases**:
-   - Handles scenarios where `ollama` might not be installed or no models exist gracefully by checking the command's existence and output before proceeding with parsing. 
-
-This script efficiently provides auto-completions for the specified use case, adhering to best practices in Bash completion scripting.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Explanation of Key Components:
+# 
+# 1. **Command Check**:
+#    - The script first ensures that it only activates when `ollama run` is being used by checking `COMP_WORDS[0]` and `COMP_WORDS[1]`.
+#    - It also verifies the cursor position (`COMP_CWORD`) to ensure we're completing the model argument specifically.
+# 
+# 2. **Colon Handling**:
+#    - Utilizes `_get_comp_words_by_ref -n :` for proper handling of colons, enabling completions like `codellama:<TAB>` to work correctly.
+#    - The function `__ltrim_colon_completions` is used after generating completions to adjust the input cursor position appropriately.
+# 
+# 3. **Model Parsing**:
+#    - Retrieves the list of models using `ollama list`, parsing only relevant lines with `tail -n +2 | awk '{print $1}'`.
+# 
+# 4. **Sorting and Completions**:
+#    - Models are sorted alphabetically for a more user-friendly completion experience.
+#    - Uses `compgen` to generate possible completions from the sorted model list.
+# 
+# 5. **Edge Cases**:
+#    - Handles scenarios where `ollama` might not be installed or no models exist gracefully by checking the command's existence and output before proceeding with parsing. 
+# 
+# This script efficiently provides auto-completions for the specified use case, adhering to best practices in Bash completion scripting.

@@ -1,0 +1,5 @@
+=== Test run on Tue Oct 28 05:33:06 AM CDT 2025 ===
+prompt.v18-1.qwen3_coder_30b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v18-2.google_gemma3_27b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v18-3.openai_gpt_oss_20b.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+=== Test run on Tue Oct 28 05:34:05 AM CDT 2025 ===
