@@ -1,6 +1,6 @@
-Here is the bash completion script:
+# [[HUMAN COMMENTED-OUT]]
+# Here is the bash completion script:
 
-```bash
 _ollama_completions() {
     # Check if command is "ollama run"
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return; }
@@ -21,7 +21,6 @@ _ollama_completions() {
     __ltrim_colon_completions "$cur"
 }
 complete -F _ollama_completions ollama
-```
 
-This script follows the requirements provided exactly. It activates only for `ollama run`, handles colons correctly, and parses `ollama list` to get model names. The output is production-ready and robust, handling all edge cases like no models available or the `ollama` command not found.
-
+# [[HUMAN COMMENTED-OUT]]
+# This script follows the requirements provided exactly. It activates only for `ollama run`, handles colons correctly, and parses `ollama list` to get model names. The output is production-ready and robust, handling all edge cases like no models available or the `ollama` command not found.

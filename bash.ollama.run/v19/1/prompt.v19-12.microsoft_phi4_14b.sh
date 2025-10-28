@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
     # Check if command is "ollama run"
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return; }
@@ -32,7 +31,6 @@ _ollama_completions() {
 
 # Register the completion function for 'ollama'
 complete -F _ollama_completions ollama
-```
 
-This script adheres to the requirements by checking only `COMP_WORDS[0]` and `COMP_WORDS[1]`, handling colons without additional checks, parsing models into a scalar string, generating completions with `compgen`, sorting them correctly, and trimming colon prefixes as needed. It also handles cases where `ollama` is not found or no models are available.
-
+# [[HUMAN COMMENTED-OUT]]
+# This script adheres to the requirements by checking only `COMP_WORDS[0]` and `COMP_WORDS[1]`, handling colons without additional checks, parsing models into a scalar string, generating completions with `compgen`, sorting them correctly, and trimming colon prefixes as needed. It also handles cases where `ollama` is not found or no models are available.

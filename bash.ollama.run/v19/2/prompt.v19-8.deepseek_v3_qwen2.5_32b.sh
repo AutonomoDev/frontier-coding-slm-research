@@ -1,4 +1,6 @@
-```bash
+#!/bin/bash
+
+# [[HUMAN COMMENTED-OUT]]
 _ollama_completions() {
     # Only activate for "ollama run" commands
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return; }
@@ -33,5 +35,3 @@ _ollama_completions() {
 
 # Register completion function with the ollama command
 complete -F _ollama_completions ollama
-```
-

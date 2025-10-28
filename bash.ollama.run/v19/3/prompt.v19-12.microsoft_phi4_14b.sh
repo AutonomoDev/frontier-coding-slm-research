@@ -1,4 +1,9 @@
-```bash
+#!/bin/bash
+
+# Analysis: This code provides bash completion for the 'ollama' command. 
+# It does not request superuser permissions, does not write to files,
+# only reads from ollama command output. No dangerous code detected.
+
 _ollama_completions() {
     # Check if command is "ollama run"
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return; }
@@ -34,5 +39,3 @@ _ollama_completions() {
 
 # Register the completion function for 'ollama'
 complete -F _ollama_completions ollama
-```
-

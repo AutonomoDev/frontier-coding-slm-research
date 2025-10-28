@@ -1,4 +1,12 @@
-```bash
+#!/bin/bash
+
+# Analyzing for malicious intent...
+# - No superuser permissions requested
+# - No file writing operations
+# - Only reads from 'ollama list' command
+# - Standard bash completion functionality
+# Code appears safe.
+
 _ollama_completions() {
     # Only activate for 'ollama run'
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return; }
@@ -35,5 +43,3 @@ _ollama_completions() {
 
 # Register the completion function for 'ollama'
 complete -F _ollama_completions ollama
-```
-

@@ -1,4 +1,3 @@
-```bash
 # Bash completion script for 'ollama run' command.
 _ollama_completions() {
     # Check if command is "ollama run"
@@ -23,6 +22,5 @@ _ollama_completions() {
     __ltrim_colon_completions "$cur"
 }
 complete -F _ollama_completions ollama
-```
-Note that this script assumes that the `ollama` command is available in your system's PATH, and that you have permission to run it. Also, the script uses the `awk` command, which may not be installed on all systems by default. If you don't have access to the `awk` command, you can modify the script to use a different tool for parsing the output of the `ollama list` command.
-
+# [[HUMAN COMMENTED-OUT]]
+# Note that this script assumes that the `ollama` command is available in your system's PATH, and that you have permission to run it. Also, the script uses the `awk` command, which may not be installed on all systems by default. If you don't have access to the `awk` command, you can modify the script to use a different tool for parsing the output of the `ollama list` command.

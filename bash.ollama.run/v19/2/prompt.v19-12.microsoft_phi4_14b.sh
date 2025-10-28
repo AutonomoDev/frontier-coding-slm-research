@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
     # Check if the current command is "ollama run"
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return; }
@@ -34,7 +33,6 @@ _ollama_completions() {
 
 # Register the function as a Bash completion entry point for 'ollama'
 complete -F _ollama_completions ollama
-```
 
-This script is structured to meet all specified requirements, ensuring that it handles completion for `ollama run` with models listed by `ollama list`. It addresses scenarios involving command availability and model presence. The script avoids unnecessary complexity while providing robust handling of colons in the input.
-
+# [[HUMAN COMMENTED-OUT]]
+# This script is structured to meet all specified requirements, ensuring that it handles completion for `ollama run` with models listed by `ollama list`. It addresses scenarios involving command availability and model presence. The script avoids unnecessary complexity while providing robust handling of colons in the input.

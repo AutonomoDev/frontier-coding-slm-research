@@ -1,4 +1,5 @@
-```bash
+#!/bin/bash
+
 # Function for ollama completions
 _ollama_completions() {
     # Check if command is "ollama run"
@@ -28,5 +29,3 @@ _ollama_completions() {
 
 # Register the completions function for ollama command
 complete -F _ollama_completions ollama
-``` 
-

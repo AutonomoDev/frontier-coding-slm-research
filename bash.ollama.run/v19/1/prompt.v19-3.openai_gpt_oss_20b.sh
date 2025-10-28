@@ -1,6 +1,6 @@
-Thinking...
-We need to output bash code only, no markdown. Function _ollama_completions. Must do checks. Include comments explaining critical sections. Ensure all requirements. Use complete -F. Provide robust script. Let's craft.
-...done thinking.
+# Thinking...
+# We need to output bash code only, no markdown. Function _ollama_completions. Must do checks. Include comments explaining critical sections. Ensure all requirements. Use complete -F. Provide robust script. Let's craft.
+# ...done thinking.
 
 #!/usr/bin/env bash
 # Bash completion for `ollama run <model>`
@@ -48,5 +48,3 @@ _ollama_completions() {
 
 # Register the completion function for the "ollama" command
 complete -F _ollama_completions ollama
-
-

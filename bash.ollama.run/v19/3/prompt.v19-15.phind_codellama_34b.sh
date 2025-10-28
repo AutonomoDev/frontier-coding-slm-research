@@ -1,6 +1,3 @@
-Here is the Bash Completion Script for `ollama run`:
-
-```bash
 #!/usr/bin/env bash
 # Copyright (c) <year> <Your Name>. All rights reserved.
 # Licensed under the MIT License. See LICENSE.txt in the project root for license information.
@@ -26,6 +23,6 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-```
-Please replace <year> and <Your Name> with the appropriate values. The script should be tested thoroughly before being used in production.
 
+# [[HUMAN COMMENTED-OUT]]
+# Please replace <year> and <Your Name> with the appropriate values. The script should be tested thoroughly before being used in production.

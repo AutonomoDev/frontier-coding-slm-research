@@ -1,4 +1,3 @@
-```bash
 #!/usr/bin/env bash
 
 # Bash completion script for the `ollama run` command
@@ -25,10 +24,10 @@ _ollama_completions() {
 
 # Register the completion script
 complete -F _ollama_completions ollama
-```
-This script uses the `compgen` builtin to generate completions from a list of possible values. The `-W` flag is used to specify the list of possible values, and the `--` flag tells `compgen` that we're using a fixed set of options rather than allowing any string.
 
-The `sort` command is used to sort the results before passing them to `compgen`, which ensures that they are displayed in alphabetical order. The `__ltrim_colon_completions` function is called after sorting, which trims the prefix from the completions (if there is one).
-
-Finally, the script registers the completion script using the `complete` builtin with the `-F` flag to specify that we're providing a custom completion script.
-
+# [[HUMAN COMMENTED-OUT]]
+# This script uses the `compgen` builtin to generate completions from a list of possible values. The `-W` flag is used to specify the list of possible values, and the `--` flag tells `compgen` that we're using a fixed set of options rather than allowing any string.
+# 
+# The `sort` command is used to sort the results before passing them to `compgen`, which ensures that they are displayed in alphabetical order. The `__ltrim_colon_completions` function is called after sorting, which trims the prefix from the completions (if there is one).
+# 
+# Finally, the script registers the completion script using the `complete` builtin with the `-F` flag to specify that we're providing a custom completion script.

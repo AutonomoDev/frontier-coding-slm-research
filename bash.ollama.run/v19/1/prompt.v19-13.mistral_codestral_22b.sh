@@ -1,35 +1,36 @@
- # Bash completion script for `ollama run`
+#!/bin/bash
 
-   _ollama_completions() {
-     # Check if command is "ollama run"
-     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return; }
+# Bash completion script for `ollama run`
 
-     local cur prev
-     _get_comp_words_by_ref -n : cur prev
+_ollama_completions() {
+  # Check if command is "ollama run"
+  [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return; }
 
-     # Check if ollama command exists
-     if ! command -v ollama &>/dev/null; then
-       COMPREPLY=()
-       return
-     fi
+  local cur prev
+  _get_comp_words_by_ref -n : cur prev
 
-     # Parse available models
-     local models=$(ollama list 2>/dev/null | tail -n +2 | awk '{print $1}')
+  # Check if ollama command exists
+  if ! command -v ollama &>/dev/null; then
+    COMPREPLY=()
+    return
+  fi
 
-     if [ -z "$models" ]; then
-       COMPREPLY=()
-       return
-     fi
+  # Parse available models
+  local models=$(ollama list 2>/dev/null | tail -n +2 | awk '{print $1}')
 
-     # Generate completions
-     COMPREPLY=($(compgen -W "$models" -- "$cur"))
+  if [ -z "$models" ]; then
+    COMPREPLY=()
+    return
+  fi
 
-     # Sort the completions array
-     COMPREPLY=($(printf "%s\n" "${COMPREPLY[@]}" | sort))
+  # Generate completions
+  COMPREPLY=($(compgen -W "$models" -- "$cur"))
 
-     # Trim prefix from COMPREPLY elements for colon-separated words
-     __ltrim_colon_completions "$cur"
-   }
+  # Sort the completions array
+  COMPREPLY=($(printf "%s\n" "${COMPREPLY[@]}" | sort))
 
-   complete -F _ollama_completions ollama
+  # Trim prefix from COMPREPLY elements for colon-separated words
+  __ltrim_colon_completions "$cur"
+}
 
+complete -F _ollama_completions ollama

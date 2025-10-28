@@ -1,4 +1,3 @@
-```bash
 # Activates only for "ollama run" command.
 _ollama_completions() {
     local cur prev models
@@ -30,5 +29,3 @@ _ollama_completions() {
 
 # Register the function as a completion function for the "ollama run" command.
 complete -F _ollama_completions ollama
-``` 
-
