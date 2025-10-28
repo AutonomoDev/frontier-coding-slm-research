@@ -1,3 +1,4 @@
+// ==== src/lib.rs ====
 use crossterm::{
     cursor::{Hide, MoveTo, Show},
     execute,
@@ -12,6 +13,7 @@ use std::time::{Duration, Instant};
 #[derive(Clone)]
 pub struct LlmMetrics {
     start_time: Instant,
+    first_token_time: Arc<Mutex<Option<Instant>>>, // Track when first token arrives
     token_count: Arc<Mutex<usize>>,
     last_update: Arc<Mutex<Instant>>,
     terminal_size: Arc<Mutex<(u16, u16)>>,
@@ -23,6 +25,7 @@ impl LlmMetrics {
         let (cols, rows) = terminal::size()?;
         Ok(Self {
             start_time: Instant::now(),
+            first_token_time: Arc::new(Mutex::new(None)),
             token_count: Arc::new(Mutex::new(0)),
             last_update: Arc::new(Mutex::new(Instant::now())),
             terminal_size: Arc::new(Mutex::new((cols, rows))),
@@ -31,7 +34,15 @@ impl LlmMetrics {
 
     /// Increment the token count (call this after each token/chunk is output)
     pub fn add_tokens(&self, count: usize) {
+        let now = Instant::now();
+        
         if let Ok(mut token_count) = self.token_count.lock() {
+            // If this is the first token, record the time
+            if *token_count == 0 {
+                if let Ok(mut first_token) = self.first_token_time.lock() {
+                    *first_token = Some(now);
+                }
+            }
             *token_count += count;
         }
     }
@@ -60,20 +71,33 @@ impl LlmMetrics {
         // Update terminal size
         self.update_terminal_size()?;
 
-        let elapsed = now.duration_since(self.start_time);
         let token_count = self.token_count.lock().unwrap_or_else(|e| e.into_inner());
         let (cols, rows) = *self.terminal_size.lock().unwrap_or_else(|e| e.into_inner());
 
-        // Calculate tokens per second
-        let elapsed_secs = elapsed.as_secs_f64();
-        let tps = if elapsed_secs > 0.0 {
-            *token_count as f64 / elapsed_secs
+        // Calculate tokens per second based on when streaming actually started
+        let tps = if let Ok(first_token) = self.first_token_time.lock() {
+            if let Some(first_token_time) = *first_token {
+                if *token_count > 0 {
+                    let streaming_duration = now.duration_since(first_token_time);
+                    let streaming_secs = streaming_duration.as_secs_f64();
+                    if streaming_secs > 0.1 { // Only calculate after we have meaningful data
+                        *token_count as f64 / streaming_secs
+                    } else {
+                        0.0
+                    }
+                } else {
+                    0.0
+                }
+            } else {
+                0.0 // No tokens received yet
+            }
         } else {
             0.0
         };
 
-        // Format time as MM:SS
-        let total_secs = elapsed.as_secs();
+        // Format time as MM:SS (total elapsed time)
+        let total_elapsed = now.duration_since(self.start_time);
+        let total_secs = total_elapsed.as_secs();
         let minutes = total_secs / 60;
         let seconds = total_secs % 60;
         let time_str = format!("{:02}:{:02}", minutes, seconds);
@@ -148,12 +172,19 @@ impl LlmMetrics {
 
     /// Get current tokens per second
     pub fn tokens_per_second(&self) -> f64 {
-        let elapsed_secs = self.elapsed().as_secs_f64();
-        if elapsed_secs > 0.0 {
-            self.token_count() as f64 / elapsed_secs
-        } else {
-            0.0
+        if let Ok(first_token) = self.first_token_time.lock() {
+            if let Some(first_token_time) = *first_token {
+                let token_count = self.token_count();
+                if token_count > 0 {
+                    let streaming_duration = Instant::now().duration_since(first_token_time);
+                    let streaming_secs = streaming_duration.as_secs_f64();
+                    if streaming_secs > 0.1 {
+                        return token_count as f64 / streaming_secs;
+                    }
+                }
+            }
         }
+        0.0
     }
 }
 
