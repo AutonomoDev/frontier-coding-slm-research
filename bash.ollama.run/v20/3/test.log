@@ -1,0 +1,17 @@
+=== Test run on Wed Oct 29 03:05:11 PM CDT 2025 ===
+prompt.v20-1.qwen3_coder_30b.sh PASSED: Perfect.
+prompt.v20-2.google_gemma3_27b.sh PASSED: Perfect.
+prompt.v20-3.openai_gpt_oss_20b.sh PASSED: Perfect.
+prompt.v20-4.wizardcoder_33b.sh PASSED: Perfect.
+prompt.v20-5.deepseek_coder_v2_16b.sh PASSED: Perfect.
+prompt.v20-6.deepseek_r1_14b.sh PASSED: Perfect.
+prompt.v20-7.deepseek_r1_32b.sh PASSED: Perfect.
+prompt.v20-8.deepseek_v3_qwen2.5_32b.sh PASSED: Perfect.
+prompt.v20-9.google_gemma3_12b.sh PASSED: Perfect.
+prompt.v20-10.meta_codellama_13b.sh PASSED: Perfect.
+prompt.v20-11.meta_codellama_34b.sh PASSED: Perfect.
+prompt.v20-12.microsoft_phi4_14b.sh PASSED: Perfect.
+prompt.v20-13.mistral_codestral_22b.sh PASSED: Perfect.
+prompt.v20-14.mistral_small_24b.sh PASSED: Perfect.
+prompt.v20-15.phind_codellama_34b.sh PASSED: Perfect.
+prompt.v20-16.microsoft_phi4_reasoning_14b.sh PASSED: Perfect.
