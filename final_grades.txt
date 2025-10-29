@@ -5,28 +5,37 @@ Model Classifications (mutually exclusive):
 - 'Failing': Model is neither Perfect nor Passing.
 
 v0:  9 failing, 7 passing, 0 perfect.
-v3:  14 failing, 2 passing, 0 perfect.
-v4:  8 failing, 8 passing, 0 perfect.
-v5:  4 failing, 12 passing, 0 perfect.
-v6:  5 failing, 11 passing, 0 perfect.
-v7:  6 failing, 10 passing, 0 perfect.
-v8:  8 failing, 8 passing, 0 perfect.
-v9:  1 failing, 15 passing, 0 perfect.
+v03:  14 failing, 2 passing, 0 perfect.
+v04:  8 failing, 8 passing, 0 perfect.
+v05:  4 failing, 12 passing, 0 perfect.
+v06:  5 failing, 11 passing, 0 perfect.
+v07:  6 failing, 10 passing, 0 perfect.
+v08:  8 failing, 8 passing, 0 perfect.
+v09:  1 failing, 15 passing, 0 perfect.
 v10:  4 failing, 12 passing, 0 perfect.
 v11:  8 failing, 0 passing, 8 perfect.
 v12:  7 failing, 2 passing, 7 perfect.
 v13:  11 failing, 1 passing, 5 perfect.
+v14:  4 failing, 1 passing, 11 perfect.
+v15:  7 failing, 9 passing, 0 perfect.
+v16:  0 failing, 16 passing, 0 perfect.
+v17:  8 failing, 8 passing, 0 perfect.
+v18:  1 failing, 15 passing, 0 perfect.
+v19:  0 failing, 0 passing, 16 perfect.
 
 ============================================================
 
 --- Milestone: First Version a Model Achieved ANY Perfect Run (>= 1) ---
 deepseek_coder_v2_16b: v11
+deepseek_r1_14b: v14
 deepseek_r1_32b: v11
 deepseek_v3_qwen2.5_32b: v11
 google_gemma3_12b: v12
+google_gemma3_27b: v19
+meta_codellama_13b: v14
 meta_codellama_34b: v11
 microsoft_phi4_14b: v11
-microsoft_phi4_reasoning_14b: v7
+microsoft_phi4_reasoning_14b: v07
 mistral_codestral_22b: v11
 mistral_small_24b: v12
 openai_gpt_oss_20b: v11
@@ -37,27 +46,27 @@ wizardcoder_33b: v10
 ============================================================
 
 --- SLM's Bash Completion Proficiency Evolution ---
-Comparing start performance (v0) with final performance (v13), sorted by final score.
+Comparing start performance (v0) with final performance (v19), sorted by final score.
 
-| Model                        | Start Score (v0) | Final Score (v13) | Change |
+| Model                        | Start Score (v0) | Final Score (v20) | Change |
 |-----------------------------:|-----------------:|------------------:|-------:|
-| openai_gpt_oss_20b           |              -1  |                15 |    +16 |
-| qwen3_coder_30b              |              -8  |                15 |    +23 |
-| microsoft_phi4_reasoning_14b |              -1  |                12 |    +13 |
-| deepseek_r1_32b              |              -8  |                 5 |    +13 |
-| microsoft_phi4_14b           |              -1  |                 5 |     +6 |
-| meta_codellama_34b           |              -8  |                -1 |     +7 |
-| google_gemma3_12b            |             -15  |                -8 |     +7 |
-| google_gemma3_27b            |             -15  |                -8 |     +7 |
-| deepseek_v3_qwen2.5_32b      |              -1  |                -5 |     -4 |
-| mistral_small_24b            |              -1  |                -5 |     -4 |
-| wizardcoder_33b              |              -8  |                -5 |     +3 |
-| deepseek_coder_v2_16b        |             -15  |               -15 |     +0 |
-| deepseek_r1_14b              |             -15  |               -15 |     +0 |
-| meta_codellama_13b           |             -15  |               -15 |     +0 |
-| mistral_codestral_22b        |              -1  |               -15 |    -14 |
-| phind_codellama_34b          |              -1  |               -15 |    -14 |
-| aadi19_olympus_coder_13b     |             N/A  |               -15 |    N/A |
+| deepseek_coder_v2_16b        |              -15 |                15 |    +30 |
+| deepseek_r1_14b              |              -15 |                15 |    +30 |
+| google_gemma3_12b            |              -15 |                15 |    +30 |
+| google_gemma3_27b            |              -15 |                15 |    +30 |
+| meta_codellama_13b           |              -15 |                15 |    +30 |
+| deepseek_r1_32b              |               -8 |                15 |    +23 |
+| qwen3_coder_30b              |               -8 |                15 |    +23 |
+| meta_codellama_34b           |               -8 |                15 |    +23 |
+| wizardcoder_33b              |               -8 |                15 |    +23 |
+| mistral_small_24b            |               -1 |                15 |    +16 |
+| openai_gpt_oss_20b           |               -1 |                15 |    +16 |
+| microsoft_phi4_14b           |               -1 |                15 |    +16 |
+| phind_codellama_34b          |               -1 |                15 |    +16 |
+| mistral_codestral_22b        |               -1 |                15 |    +16 |
+| deepseek_v3_qwen2.5_32b      |               -1 |                15 |    +16 |
+| microsoft_phi4_reasoning_14b |               -1 |                15 |    +16 |
+| aadi19_olympus_coder_13b     |              N/A |               N/A |    N/A |
 
 *Note: Proficiency score is calculated as `(perfect * 5) + (passed * 2) + (failed * -5)`.*
 *A model with 3 perfect runs has a score of +15 (best); 3 failed runs is -15 (worst).*
@@ -84,7 +93,7 @@ phind_codellama_34b (passed: 2, failed: 1, perfect: 0)
 qwen3_coder_30b (passed: 1, failed: 2, perfect: 0)
 wizardcoder_33b (passed: 1, failed: 2, perfect: 0)
 
---- Results for v3 ---
+--- Results for v03 ---
 deepseek_coder_v2_16b (passed: 0, failed: 3, perfect: 0)
 deepseek_r1_14b (passed: 0, failed: 3, perfect: 0)
 deepseek_r1_32b (passed: 0, failed: 3, perfect: 0)
@@ -102,7 +111,7 @@ phind_codellama_34b (passed: 0, failed: 3, perfect: 0)
 qwen3_coder_30b (passed: 3, failed: 0, perfect: 0)
 wizardcoder_33b (passed: 0, failed: 3, perfect: 0)
 
---- Results for v4 ---
+--- Results for v04 ---
 deepseek_coder_v2_16b (passed: 0, failed: 3, perfect: 0)
 deepseek_r1_14b (passed: 0, failed: 3, perfect: 0)
 deepseek_r1_32b (passed: 2, failed: 1, perfect: 0)
@@ -120,7 +129,7 @@ phind_codellama_34b (passed: 1, failed: 2, perfect: 0)
 qwen3_coder_30b (passed: 3, failed: 0, perfect: 0)
 wizardcoder_33b (passed: 3, failed: 0, perfect: 0)
 
---- Results for v5 ---
+--- Results for v05 ---
 deepseek_coder_v2_16b (passed: 0, failed: 3, perfect: 0)
 deepseek_r1_14b (passed: 0, failed: 3, perfect: 0)
 deepseek_r1_32b (passed: 2, failed: 1, perfect: 0)
@@ -138,7 +147,7 @@ phind_codellama_34b (passed: 3, failed: 0, perfect: 0)
 qwen3_coder_30b (passed: 3, failed: 0, perfect: 0)
 wizardcoder_33b (passed: 3, failed: 0, perfect: 0)
 
---- Results for v6 ---
+--- Results for v06 ---
 deepseek_coder_v2_16b (passed: 1, failed: 3, perfect: 0)
 deepseek_r1_14b (passed: 2, failed: 2, perfect: 0)
 deepseek_r1_32b (passed: 2, failed: 2, perfect: 0)
@@ -156,7 +165,7 @@ phind_codellama_34b (passed: 1, failed: 3, perfect: 0)
 qwen3_coder_30b (passed: 3, failed: 1, perfect: 0)
 wizardcoder_33b (passed: 3, failed: 1, perfect: 0)
 
---- Results for v7 ---
+--- Results for v07 ---
 deepseek_coder_v2_16b (passed: 3, failed: 0, perfect: 0)
 deepseek_r1_14b (passed: 1, failed: 2, perfect: 0)
 deepseek_r1_32b (passed: 3, failed: 0, perfect: 0)
@@ -174,7 +183,7 @@ phind_codellama_34b (passed: 3, failed: 0, perfect: 0)
 qwen3_coder_30b (passed: 1, failed: 2, perfect: 0)
 wizardcoder_33b (passed: 3, failed: 0, perfect: 0)
 
---- Results for v8 ---
+--- Results for v08 ---
 deepseek_coder_v2_16b (passed: 1, failed: 2, perfect: 0)
 deepseek_r1_14b (passed: 0, failed: 3, perfect: 0)
 deepseek_r1_32b (passed: 2, failed: 1, perfect: 0)
@@ -192,7 +201,7 @@ phind_codellama_34b (passed: 2, failed: 1, perfect: 0)
 qwen3_coder_30b (passed: 2, failed: 1, perfect: 0)
 wizardcoder_33b (passed: 0, failed: 3, perfect: 0)
 
---- Results for v9 ---
+--- Results for v09 ---
 deepseek_coder_v2_16b (passed: 3, failed: 0, perfect: 0)
 deepseek_r1_14b (passed: 1, failed: 2, perfect: 0)
 deepseek_r1_32b (passed: 3, failed: 0, perfect: 0)
@@ -283,3 +292,110 @@ phind_codellama_34b (passed: 0, failed: 3, perfect: 0)
 qwen3_coder_30b (passed: 0, failed: 0, perfect: 3)
 wizardcoder_33b (passed: 0, failed: 2, perfect: 1)
 
+--- Results for v14 ---
+deepseek_coder_v2_16b (passed: 0, failed: 3, perfect: 0)
+deepseek_r1_14b (passed: 0, failed: 1, perfect: 2)
+deepseek_r1_32b (passed: 0, failed: 0, perfect: 3)
+deepseek_v3_qwen2.5_32b (passed: 0, failed: 0, perfect: 3)
+google_gemma3_12b (passed: 0, failed: 0, perfect: 3)
+google_gemma3_27b (passed: 0, failed: 3, perfect: 0)
+meta_codellama_13b (passed: 1, failed: 1, perfect: 1)
+meta_codellama_34b (passed: 0, failed: 1, perfect: 2)
+microsoft_phi4_14b (passed: 0, failed: 2, perfect: 1)
+microsoft_phi4_reasoning_14b (passed: 0, failed: 0, perfect: 3)
+mistral_codestral_22b (passed: 0, failed: 0, perfect: 3)
+mistral_small_24b (passed: 0, failed: 1, perfect: 2)
+openai_gpt_oss_20b (passed: 0, failed: 0, perfect: 3)
+phind_codellama_34b (passed: 0, failed: 0, perfect: 3)
+qwen3_coder_30b (passed: 0, failed: 0, perfect: 3)
+wizardcoder_33b (passed: 0, failed: 2, perfect: 1)
+
+--- Results for v15 ---
+deepseek_coder_v2_16b (passed: 0, failed: 3, perfect: 0)
+deepseek_r1_14b (passed: 1, failed: 2, perfect: 0)
+deepseek_r1_32b (passed: 1, failed: 2, perfect: 0)
+deepseek_v3_qwen2.5_32b (passed: 3, failed: 0, perfect: 0)
+google_gemma3_12b (passed: 0, failed: 3, perfect: 0)
+google_gemma3_27b (passed: 3, failed: 0, perfect: 0)
+meta_codellama_13b (passed: 1, failed: 2, perfect: 0)
+meta_codellama_34b (passed: 2, failed: 1, perfect: 0)
+microsoft_phi4_14b (passed: 3, failed: 0, perfect: 0)
+microsoft_phi4_reasoning_14b (passed: 2, failed: 1, perfect: 0)
+mistral_codestral_22b (passed: 0, failed: 3, perfect: 0)
+mistral_small_24b (passed: 3, failed: 0, perfect: 0)
+openai_gpt_oss_20b (passed: 3, failed: 0, perfect: 0)
+phind_codellama_34b (passed: 0, failed: 3, perfect: 0)
+qwen3_coder_30b (passed: 2, failed: 1, perfect: 0)
+wizardcoder_33b (passed: 3, failed: 0, perfect: 0)
+
+--- Results for v16 ---
+deepseek_coder_v2_16b (passed: 3, failed: 0, perfect: 0)
+deepseek_r1_14b (passed: 3, failed: 0, perfect: 0)
+deepseek_r1_32b (passed: 3, failed: 0, perfect: 0)
+deepseek_v3_qwen2.5_32b (passed: 3, failed: 0, perfect: 0)
+google_gemma3_12b (passed: 3, failed: 0, perfect: 0)
+google_gemma3_27b (passed: 3, failed: 0, perfect: 0)
+meta_codellama_13b (passed: 3, failed: 0, perfect: 0)
+meta_codellama_34b (passed: 2, failed: 1, perfect: 0)
+microsoft_phi4_14b (passed: 3, failed: 0, perfect: 0)
+microsoft_phi4_reasoning_14b (passed: 3, failed: 0, perfect: 0)
+mistral_codestral_22b (passed: 3, failed: 0, perfect: 0)
+mistral_small_24b (passed: 3, failed: 0, perfect: 0)
+openai_gpt_oss_20b (passed: 3, failed: 0, perfect: 0)
+phind_codellama_34b (passed: 3, failed: 0, perfect: 0)
+qwen3_coder_30b (passed: 3, failed: 0, perfect: 0)
+wizardcoder_33b (passed: 3, failed: 0, perfect: 0)
+
+--- Results for v17 ---
+deepseek_coder_v2_16b (passed: 1, failed: 2, perfect: 0)
+deepseek_r1_14b (passed: 3, failed: 0, perfect: 0)
+deepseek_r1_32b (passed: 3, failed: 0, perfect: 0)
+deepseek_v3_qwen2.5_32b (passed: 3, failed: 0, perfect: 0)
+google_gemma3_12b (passed: 0, failed: 3, perfect: 0)
+google_gemma3_27b (passed: 0, failed: 3, perfect: 0)
+meta_codellama_13b (passed: 0, failed: 3, perfect: 0)
+meta_codellama_34b (passed: 2, failed: 1, perfect: 0)
+microsoft_phi4_14b (passed: 1, failed: 2, perfect: 0)
+microsoft_phi4_reasoning_14b (passed: 2, failed: 1, perfect: 0)
+mistral_codestral_22b (passed: 0, failed: 3, perfect: 0)
+mistral_small_24b (passed: 0, failed: 3, perfect: 0)
+openai_gpt_oss_20b (passed: 3, failed: 0, perfect: 0)
+phind_codellama_34b (passed: 0, failed: 3, perfect: 0)
+qwen3_coder_30b (passed: 3, failed: 0, perfect: 0)
+wizardcoder_33b (passed: 2, failed: 1, perfect: 0)
+
+--- Results for v18 ---
+deepseek_coder_v2_16b (passed: 3, failed: 0, perfect: 0)
+deepseek_r1_14b (passed: 3, failed: 0, perfect: 0)
+deepseek_r1_32b (passed: 3, failed: 0, perfect: 0)
+deepseek_v3_qwen2.5_32b (passed: 3, failed: 0, perfect: 0)
+google_gemma3_12b (passed: 3, failed: 0, perfect: 0)
+google_gemma3_27b (passed: 3, failed: 0, perfect: 0)
+meta_codellama_13b (passed: 0, failed: 2, perfect: 1)
+meta_codellama_34b (passed: 2, failed: 0, perfect: 1)
+microsoft_phi4_14b (passed: 3, failed: 0, perfect: 0)
+microsoft_phi4_reasoning_14b (passed: 2, failed: 1, perfect: 0)
+mistral_codestral_22b (passed: 3, failed: 0, perfect: 0)
+mistral_small_24b (passed: 3, failed: 0, perfect: 0)
+openai_gpt_oss_20b (passed: 3, failed: 0, perfect: 0)
+phind_codellama_34b (passed: 3, failed: 0, perfect: 0)
+qwen3_coder_30b (passed: 3, failed: 0, perfect: 0)
+wizardcoder_33b (passed: 3, failed: 0, perfect: 0)
+
+--- Results for v19 ---
+deepseek_coder_v2_16b (passed: 0, failed: 0, perfect: 3)
+deepseek_r1_14b (passed: 0, failed: 0, perfect: 3)
+deepseek_r1_32b (passed: 0, failed: 0, perfect: 3)
+deepseek_v3_qwen2.5_32b (passed: 0, failed: 0, perfect: 3)
+google_gemma3_12b (passed: 0, failed: 0, perfect: 3)
+google_gemma3_27b (passed: 0, failed: 0, perfect: 3)
+meta_codellama_13b (passed: 0, failed: 0, perfect: 3)
+meta_codellama_34b (passed: 0, failed: 0, perfect: 3)
+microsoft_phi4_14b (passed: 0, failed: 0, perfect: 3)
+microsoft_phi4_reasoning_14b (passed: 0, failed: 0, perfect: 3)
+mistral_codestral_22b (passed: 0, failed: 0, perfect: 3)
+mistral_small_24b (passed: 0, failed: 0, perfect: 3)
+openai_gpt_oss_20b (passed: 0, failed: 0, perfect: 3)
+phind_codellama_34b (passed: 0, failed: 0, perfect: 3)
+qwen3_coder_30b (passed: 0, failed: 0, perfect: 3)
+wizardcoder_33b (passed: 0, failed: 0, perfect: 3)
