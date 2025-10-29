@@ -1,8 +1,9 @@
-Thinking...
-We need to produce a single Bash function as described. Just code, no markdown. Add inline comments. Let's produce it. Ensure function name _ollama_completions. Steps as listed. Also need to call complete -F _ollama_completions ollama. Ensure usage of _get_comp_words_by_ref -n : cur prev. All conditions. Provide code.
-...done thinking.
-
 #!/usr/bin/env bash
+# [[HUMAN COMMENTED-OUT]]
+#Thinking...
+#We need to produce a single Bash function as described. Just code, no markdown. Add inline comments. Let's produce it. Ensure function name _ollama_completions. Steps as listed. Also need to call complete -F _ollama_completions ollama. Ensure usage of _get_comp_words_by_ref -n : cur prev. All conditions. Provide code.
+#...done thinking.
+
 _ollama_completions() {
     # Only activate for "ollama run <model>"
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return; }
@@ -27,4 +28,3 @@ _ollama_completions() {
     __ltrim_colon_completions "$cur"
 }
 complete -F _ollama_completions ollama
-

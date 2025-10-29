@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
     # Validate command structure: must start with 'ollama run'
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return; }
@@ -30,7 +29,6 @@ _ollama_completions() {
 
 # Register the function as a completion handler for 'ollama'
 complete -F _ollama_completions ollama
-```
 
-This script sets up Bash tab completion for `ollama run <model>`. It first checks if the command structure is correct and extracts necessary words. It verifies if the `ollama` binary exists, retrieves available models by running `ollama list`, generates potential completions from these models, sorts them, and adjusts for special characters like colons in model names. The script ensures graceful handling of cases where no models are found or the `ollama` command is missing.
-
+# [[HUMAN COMMENTED-OUT]]
+# This script sets up Bash tab completion for `ollama run <model>`. It first checks if the command structure is correct and extracts necessary words. It verifies if the `ollama` binary exists, retrieves available models by running `ollama list`, generates potential completions from these models, sorts them, and adjusts for special characters like colons in model names. The script ensures graceful handling of cases where no models are found or the `ollama` command is missing.

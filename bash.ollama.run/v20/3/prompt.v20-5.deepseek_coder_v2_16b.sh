@@ -1,4 +1,3 @@
- ```bash
 _ollama_completions() {
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return; }
     local cur prev
@@ -12,5 +11,3 @@ _ollama_completions() {
     __ltrim_colon_completions "$cur"
 }
 complete -F _ollama_completions ollama
-```
-

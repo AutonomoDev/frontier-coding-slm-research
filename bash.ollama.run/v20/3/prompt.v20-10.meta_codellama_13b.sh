@@ -1,5 +1,3 @@
-
-[PYTHON]
 # Bash completion for `ollama run <model>`
 _ollama_completions() {
     # Validate command
@@ -28,6 +26,3 @@ _ollama_completions() {
 
 # Register the completion function
 complete -F _ollama_completions ollama
-[/PYTHON]
-
-

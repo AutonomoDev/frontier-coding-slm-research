@@ -1,4 +1,5 @@
-```bash
+#!/bin/bash
+
 _ollama_completions() {
     # Validate that the command is 'ollama run'
     [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return; }
@@ -23,5 +24,3 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-```
-

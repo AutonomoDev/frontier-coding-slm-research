@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 _ollama_completions() {
@@ -20,4 +19,3 @@ _ollama_completions() {
     __ltrim_colon_completions "$cur"
 }
 complete -F _ollama_completions ollama  # (7) Register completion function
-

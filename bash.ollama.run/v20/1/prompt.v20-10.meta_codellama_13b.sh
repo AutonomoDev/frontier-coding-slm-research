@@ -1,12 +1,13 @@
-```bash
 #!/usr/bin/env bash
 
+# [[HUMAN COMMENTED-OUT]]
 ## 🚫 Do Not:
 # - Add COMP_CWORD or fallback logic.
 # - Check for `_get_comp_words_by_ref` or `__ltrim_colon_completions` existence.
 # - Use arrays for models.
 # - Sort input models.
 
+# [[HUMAN COMMENTED-OUT]]
 ## ✅ Must Do (Exact Steps)
 
 # 1. Function
@@ -34,5 +35,3 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-```
-

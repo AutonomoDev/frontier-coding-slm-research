@@ -1,4 +1,4 @@
-```bash
+# [[HUMAN COMMENTED-OUT]]
 _ollama_completions() {
   # Validate command
   [[ "${COMP_WORDS[0]}" != "ollama" || "${COMP_WORDS[1]}" != "run" ]] && { COMPREPLY=(); return; }
@@ -22,5 +22,3 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-```
-
