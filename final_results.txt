@@ -1099,5 +1099,60 @@ bash.ollama.run
     │           ├── (912) prompt.v19-7.deepseek_r1_32b.sh
     │           ├── (913) prompt.v19-8.deepseek_v3_qwen2.5_32b.sh
     │           └── (914) prompt.v19-9.google_gemma3_12b.sh
-    ├── (915) prompt.v1-deepseek_r1_14b.sh
-    └── (916) prompt.v2-deepseek_r1_14b.sh
+    ├── v20
+    │   ├── 1
+    │   │   └── perfect
+    │   │       ├── (915) prompt.v20-1.qwen3_coder_30b.sh
+    │   │       ├── (916) prompt.v20-10.meta_codellama_13b.sh
+    │   │       ├── (917) prompt.v20-11.meta_codellama_34b.sh
+    │   │       ├── (918) prompt.v20-12.microsoft_phi4_14b.sh
+    │   │       ├── (919) prompt.v20-13.mistral_codestral_22b.sh
+    │   │       ├── (920) prompt.v20-14.mistral_small_24b.sh
+    │   │       ├── (921) prompt.v20-15.phind_codellama_34b.sh
+    │   │       ├── (922) prompt.v20-16.microsoft_phi4_reasoning_14b.sh
+    │   │       ├── (923) prompt.v20-2.google_gemma3_27b.sh
+    │   │       ├── (924) prompt.v20-3.openai_gpt_oss_20b.sh
+    │   │       ├── (925) prompt.v20-4.wizardcoder_33b.sh
+    │   │       ├── (926) prompt.v20-5.deepseek_coder_v2_16b.sh
+    │   │       ├── (927) prompt.v20-6.deepseek_r1_14b.sh
+    │   │       ├── (928) prompt.v20-7.deepseek_r1_32b.sh
+    │   │       ├── (929) prompt.v20-8.deepseek_v3_qwen2.5_32b.sh
+    │   │       └── (930) prompt.v20-9.google_gemma3_12b.sh
+    │   ├── 2
+    │   │   └── perfect
+    │   │       ├── (931) prompt.v20-1.qwen3_coder_30b.sh
+    │   │       ├── (932) prompt.v20-10.meta_codellama_13b.sh
+    │   │       ├── (933) prompt.v20-11.meta_codellama_34b.sh
+    │   │       ├── (934) prompt.v20-12.microsoft_phi4_14b.sh
+    │   │       ├── (935) prompt.v20-13.mistral_codestral_22b.sh
+    │   │       ├── (936) prompt.v20-14.mistral_small_24b.sh
+    │   │       ├── (937) prompt.v20-15.phind_codellama_34b.sh
+    │   │       ├── (938) prompt.v20-16.microsoft_phi4_reasoning_14b.sh
+    │   │       ├── (939) prompt.v20-2.google_gemma3_27b.sh
+    │   │       ├── (940) prompt.v20-3.openai_gpt_oss_20b.sh
+    │   │       ├── (941) prompt.v20-4.wizardcoder_33b.sh
+    │   │       ├── (942) prompt.v20-5.deepseek_coder_v2_16b.sh
+    │   │       ├── (943) prompt.v20-6.deepseek_r1_14b.sh
+    │   │       ├── (944) prompt.v20-7.deepseek_r1_32b.sh
+    │   │       ├── (945) prompt.v20-8.deepseek_v3_qwen2.5_32b.sh
+    │   │       └── (946) prompt.v20-9.google_gemma3_12b.sh
+    │   └── 3
+    │       └── perfect
+    │           ├── (947) prompt.v20-1.qwen3_coder_30b.sh
+    │           ├── (948) prompt.v20-10.meta_codellama_13b.sh
+    │           ├── (949) prompt.v20-11.meta_codellama_34b.sh
+    │           ├── (950) prompt.v20-12.microsoft_phi4_14b.sh
+    │           ├── (951) prompt.v20-13.mistral_codestral_22b.sh
+    │           ├── (952) prompt.v20-14.mistral_small_24b.sh
+    │           ├── (953) prompt.v20-15.phind_codellama_34b.sh
+    │           ├── (954) prompt.v20-16.microsoft_phi4_reasoning_14b.sh
+    │           ├── (955) prompt.v20-2.google_gemma3_27b.sh
+    │           ├── (956) prompt.v20-3.openai_gpt_oss_20b.sh
+    │           ├── (957) prompt.v20-4.wizardcoder_33b.sh
+    │           ├── (958) prompt.v20-5.deepseek_coder_v2_16b.sh
+    │           ├── (959) prompt.v20-6.deepseek_r1_14b.sh
+    │           ├── (960) prompt.v20-7.deepseek_r1_32b.sh
+    │           ├── (961) prompt.v20-8.deepseek_v3_qwen2.5_32b.sh
+    │           └── (962) prompt.v20-9.google_gemma3_12b.sh
+    ├── (963) prompt.v1-deepseek_r1_14b.sh
+    └── (964) prompt.v2-deepseek_r1_14b.sh

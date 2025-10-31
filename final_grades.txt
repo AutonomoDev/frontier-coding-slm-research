@@ -22,6 +22,7 @@ v16:  0 failing, 16 passing, 0 perfect.
 v17:  8 failing, 8 passing, 0 perfect.
 v18:  1 failing, 15 passing, 0 perfect.
 v19:  0 failing, 0 passing, 16 perfect.
+v20:  0 failing, 0 passing, 16 perfect.
 
 ============================================================
 
@@ -46,7 +47,7 @@ wizardcoder_33b: v10
 ============================================================
 
 --- SLM's Bash Completion Proficiency Evolution ---
-Comparing start performance (v0) with final performance (v19), sorted by final score.
+Comparing start performance (v0) with final performance (v20), sorted by final score.
 
 | Model                        | Start Score (v0) | Final Score (v20) | Change |
 |-----------------------------:|-----------------:|------------------:|-------:|
@@ -383,6 +384,24 @@ qwen3_coder_30b (passed: 3, failed: 0, perfect: 0)
 wizardcoder_33b (passed: 3, failed: 0, perfect: 0)
 
 --- Results for v19 ---
+deepseek_coder_v2_16b (passed: 0, failed: 0, perfect: 3)
+deepseek_r1_14b (passed: 0, failed: 0, perfect: 3)
+deepseek_r1_32b (passed: 0, failed: 0, perfect: 3)
+deepseek_v3_qwen2.5_32b (passed: 0, failed: 0, perfect: 3)
+google_gemma3_12b (passed: 0, failed: 0, perfect: 3)
+google_gemma3_27b (passed: 0, failed: 0, perfect: 3)
+meta_codellama_13b (passed: 0, failed: 0, perfect: 3)
+meta_codellama_34b (passed: 0, failed: 0, perfect: 3)
+microsoft_phi4_14b (passed: 0, failed: 0, perfect: 3)
+microsoft_phi4_reasoning_14b (passed: 0, failed: 0, perfect: 3)
+mistral_codestral_22b (passed: 0, failed: 0, perfect: 3)
+mistral_small_24b (passed: 0, failed: 0, perfect: 3)
+openai_gpt_oss_20b (passed: 0, failed: 0, perfect: 3)
+phind_codellama_34b (passed: 0, failed: 0, perfect: 3)
+qwen3_coder_30b (passed: 0, failed: 0, perfect: 3)
+wizardcoder_33b (passed: 0, failed: 0, perfect: 3)
+
+--- Results for v20 ---
 deepseek_coder_v2_16b (passed: 0, failed: 0, perfect: 3)
 deepseek_r1_14b (passed: 0, failed: 0, perfect: 3)
 deepseek_r1_32b (passed: 0, failed: 0, perfect: 3)
