@@ -1,4 +1,3 @@
-```bash
 complete -F _ollama_run_completion ollama
 
 _ollama_run_completion() {
@@ -37,10 +36,9 @@ _ollama_run_completion() {
   return 0
 }
 
+# [[HUMAN COMMENTED-OUT]]
 # Installation:
 # 1. Save this script to ~/.bash_completion.d/ollama-run
 # 2. Add the following line to your ~/.bashrc:
 #    source ~/.bash_completion.d/ollama-run
 # 3. Reload your bash configuration: source ~/.bashrc
-```
-

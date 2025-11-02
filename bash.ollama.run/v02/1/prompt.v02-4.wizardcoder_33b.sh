@@ -1,4 +1,3 @@
-```bash
 # Define a new completion function
 _ollama() {
     # Only offer completions when invoking 'ollama run'
@@ -21,9 +20,8 @@ _ollama() {
 # Register the new completion function for 'ollama' commands.
 complete -F _ollama ollama
 
-```
-To install and activate this script:
-1. Save it to a file, e.g., `/etc/bash_completion.d/ollama`.
-2. Source the bash completion script in your shell startup script (e.g., add `source /etc/bash_completion.d/ollama` to your `.bashrc`).
-3. Start a new shell session or reload your current one with: `exec $SHELL` 
-
+# [[HUMAN COMMENTED-OUT]]
+# To install and activate this script:
+# 1. Save it to a file, e.g., `/etc/bash_completion.d/ollama`.
+# 2. Source the bash completion script in your shell startup script (e.g., add `source /etc/bash_completion.d/ollama` to your `.bashrc`).
+# 3. Start a new shell session or reload your current one with: `exec $SHELL`

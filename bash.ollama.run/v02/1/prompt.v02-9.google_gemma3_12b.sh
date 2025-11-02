@@ -1,4 +1,3 @@
-```bash
 # Bash completion for ollama run <model>
 # Dynamically lists available models from ollama list
 
@@ -39,5 +38,3 @@ complete -F _ollama_completion ollama
 #    `source /usr/local/etc/bash_completion.d/ollama`
 #    or add the above line to your .bashrc/profile.
 # 3. Reload your shell: `source ~/.bashrc` or `source ~/.bash_profile`
-```
-

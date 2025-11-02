@@ -1,4 +1,3 @@
- ```bash
 #!/usr/bin/env bash
 
 # ollama run completion function
@@ -14,19 +13,14 @@ _ollama_run_completion() {
 }
 
 complete -F _ollama_run_completion ollama
-```
 
-### Installation Instructions:
-Save this script to a file, e.g., `ollama-run-completion.bash`, then source it in your `.bashrc`:
-
-```bash
-echo 'source /path/to/ollama-run-completion.bash' >> ~/.bashrc
-source ~/.bashrc
-```
-
-After adding the above line, reload your shell configuration:
-
-```bash
-source ~/.bashrc
-```
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Installation Instructions:
+# Save this script to a file, e.g., `ollama-run-completion.bash`, then source it in your `.bashrc`:
+# 
+# echo 'source /path/to/ollama-run-completion.bash' >> ~/.bashrc
+# source ~/.bashrc
+# 
+# After adding the above line, reload your shell configuration:
+# 
+# source ~/.bashrc

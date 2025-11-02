@@ -1,4 +1,3 @@
- ```bash
 # Define bash completion function for ollama run command
 _ollama() {
     local current_word=${COMP_WORDS[COMP_CWORD]} # Get currently completed word
@@ -13,13 +12,10 @@ _ollama() {
 
 # Wire bash completion function to ollama command
 complete -F _ollama ollama
-```
 
-**Installation/Activation:** Save the script in a file (e.g., `~/.ollama-completion.bash`), then add the following line to your shell's initialization file (e.g., `~/.bashrc` or `~/.zshrc`):
-
-```bash
-source ~/.ollama-completion.bash
-```
-
-Finally, reload your shell (or open a new one) to activate the changes.
-
+# [[HUMAN COMMENTED-OUT]]
+# **Installation/Activation:** Save the script in a file (e.g., `~/.ollama-completion.bash`), then add the following line to your shell's initialization file (e.g., `~/.bashrc` or `~/.zshrc`):
+# [[HUMAN COMMENTED-OUT]]
+# source ~/.ollama-completion.bash
+# [[HUMAN COMMENTED-OUT]]
+# Finally, reload your shell (or open a new one) to activate the changes.

@@ -1,4 +1,3 @@
- ```bash
 #!/bin/bash
 # ollama_completions.bash: Bash completion script for the "ollama run <model>" command
 
@@ -22,9 +21,9 @@ _ollama_completions() {
 
 # Register completion function with "ollama" command
 complete -F _ollama_completions ollama
-```
- Installation instructions:
-1. Save the script above to a file (e.g., `ollama_completions.bash`)
-2. Add `source /path/to/ollama_completions.bash` to your `.bashrc` file or equivalent
-3. Reload your shell environment for the changes to take effect
 
+# [[HUMAN COMMENTED-OUT]]
+# Installation instructions:
+# 1. Save the script above to a file (e.g., `ollama_completions.bash`)
+# 2. Add `source /path/to/ollama_completions.bash` to your `.bashrc` file or equivalent
+# 3. Reload your shell environment for the changes to take effect

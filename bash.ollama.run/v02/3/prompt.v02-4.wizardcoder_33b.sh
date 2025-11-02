@@ -1,6 +1,6 @@
-Here is a bash-completion script for `ollama run <model>` that satisfies all requirements:
+# [[HUMAN COMMENTED-OUT]]
+# Here is a bash-completion script for `ollama run <model>` that satisfies all requirements:
 
-```bash
 # Bash completion function
 _ollama() 
 {
@@ -25,16 +25,14 @@ _ollama()
 # Installation instructions
 echo "To activate this bash completion script immediately, add the following line to your .bashrc:"
 echo "source /path/to/your_script"
-```
-Save this script somewhere (e.g., `~/.ollama-completion.sh`), then source it in `.bashrc`: 
 
-```bash
-echo 'source ~/.ollama-completion.sh' >> ~/.bashrc
-```
-Remember to replace `/path/to/your_script` with the actual path where you saved this script. Finally, start a new shell session or source your `.bashrc` file: 
-
-```bash
-source ~/.bashrc
-```
-This should make bash auto-completion for `ollama run <model>` behave as described above. 
-
+# [[HUMAN COMMENTED-OUT]]
+# Save this script somewhere (e.g., `~/.ollama-completion.sh`), then source it in `.bashrc`: 
+# 
+# echo 'source ~/.ollama-completion.sh' >> ~/.bashrc
+# 
+# Remember to replace `/path/to/your_script` with the actual path where you saved this script. Finally, start a new shell session or source your `.bashrc` file: 
+# 
+# source ~/.bashrc
+# 
+# This should make bash auto-completion for `ollama run <model>` behave as described above.

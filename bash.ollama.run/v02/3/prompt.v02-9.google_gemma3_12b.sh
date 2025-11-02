@@ -1,4 +1,3 @@
-```bash
 # Completion function for ollama run <model>
 _ollama_run_completion() {
   local cur prev words
@@ -44,10 +43,9 @@ _ollama_run_completion() {
 # Tell bash to use the completion function
 complete -F _ollama_run_completion ollama
 
+# [[HUMAN COMMENTED-OUT]]
 # Installation/Activation:
 # 1. Save this script to a file, e.g., /usr/local/share/bash-completion/completions/ollama.
 # 2. Source the completions file in your .bashrc or .bash_profile:
 #    `source /usr/local/share/bash-completion/completions/ollama`
 # 3. Reload your shell: `source ~/.bashrc` (or equivalent).
-```
-

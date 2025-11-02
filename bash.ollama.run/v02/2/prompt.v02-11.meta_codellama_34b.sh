@@ -1,4 +1,3 @@
-```bash
 # Save this file as 'ollama_completion.sh' and source it in your .bashrc
 # (e.g., '. ~/.bashrc') to activate completion immediately
 
@@ -33,14 +32,14 @@ _ollama_run() {
     COMPREPLY=($(printf '%s\n' "${matches[@]}" | sort))
   fi
 }
-```
-Installation/activation:
 
-1. Save this script as `ollama_completion.sh` in your favorite location (e.g., `~/.bashrc.d`).
-2. Source the file from your `.bashrc`:
-   ```bash
-   # Assuming you saved the script to ~/.bashrc.d/ollama_completion.sh:
-   for file in ~/.bashrc.d/*.sh; do source "$file"; done
-   ```
-3. Reload your `.bashrc` or restart your terminal session to activate completion immediately.
-
+# [[HUMAN COMMENTED-OUT]]
+# Installation/activation:
+# 
+# 1. Save this script as `ollama_completion.sh` in your favorite location (e.g., `~/.bashrc.d`).
+# 2. Source the file from your `.bashrc`:
+#    
+#    # Assuming you saved the script to ~/.bashrc.d/ollama_completion.sh:
+#    for file in ~/.bashrc.d/*.sh; do source "$file"; done
+#    
+# 3. Reload your `.bashrc` or restart your terminal session to activate completion immediately.

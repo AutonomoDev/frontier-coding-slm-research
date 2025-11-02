@@ -1,4 +1,3 @@
-```bash
 # Bash completion for 'ollama'
 # This script depends only on built-in bash features and
 # should be sourced from your .bashrc file after installation.
@@ -31,11 +30,10 @@ _ollama_list() {
 # Complete 'ollama run' command with dynamic model list.
 complete -F _ollama_list ollama
 
+# [[HUMAN COMMENTED-OUT]]
 # Installation/activation instructions:
 # ---------------------------------------
 # 1. Save this script as 'ollama-completion.bash' in your home directory.
 # 2. Add the following line to your .bashrc file:
 #      source ~/ollama-completion.bash
 # 3. Reload your .bashrc file with '. ~/.bashrc'.
-```
-

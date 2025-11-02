@@ -1,4 +1,3 @@
- ```bash
 #!/bin/bash
 
 _ollama() {
@@ -22,5 +21,3 @@ complete -F _ollama ollama  # Register the completion function for 'ollama' comm
 # Save this script in a location of your choice (e.g., ~/.bash_completion.d/ollama)
 # Add `source ~/.bash_completion.d/ollama` to your ~/.bashrc file
 # Then, open a new terminal or source the updated bash configuration (`source ~/.bashrc`)
-```
-

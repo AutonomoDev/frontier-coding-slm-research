@@ -1,4 +1,3 @@
-```bash
 # Bash completion for "ollama run <model>"
 #
 # This script depends only on built-in shell features and completes the `ollama run`
@@ -22,5 +21,3 @@ _ollama_list_models() {
 
 # Register the completion function for "ollama run"
 complete -F _ollama_list_models ollama
-```
-

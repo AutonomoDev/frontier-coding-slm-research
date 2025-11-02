@@ -1,4 +1,3 @@
- ```bash
 #!/bin/bash
 
 _ollama() {
@@ -23,12 +22,11 @@ _ollama() {
 
 # Wire the completion function to ollama command.
 complete -F _ollama ollama
-```
 
-To activate this script immediately, add it to your `.bashrc` file and source it:
-
-1. Open `~/.bashrc` in an editor (e.g., `nano ~/.bashrc`).
-2. Append the provided script at the end of the file.
-3. Save and close the file.
-4. Run `source ~/.bashrc` to make changes effective immediately without needing to restart the shell.
-
+# [[HUMAN COMMENTED-OUT]]
+# To activate this script immediately, add it to your `.bashrc` file and source it:
+# 
+# 1. Open `~/.bashrc` in an editor (e.g., `nano ~/.bashrc`).
+# 2. Append the provided script at the end of the file.
+# 3. Save and close the file.
+# 4. Run `source ~/.bashrc` to make changes effective immediately without needing to restart the shell.

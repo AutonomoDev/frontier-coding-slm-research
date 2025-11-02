@@ -1,4 +1,5 @@
-```bash
+#!/bin/bash
+
 _ollama_run_completions() {
     local cur prev words cword
     _init_completion || return
@@ -37,11 +38,10 @@ _ollama_run_completions() {
 
 complete -F _ollama_run_completions ollama
 
+# [[HUMAN COMMENTED-OUT]]
 # Installation/activation instructions:
 # Save this script to a file, e.g., `~/.bash_completion.d/ollama-completion`.
 # Add the following line to your `.bashrc` or equivalent shell configuration file:
 #   source ~/.bash_completion.d/ollama-completion
 # Then reload your shell configuration:
 #   source ~/.bashrc
-```
-

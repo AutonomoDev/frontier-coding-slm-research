@@ -1,4 +1,5 @@
-```bash
+#!/bin/bash
+
 # Bash completion script for 'ollama run <model>'
 
 _ollama_run_completion() {
@@ -47,14 +48,11 @@ complete -F _ollama_run_completion ollama
 # 2. Add the following lines to your ~/.bashrc or ~/.bash_profile:
 #    source ~/ollama-completion.bash
 # 3. Reload your shell configuration by running: source ~/.bashrc or exec bash
-```
 
-### Instructions:
-
-1. Save the script to a file named `ollama-completion.bash` in your home directory.
-2. Add the following lines to your `~/.bashrc` or `~/.bash_profile`:
-   ```bash
-   source ~/ollama-completion.bash
-   ```
-3. Reload your shell configuration by running: `source ~/.bashrc` or `exec bash`.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Instructions:
+# 
+# 1. Save the script to a file named `ollama-completion.bash` in your home directory.
+# 2. Add the following lines to your `~/.bashrc` or `~/.bash_profile`:
+#    source ~/ollama-completion.bash
+# 3. Reload your shell configuration by running: `source ~/.bashrc` or `exec bash`.

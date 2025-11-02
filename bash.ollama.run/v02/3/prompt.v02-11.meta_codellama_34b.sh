@@ -1,4 +1,3 @@
-```
 # Completion script for 'ollama run <model>'
 # To use, save this script to a file like '.ollama_completion'
 # and then source it from your .bashrc:
@@ -41,5 +40,3 @@ _ollama_completion() {
 
 # Wire the completion function to 'ollama'
 complete -F _ollama_completion ollama
-```
-

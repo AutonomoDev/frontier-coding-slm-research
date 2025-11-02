@@ -1,4 +1,3 @@
-```bash
 # Bash completion script for 'ollama run <model>'
 _ollama_run_completion() {
     # Check if we are in the right context
@@ -48,5 +47,3 @@ complete -F _ollama_run_completion ollama
 #    fi
 #   to your `.bashrc`.
 # 3. Reload the shell session or run `source ~/.bashrc` to activate completions.
-```
-

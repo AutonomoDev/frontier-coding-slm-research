@@ -1,4 +1,3 @@
-```bash
 # Bash completion for 'ollama run <model>'
 _ollama_run() {
     local cur models sorted_models matches cmd_output
@@ -39,20 +38,17 @@ _ollama_run() {
 
 # Wire the completion function to 'ollama'
 complete -F _ollama_run ollama
-```
 
-**Installation/Activation Instructions:**  
-Save this script to a file (e.g., `~/.bash_completion_ollama`), then add it to your bash configuration:
-```bash
-source ~/.bash_completion_ollama
+# [[HUMAN COMMENTED-OUT]]
+# **Installation/Activation Instructions:**  
+# Save this script to a file (e.g., `~/.bash_completion_ollama`), then add it to your bash configuration:
+# source ~/.bash_completion_ollama
 # To apply changes immediately, run: source ~/.bashrc or restart your terminal.
-```
-
----
-
-**Notes on Correctness:**  
-- The function `_ollama_run()` is triggered when completing `ollama run`.  
-- `cmd_output` captures the output of `ollama list`, and any errors are ignored silently.  
-- Models are filtered by prefix using a case-sensitive match (to avoid false positives).  
-- Matches are sorted alphabetically before populating `COMPREPLY`.
-
+# 
+# ---
+# 
+# **Notes on Correctness:**  
+# - The function `_ollama_run()` is triggered when completing `ollama run`.  
+# - `cmd_output` captures the output of `ollama list`, and any errors are ignored silently.  
+# - Models are filtered by prefix using a case-sensitive match (to avoid false positives).  
+# - Matches are sorted alphabetically before populating `COMPREPLY`.

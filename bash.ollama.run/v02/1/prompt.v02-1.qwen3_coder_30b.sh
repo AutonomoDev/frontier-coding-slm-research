@@ -1,4 +1,3 @@
-```bash
 _ollama_completion() {
     local cur="${COMP_WORDS[COMP_CWORD]}"  # Current word being completed
     local cmd="${COMP_WORDS[1]}"           # Second word (e.g., "run")
@@ -37,17 +36,12 @@ _ollama_completion() {
 
 # Register completion function for ollama
 complete -F _ollama_completion ollama
-```
 
-### Installation Instructions:
-
-1. Save this script to a file, e.g., `ollama-completion.sh`.
-2. Add the following line to your `~/.bashrc`:
-   ```bash
-   source /path/to/ollama-completion.sh
-   ```
-3. Reload your shell configuration:
-   ```bash
-   source ~/.bashrc
-   ```
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Installation Instructions:
+# 
+# 1. Save this script to a file, e.g., `ollama-completion.sh`.
+# 2. Add the following line to your `~/.bashrc`:
+#    source /path/to/ollama-completion.sh
+# 3. Reload your shell configuration:
+#    source ~/.bashrc

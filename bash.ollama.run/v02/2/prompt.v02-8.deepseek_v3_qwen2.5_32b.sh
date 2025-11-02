@@ -1,4 +1,3 @@
-```bash
 # Bash completion for 'ollama run' command to list available models dynamically.
 
 _ollama_run() {
@@ -27,13 +26,11 @@ _ollama_run() {
 
 # Activate completion for 'ollama' command with the custom function.
 complete -F _ollama_run ollama
-```
 
-### Installation/Activation Instructions:
-1. Save the script to your shell configuration file (e.g., `~/.bashrc` or `/etc/bash_completion.d/ollama-completion.sh`).
-2. Reload the configuration by running:  
-   ```sh
-   source ~/.bashrc  # or source /etc/bash_completion.d/ollama-completion.sh
-   ```
-3. Now, type `ollama run <Tab>` to see available models dynamically.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Installation/Activation Instructions:
+# 1. Save the script to your shell configuration file (e.g., `~/.bashrc` or `/etc/bash_completion.d/ollama-completion.sh`).
+# 2. Reload the configuration by running:  
+#    #    source ~/.bashrc  # or source /etc/bash_completion.d/ollama-completion.sh
+#    ```
+# 3. Now, type `ollama run <Tab>` to see available models dynamically.

@@ -1,4 +1,3 @@
-```
 # Define a completion function for "ollama run <model>"
 _ollama_run() {
   # Check if the command is "ollama run" and the user is completing after "run"
@@ -29,10 +28,10 @@ _ollama_run() {
 
 # Wire the completion function to "ollama"
 complete -F _ollama_run ollama
-```
-Installation:
 
-* Save the script as `~/.bash_completion.d/ollama` (or any other path included in your `$fpath`)
-* Source the file or restart your shell to activate completions immediately
-* Add the following line to your `.bashrc` (or equivalent) to enable completion for future shell sessions: `[[ -r ~/.bash_completion.d/ollama ]] && source ~/.bash_completion.d/ollama`
-
+# [[HUMAN COMMENTED-OUT]]
+# Installation:
+# 
+# * Save the script as `~/.bash_completion.d/ollama` (or any other path included in your `$fpath`)
+# * Source the file or restart your shell to activate completions immediately
+# * Add the following line to your `.bashrc` (or equivalent) to enable completion for future shell sessions: `[[ -r ~/.bash_completion.d/ollama ]] && source ~/.bash_completion.d/ollama`

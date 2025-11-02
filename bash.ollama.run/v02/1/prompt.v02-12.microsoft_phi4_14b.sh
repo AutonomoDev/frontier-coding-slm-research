@@ -1,4 +1,3 @@
-```bash
 # Bash-completion function for `ollama run <model>`
 _ollama_run_completion() {
     # Check if we are completing after 'run'
@@ -36,17 +35,15 @@ _ollama_run_completion() {
 # Associate the completion function with `ollama`
 complete -F _ollama_run_completion ollama
 
-```
-
-### Installation/Activation Instructions:
-
-1. Save the above script into a file, e.g., `/etc/bash_completion.d/ollama.bash`.
-2. Ensure you have bash-completion installed and sourced in your `.bashrc` or equivalent.
-3. Add this line to your `.bashrc` if not already present:
-   ```bash
-   source /etc/profile.d/bash_completion.sh
-   ```
-4. Reload the shell configuration with `source ~/.bashrc`.
-
-This will enable autocompletion for `ollama run <model>` in Bash.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Installation/Activation Instructions:
+# [[HUMAN COMMENTED-OUT]]
+# 1. Save the above script into a file, e.g., `/etc/bash_completion.d/ollama.bash`.
+# 2. Ensure you have bash-completion installed and sourced in your `.bashrc` or equivalent.
+# 3. Add this line to your `.bashrc` if not already present:
+# [[HUMAN COMMENTED-OUT]]
+#    source /etc/profile.d/bash_completion.sh
+# [[HUMAN COMMENTED-OUT]]
+# 4. Reload the shell configuration with `source ~/.bashrc`.
+# [[HUMAN COMMENTED-OUT]]
+# This will enable autocompletion for `ollama run <model>` in Bash.

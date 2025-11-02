@@ -1,4 +1,3 @@
-```bash
 _ollama_completion() {
     local cur prev words cword
     _init_completion || return
@@ -41,17 +40,16 @@ _ollama_completion() {
 
 # Register the completion function for ollama
 complete -F _ollama_completion ollama
-```
 
-### Installation Instructions:
-
-1. Save this script to a file, e.g., `ollama-completion.sh`.
-2. Add the following line to your `~/.bashrc`:
-   ```bash
-   source /path/to/ollama-completion.sh
-   ```
-3. Reload your shell or run:
-   ```bash
-   source ~/.bashrc
-   ```
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Installation Instructions:
+# 
+# 1. Save this script to a file, e.g., `ollama-completion.sh`.
+# 2. Add the following line to your `~/.bashrc`:
+#    ```bash
+#    source /path/to/ollama-completion.sh
+#    ```
+# 3. Reload your shell or run:
+#    ```bash
+#    source ~/.bashrc
+#    ```

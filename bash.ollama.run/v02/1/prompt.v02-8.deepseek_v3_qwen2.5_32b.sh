@@ -1,4 +1,5 @@
-```bash
+#!/bin/bash
+
 _ollama() {
     local cur prev words cword
     # Get all command line arguments, current word, previous word, etc.
@@ -18,13 +19,10 @@ _ollama() {
 }
 
 complete -F _ollama ollama
-```
 
-### Installation/Activation Instructions:
-1. **Save the script**: Copy the above function into your `~/.bashrc` file (or a custom completion script like `~/.bash_completion.d/ollama`).
-2. **Source it immediately** for current session:  
-   ```bash
-   source ~/.bashrc
-   ```
-3. **Persistent activation**: Ensure `~/.bashrc` is sourced in future sessions (typically already done by default).
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Installation/Activation Instructions:
+# 1. **Save the script**: Copy the above function into your `~/.bashrc` file (or a custom completion script like `~/.bash_completion.d/ollama`).
+# 2. **Source it immediately** for current session:
+# source ~/.bashrc
+# 3. **Persistent activation**: Ensure `~/.bashrc` is sourced in future sessions (typically already done by default).

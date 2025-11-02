@@ -1,4 +1,3 @@
-```bash
 # ollama run completion script
 
 _ollama() {
@@ -27,10 +26,9 @@ _ollama() {
 # Register the completion function for ollama run.
 complete -F _ollama ollama run
 
+# [[HUMAN COMMENTED-OUT]]
 # Installation/Activation:
 # 1. Save the above script to a file, e.g., ~/.bash_completions/ollama.bash
 # 2. Source the script in your .bashrc or .bash_profile:
 #    echo 'source ~/.bash_completions/ollama.bash' >> ~/.bashrc
 # 3. Reload your .bashrc: source ~/.bashrc
-```
-

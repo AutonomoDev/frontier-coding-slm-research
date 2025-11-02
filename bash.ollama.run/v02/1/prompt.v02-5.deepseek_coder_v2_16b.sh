@@ -1,4 +1,3 @@
- ```bash
 # Bash completion script for `ollama run <model>`
 # This script assumes that ollama is in your PATH and executable.
 
@@ -26,14 +25,11 @@ _ollama_run_completion() {
 }
 
 complete -F _ollama_run_completion ollama
-```
 
-### Installation Instructions:
-To use this completion script, save it somewhere and ensure it is executable. Then, add the following line to your `.bashrc` file:
-
-```bash
-source /path/to/your/script/ollama-completion.sh
-```
-
-Replace `/path/to/your/script/` with the actual path where you saved the script. After updating your `.bashrc`, reload it by running `source ~/.bashrc`.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Installation Instructions:
+# To use this completion script, save it somewhere and ensure it is executable. Then, add the following line to your `.bashrc` file:
+# 
+# source /path/to/your/script/ollama-completion.sh
+# 
+# Replace `/path/to/your/script/` with the actual path where you saved the script. After updating your `.bashrc`, reload it by running `source ~/.bashrc`.
