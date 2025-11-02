@@ -9,8 +9,8 @@ complete -F _ollama ollama
 
 # [[HUMAN COMMENTED-OUT]]
 # To install and activate the completion function, add the above script to your bash startup file (e.g., `~/.bashrc`), then source it to apply the changes:
-
-source ~/.bashrc
-
+#
+#source ~/.bashrc
+#
 # [[HUMAN COMMENTED-OUT]]
 # Note: The completion function relies on the `ollama list` command printing model names one per line or separated by whitespace when run with no formatting flags. If your version of ollama uses a different output format, you may need to adjust the script accordingly.
