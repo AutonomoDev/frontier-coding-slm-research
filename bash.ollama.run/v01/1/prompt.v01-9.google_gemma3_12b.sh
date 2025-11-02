@@ -1,4 +1,3 @@
-```bash
 _ollama_run() {
   local cur prev models
   COMPREPLY=()
@@ -26,5 +25,3 @@ complete -F _ollama_run ollama run
 #    source /usr/local/etc/bash_completion.d/ollama_run
 #    (or add it to a file sourced by your shell)
 # 3. Restart your shell or type `source ~/.bashrc` (or equivalent) to activate.
-```
-

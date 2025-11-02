@@ -1,4 +1,3 @@
-```bash
 # Bash completion for ollama command
 _ollama() {
     local cur prev opts
@@ -20,22 +19,18 @@ _ollama() {
     esac
 }
 complete -F _ollama ollama
-```
 
-**Installation Instructions:**
-
-1. **Source the script in your shell:**  
-   Add the following line to your `~/.bashrc` or equivalent:
-   ```bash
-   source /path/to/this/script.sh
-   ```
-2. **Activate immediately (optional):**
-   Run:
-   ```bash
-   . /path/to/this/script.sh
-   ```
-
-**Notes:**  
-- The script handles errors by redirecting stderr to `/dev/null` during `ollama list`.
-- Completion is triggered only for the `run` subcommand of `ollama`.
-
+# [[HUMAN COMMENTED-OUT]]
+# **Installation Instructions:**
+# 
+# 1. **Source the script in your shell:**  
+#    Add the following line to your `~/.bashrc` or equivalent:
+#    source /path/to/this/script.sh
+# 
+# 2. **Activate immediately (optional):**
+#    Run:
+#    . /path/to/this/script.sh
+# 
+# **Notes:**  
+# - The script handles errors by redirecting stderr to `/dev/null` during `ollama list`.
+# - Completion is triggered only for the `run` subcommand of `ollama`.

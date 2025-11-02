@@ -1,4 +1,3 @@
-```bash
 # bash-completion for ollama run <model>
 _ollama_run() {
     local cur model_list models
@@ -29,18 +28,17 @@ complete -F _ollama_run ollama
 # Save this script to a file, say /etc/bash_completion.d/ollama-completion.bash,
 # or add the above code directly into your .bashrc.
 # Then source it (e.g., `source /path/to/script`) and test by typing 'ollama run <Tab>'.
-```
 
-### Installation Instructions
-1. **Save to Completion Directory**: 
-   Place the script in `/etc/bash_completion.d/` or a similar directory where your system loads completions.
-
-2. **Add to .bashrc**:
-   Alternatively, copy the code directly into your `~/.bashrc`.
-
-3. **Reload Shell Configuration**:
-   After saving or adding, source the file (e.g., `source /path/to/script`) or restart your terminal session.
-
-4. **Test Completion**:
-   Type `ollama run` followed by `<Tab>` to see model suggestions.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Installation Instructions
+# 1. **Save to Completion Directory**: 
+#    Place the script in `/etc/bash_completion.d/` or a similar directory where your system loads completions.
+# 
+# 2. **Add to .bashrc**:
+#    Alternatively, copy the code directly into your `~/.bashrc`.
+# 
+# 3. **Reload Shell Configuration**:
+#    After saving or adding, source the file (e.g., `source /path/to/script`) or restart your terminal session.
+# 
+# 4. **Test Completion**:
+#    Type `ollama run` followed by `<Tab>` to see model suggestions.

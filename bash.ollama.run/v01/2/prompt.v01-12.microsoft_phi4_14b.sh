@@ -1,4 +1,3 @@
-```bash
 # Bash completion script for `ollama run <model>`
 
 _ollama_run_completion() {
@@ -34,14 +33,13 @@ complete -F _ollama_run_completion ollama
 # Source it in your shell's startup configuration (e.g., .bashrc, .zshrc):
 #   source /path/to/ollama-completion.sh
 # Restart the shell or run `source ~/.bashrc` for changes to take effect immediately.
-```
 
-**Installation Instructions:**
-
-1. Save the above script to a file named `ollama-completion.sh`.
-2. Add the following line to your `.bashrc`, `.zshrc`, or equivalent shell configuration file:
-   ```bash
-   source /path/to/ollama-completion.sh
-   ```
-3. Reload your shell configuration by running `source ~/.bashrc` (or similar) in your terminal, or restart your shell session for the changes to take effect immediately.
-
+# [[HUMAN COMMENTED-OUT]]
+# **Installation Instructions:**
+# [[HUMAN COMMENTED-OUT]]
+# 1. Save the above script to a file named `ollama-completion.sh`.
+# 2. Add the following line to your `.bashrc`, `.zshrc`, or equivalent shell configuration file:
+# [[HUMAN COMMENTED-OUT]]
+#    source /path/to/ollama-completion.sh
+# [[HUMAN COMMENTED-OUT]]
+# 3. Reload your shell configuration by running `source ~/.bashrc` (or similar) in your terminal, or restart your shell session for the changes to take effect immediately.

@@ -1,4 +1,3 @@
- ```bash
 # Create a bash-completion function for `ollama run` command
 _ollama_run() {
     local word models cmd
@@ -13,11 +12,10 @@ _ollama_run() {
 
 # Register the completion function for `ollama run` command
 complete -F _ollama_run ollama_run
-```
 
-To install and activate the script:
-1. Save the above script to a file, e.g., `/etc/bash_completion.d/ollama_run`.
-2. Source the file in your current shell session by running `source /etc/bash_completion.d/ollama_run`, or start a new terminal session for changes to take effect.
-
-The completion function is now active and can be used immediately with the `ollama run` command.
-
+# [[HUMAN COMMENTED-OUT]]
+# To install and activate the script:
+# 1. Save the above script to a file, e.g., `/etc/bash_completion.d/ollama_run`.
+# 2. Source the file in your current shell session by running `source /etc/bash_completion.d/ollama_run`, or start a new terminal session for changes to take effect.
+# 
+# The completion function is now active and can be used immediately with the `ollama run` command.

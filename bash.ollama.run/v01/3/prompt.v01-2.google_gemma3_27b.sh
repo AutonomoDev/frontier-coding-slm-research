@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 # Bash completion for `ollama run <model>`
 
@@ -21,5 +20,3 @@ complete -f ollama_run_completion ollama run
 # 1. Save this script to ~/.bash_completion.d/ollama-run.bash
 # 2. Source it: source ~/.bash_completion.d/ollama-run.bash
 # 3. Or, source ~/.bashrc or ~/.bash_profile to make it permanent.
-```
-

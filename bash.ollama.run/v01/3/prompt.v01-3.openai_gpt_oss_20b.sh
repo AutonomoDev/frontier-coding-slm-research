@@ -1,20 +1,19 @@
-Thinking...
-We need to output a bash completion script that defines a function for ollama run. We can parse `ollama list` output. We need to get the current word prefix from COMP_WORDS[COMP_CWORD]. For ollama run, the first word after command is model. So we need to detect when completing the second word (i.e., COMP_CWORD==2). But we need to allow partial typing. Use `COMPREPLY=($(compgen -W "$models" -- "$cur"))`.
+# Thinking...
+# We need to output a bash completion script that defines a function for ollama run. We can parse `ollama list` output. We need to get the current word prefix from COMP_WORDS[COMP_CWORD]. For ollama run, the first word after command is model. So we need to detect when completing the second word (i.e., COMP_CWORD==2). But we need to allow partial typing. Use `COMPREPLY=($(compgen -W "$models" -- "$cur"))`.
+# 
+# We must fetch models via `ollama list` quietly, capture errors. Use `local models=$(ollama list 2>/dev/null)` but need to process lines. Use IFS=$'\n' read -r -a array. Then join to space for compgen.
+# 
+# Also handle if no models: COMPREPLY=().
+# 
+# Implement function _ollama_run_completion. Then register with complete -F.
+# 
+# Add minimal installation instructions: Save as /etc/bash_completion.d/ollama or ~/.bash_completion, then source via `source ~/.bash_completion` or add to ~/.bashrc.
+# 
+# Need to output only script with comments plus instructions. Use `#` comments.
+# 
+# Let's write.
+# ...done thinking.
 
-We must fetch models via `ollama list` quietly, capture errors. Use `local models=$(ollama list 2>/dev/null)` but need to process lines. Use IFS=$'\n' read -r -a array. Then join to space for compgen.
-
-Also handle if no models: COMPREPLY=().
-
-Implement function _ollama_run_completion. Then register with complete -F.
-
-Add minimal installation instructions: Save as /etc/bash_completion.d/ollama or ~/.bash_completion, then source via `source ~/.bash_completion` or add to ~/.bashrc.
-
-Need to output only script with comments plus instructions. Use `#` comments.
-
-Let's write.
-...done thinking.
-
-```bash
 # Bash completion for `ollama run <model>`
 # ----------------------------------------
 # Save this file as /etc/bash_completion.d/ollama-run or
@@ -57,5 +56,3 @@ _ollama_run_completion() {
 
 # Register the completion function for `ollama run`
 complete -F _ollama_run_completion ollama
-```
-

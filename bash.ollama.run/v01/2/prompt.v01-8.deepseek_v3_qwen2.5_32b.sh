@@ -1,4 +1,3 @@
-```bash
 # ollama_complete - Bash completion for 'ollama run' command
 
 _ollama_run() {
@@ -23,13 +22,12 @@ complete -F _ollama_run ollama
 # 1. Save this script as ~/.bash_completion.d/ollama.sh
 # 2. Add to your .bashrc: [[ $- == *i* ]] && source ~/.bash_completion.d/ollama.sh
 # 3. Activate immediately: source ~/.bash_completion.d/ollama.sh
-```
 
-### Explanation:
-1. **Completion Function**: The `_ollama_run` function handles completion when the user types `ollama run <Tab>`. It checks if the second word is "run" and fetches models via `ollama list`.
-2. **Error Handling**: `ollama list` runs with `LC_ALL=C` for consistent splitting, and errors are silenced (`2>/dev/null`). 
-3. **Filtering**: Matches are generated using `compgen`, ensuring case-insensitive prefix matching.
-4. **Installation**: The script is sourced from `.bashrc` to activate completions dynamically.
-
-This ensures robustness by silently handling command failures and adheres to POSIX-compliant operations without external dependencies like `jq`.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Explanation:
+# 1. **Completion Function**: The `_ollama_run` function handles completion when the user types `ollama run <Tab>`. It checks if the second word is "run" and fetches models via `ollama list`.
+# 2. **Error Handling**: `ollama list` runs with `LC_ALL=C` for consistent splitting, and errors are silenced (`2>/dev/null`). 
+# 3. **Filtering**: Matches are generated using `compgen`, ensuring case-insensitive prefix matching.
+# 4. **Installation**: The script is sourced from `.bashrc` to activate completions dynamically.
+# 
+# This ensures robustness by silently handling command failures and adheres to POSIX-compliant operations without external dependencies like `jq`.

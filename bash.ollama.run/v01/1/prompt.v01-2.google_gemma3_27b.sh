@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 # Bash completion for ollama run <model>
 
@@ -39,5 +38,3 @@ complete -F _ollama_run_completion ollama
 # 2. Source the script: source ~/.bash_completion.d/ollama_run.bash
 # 3. Or, source ~/.bash_completion to load all completion scripts.
 # 4. Restart your shell or run 'source ~/.bashrc' to activate immediately.
-```
-

@@ -1,4 +1,3 @@
-```bash
 _ollama_run() {
     local cur prev words cword
     _init_completion || return
@@ -27,18 +26,13 @@ _ollama_run() {
 }
 
 complete -F _ollama_run ollama
-```
 
-### Installation Instructions:
-1. Save the above script to a file, e.g., `ollama-completion.bash`.
-2. Source the script in your shell configuration file (e.g., `~/.bashrc` or `~/.bash_profile`) by adding the following line:
-   ```bash
-   source /path/to/ollama-completion.bash
-   ```
-3. Reload your shell configuration file to activate the completion:
-   ```bash
-   source ~/.bashrc  # or source ~/.bash_profile, depending on your setup
-   ```
-
-This will enable tab completion for `ollama run <model>` with dynamically listed models.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Installation Instructions:
+# 1. Save the above script to a file, e.g., `ollama-completion.bash`.
+# 2. Source the script in your shell configuration file (e.g., `~/.bashrc` or `~/.bash_profile`) by adding the following line:
+#    source /path/to/ollama-completion.bash
+# 3. Reload your shell configuration file to activate the completion:
+#    source ~/.bashrc  # or source ~/.bash_profile, depending on your setup
+# 
+# This will enable tab completion for `ollama run <model>` with dynamically listed models.

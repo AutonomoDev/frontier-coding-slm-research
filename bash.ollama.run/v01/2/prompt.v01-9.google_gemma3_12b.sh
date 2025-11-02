@@ -1,4 +1,3 @@
-```bash
 _ollama_run() {
   local cur prev models
   COMPREPLY=()
@@ -20,10 +19,9 @@ _ollama_run() {
 
 complete -F _ollama_run ollama run
 
+# [[HUMAN COMMENTED-OUT]]
 # Installation Instructions:
 # 1. Save the above script to a file, e.g., /usr/local/etc/bash_completion.d/ollama.bash
 # 2. Source the completion script in your ~/.bashrc or ~/.bash_profile:
 #    `source /usr/local/etc/bash_completion.d/ollama.bash`
 # 3. (Optional) Reload your shell to activate immediately: `exec bash`
-```
-

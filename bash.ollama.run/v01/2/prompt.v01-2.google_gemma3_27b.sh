@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 # Bash completion for `ollama run <model>`
 
@@ -29,9 +28,8 @@ _ollama_run_completion() {
 
 complete -f _ollama_run_completion ollama run
 
+# [[HUMAN COMMENTED-OUT]]
 # Installation:
 # 1. Save this script to a file, e.g., ~/.ollama_completion.bash
 # 2. Source it: `source ~/.ollama_completion.bash`
 # 3. To activate immediately, run: `complete -f _ollama_run_completion ollama run`
-```
-

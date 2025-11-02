@@ -18,7 +18,7 @@ _ollama_run() {
   done
 }
 complete -F _ollama_run ollama run
-```
-Installation: Drop the script into your $HOME/.bash_completion directory or source it in your shell profile.
-# To activate, either open a new terminal window or type `source ~/.bash_completion`
 
+# [[HUMAN COMMENTED-OUT]]
+# Installation: Drop the script into your $HOME/.bash_completion directory or source it in your shell profile.
+# To activate, either open a new terminal window or type `source ~/.bash_completion`

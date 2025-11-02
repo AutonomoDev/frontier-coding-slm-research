@@ -1,4 +1,3 @@
-```bash
 _ollama_run_completion() {
     local cur="${COMP_WORDS[COMP_CWORD]}"
     local models=()
@@ -21,19 +20,22 @@ _ollama_run_completion() {
 }
 
 complete -F _ollama_run_completion ollama
-```
 
-### Installation Instructions
+# [[HUMAN COMMENTED-OUT]]
+# ### Installation Instructions
+# 
+# 1. Save the script to a file, e.g., `_ollama_run_completion.sh`.
+# 2. Source it in your current shell session:
 
-1. Save the script to a file, e.g., `_ollama_run_completion.sh`.
-2. Source it in your current shell session:
-   ```bash
-   source _ollama_run_completion.sh
-   ```
-3. Optionally, add the source line to your `~/.bashrc` to make it permanent:
-   ```bash
-   echo 'source /path/to/_ollama_run_completion.sh' >> ~/.bashrc
-   ```
+# [[HUMAN COMMENTED-OUT]]
+#    source _ollama_run_completion.sh
 
-> **Note:** Ensure `ollama` is in your `$PATH` and the `ollama list` command works as expected. The completion will only suggest models that match the current input prefix.
+# [[HUMAN COMMENTED-OUT]]
+# 3. Optionally, add the source line to your `~/.bashrc` to make it permanent:
 
+# [[HUMAN COMMENTED-OUT]]
+#    echo 'source /path/to/_ollama_run_completion.sh' >> ~/.bashrc
+
+# [[HUMAN COMMENTED-OUT]]
+# 
+# > **Note:** Ensure `ollama` is in your `$PATH` and the `ollama list` command works as expected. The completion will only suggest models that match the current input prefix.

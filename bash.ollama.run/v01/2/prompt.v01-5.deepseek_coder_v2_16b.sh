@@ -1,4 +1,3 @@
- ```bash
 # ollama-run-completion.sh
 
 _ollama_run_completions() {
@@ -21,17 +20,12 @@ _ollama_run_completions() {
 }
 
 complete -F _ollama_run_completions ollama
-```
 
-### Installation Instructions:
-1. Save the script as `ollama-run-completion.sh`.
-2. Source this script from your `.bashrc` or equivalent initialization file:
-   ```bash
-   source /path/to/ollama-run-completion.sh
-   ```
-3. Activate the completion function by reloading your shell configuration:
-   ```bash
-   source ~/.bashrc  # Or ~/.zshrc, depending on your shell setup
-   ```
-4. Now you can use `ollama run <Tab>` to trigger model name suggestions.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Installation Instructions:
+# 1. Save the script as `ollama-run-completion.sh`.
+# 2. Source this script from your `.bashrc` or equivalent initialization file:
+#    source /path/to/ollama-run-completion.sh
+# 3. Activate the completion function by reloading your shell configuration:
+#    source ~/.bashrc  # Or ~/.zshrc, depending on your shell setup
+# 4. Now you can use `ollama run <Tab>` to trigger model name suggestions.

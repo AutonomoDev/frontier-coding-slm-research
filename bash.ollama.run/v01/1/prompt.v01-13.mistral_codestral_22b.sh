@@ -1,4 +1,3 @@
- ```bash
 # Include this function in your ~/.bashrc or ~/.bash_profile to activate.
 _ollama() {
     local cur prev words cword
@@ -11,10 +10,8 @@ _ollama() {
     fi
 }
 complete -F _ollama ollama
-```
-To activate, add this script to your shell configuration (like `~/.bashrc` or `~/.bash_profile`) and then source the file:
-```bash
-$ source ~/.bashrc # or .bash_profile
-```
-Now, you can use tab completion for available models with `ollama run <Tab>`.
-
+# [[HUMAN COMMENTED-OUT]]
+# To activate, add this script to your shell configuration (like `~/.bashrc` or `~/.bash_profile`) and then source the file:
+# $ source ~/.bashrc # or .bash_profile
+# [[HUMAN COMMENTED-OUT]]
+# Now, you can use tab completion for available models with `ollama run <Tab>`.

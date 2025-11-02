@@ -1,4 +1,3 @@
- ```bash
 # ollama-run-completion.sh
 
 _ollama_run_completion() {
@@ -18,16 +17,12 @@ _ollama_run_completion() {
 }
 
 complete -F _ollama_run_completion ollama run
-```
 
-### Installation Instructions:
-1. Save the script to a file, e.g., `ollama-run-completion.sh`.
-2. Source this script from your `.bashrc` or equivalent initialization file:
-   ```bash
-   source /path/to/ollama-run-completion.sh
-   ```
-3. Activate the completion by running:
-   ```bash
-   complete -F _ollama_run_completion ollama run
-   ```
+# [[HUMAN COMMENTED-OUT]]
+# ### Installation Instructions:
+# 1. Save the script to a file, e.g., `ollama-run-completion.sh`.
+# 2. Source this script from your `.bashrc` or equivalent initialization file:
+#    source /path/to/ollama-run-completion.sh
+# 3. Activate the completion by running:
+#    complete -F _ollama_run_completion ollama run
 

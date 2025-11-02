@@ -1,4 +1,3 @@
-```bash
 # Bash completion function for 'ollama run <model>'
 _ollama_run_completion() {
     local cur prev words cword
@@ -33,22 +32,26 @@ _ollama_run_completion() {
 # Register the completion function for 'ollama run'
 complete -F _ollama_run_completion ollama
 
-```
-
-### Installation Instructions
-
-1. Save the above script to a file, e.g., `~/.bash_completion.d/ollama.bash`.
-
-2. Source this script in your `.bashrc` or equivalent shell configuration file:
-   ```bash
-   # Add the following line to .bashrc if not already present
-   for f in ~/.bash_completion.d/*.bash; do source "$f"; done
-   ```
-
-3. Reload your shell configuration to activate completions immediately:
-   ```bash
-   source ~/.bashrc
-   ```
-
-This setup assumes you are using a typical Bash environment and that `.bash_completion` is properly configured to load scripts from `~/.bash_completion.d/`. Adjust the path as necessary for other setups.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Installation Instructions
+# [[HUMAN COMMENTED-OUT]]
+# 1. Save the above script to a file, e.g., `~/.bash_completion.d/ollama.bash`.
+# [[HUMAN COMMENTED-OUT]]
+# 2. Source this script in your `.bashrc` or equivalent shell configuration file:
+# [[HUMAN COMMENTED-OUT]]
+## [[HUMAN COMMENTED-OUT]]
+#    # Add the following line to .bashrc if not already present
+# [[HUMAN COMMENTED-OUT]]
+#    for f in ~/.bash_completion.d/*.bash; do source "$f"; done
+# [[HUMAN COMMENTED-OUT]]
+#    ```
+# [[HUMAN COMMENTED-OUT]]
+# 3. Reload your shell configuration to activate completions immediately:
+# [[HUMAN COMMENTED-OUT]]
+#    ```bash
+# [[HUMAN COMMENTED-OUT]]
+#    source ~/.bashrc
+# [[HUMAN COMMENTED-OUT]]
+#    ```
+# [[HUMAN COMMENTED-OUT]]
+# This setup assumes you are using a typical Bash environment and that `.bash_completion` is properly configured to load scripts from `~/.bash_completion.d/`. Adjust the path as necessary for other setups.
