@@ -1,0 +1,18 @@
+=== Test run on Sun Nov  2 01:55:39 PM CST 2025 ===
+prompt.v02-1.qwen3_coder_30b.sh FAILED: It shows the entire output of ollama list when no search.
+prompt.v02-2.google_gemma3_27b.sh Only the first line of `ollama list`.
+prompt.v02-3.openai_gpt_oss_20b.sh Only the first line of `ollama list`.
+prompt.v02-4.wizardcoder_33b.sh FAILED: It shows the entire output of ollama list when no search.
+=== Test run on Sun Nov  2 01:59:11 PM CST 2025 ===
+prompt.v02-5.deepseek_coder_v2_16b.sh FAILED: It shows the entire output of ollama list when no search.
+prompt.v02-6.deepseek_r1_14b.sh FAILED: No suggestions.
+prompt.v02-7.deepseek_r1_32b.sh FAILED: It shows the entire output of ollama list when no search.
+prompt.v02-8.deepseek_v3_qwen2.5_32b.sh FAILED: No suggestions.
+prompt.v02-9.google_gemma3_12b.sh FAILED: It shows the entire output of ollama list when no search.
+prompt.v02-10.meta_codellama_13b.sh FAILED: No suggestions.
+prompt.v02-11.meta_codellama_34b.sh FAILED: It shows the entire output of ollama list when no search.
+prompt.v02-12.microsoft_phi4_14b.sh FAILED: No suggestions.
+prompt.v02-13.mistral_codestral_22b.sh FAILED: It shows the entire output of ollama list when no search.
+prompt.v02-14.mistral_small_24b.sh Autosuggests "NAME" over and over.
+prompt.v02-15.phind_codellama_34b.sh FAILED: Bash syntax error.
+prompt.v02-16.microsoft_phi4_reasoning_14b.sh FAILED: It shows the entire output of ollama list when no search.
