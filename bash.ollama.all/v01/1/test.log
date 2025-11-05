@@ -1,1 +1,17 @@
-=== Test run on Sun Nov  2 01:49:17 AM CST 2025 ===
+=== Test run on Wed Nov  5 06:28:36 AM CST 2025 ===
+prompt.v01-1.qwen3_coder_30b.sh FAILED: It tries to autocomplete with the files in the PWD.
+prompt.v01-2.google_gemma3_27b.sh FAILED: No suggestions.
+prompt.v01-3.openai_gpt_oss_20b.sh Only autosuggested `ollama run`.
+prompt.v01-4.wizardcoder_33b.sh PASSED: Doesn't suggest commands.
+prompt.v01-5.deepseek_coder_v2_16b.sh FAILED: No suggestions.
+prompt.v01-6.deepseek_r1_14b.sh FAILED: It tries to autocomplete with the files in the PWD.
+prompt.v01-7.deepseek_r1_32b.sh FAILED: No suggestions.
+prompt.v01-8.deepseek_v3_qwen2.5_32b.sh FAILED: It tries to autocomplete with the files in the PWD.
+prompt.v01-9.google_gemma3_12b.sh PASSED: Doesn't suggest commands.
+prompt.v01-10.meta_codellama_13b.sh FAILED: No suggestions.
+prompt.v01-11.meta_codellama_34b.sh FAILED: No suggestions.
+prompt.v01-12.microsoft_phi4_14b.sh PASSED: Doesn't suggest commands.
+prompt.v01-13.mistral_codestral_22b.sh FAILED: No suggestions.
+prompt.v01-14.mistral_small_24b.sh PASSED: Doesn't suggest commands.
+prompt.v01-15.phind_codellama_34b.sh PASSED: Perfect.
+prompt.v01-16.microsoft_phi4_reasoning_14b.sh PASSED: Doesn't suggest commands.
