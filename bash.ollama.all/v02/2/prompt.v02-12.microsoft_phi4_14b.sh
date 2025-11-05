@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
     local cur prev words cword
     _get_comp_words_by_ref -n : cur prev words cword
@@ -42,24 +41,23 @@ _ollama_completions() {
 
 # Register the function with `complete` to enable tab completion.
 complete -F _ollama_completions ollama
-```
 
-### Explanation
-
-- **Initialization**: The function `_ollama_completions` begins by setting up local variables using `_get_comp_words_by_ref`, which helps in understanding the current word (`cur`) and previous word (`prev`) among other details, crucial for providing context-aware completions.
-
-- **Top-Level Completion**: If `ollama` is detected as the previous word, all available subcommands are suggested as completions. This ensures that users can quickly discover what they can do with `ollama`.
-
-- **Model Name Completion Logic**:
-  - Commands requiring `<MODEL>` completion (`show`, `run`, etc.) follow a defined sequence to fetch model names. 
-  - The existence of the `ollama` command is checked first; if absent, no completions are provided.
-  - Model names are retrieved using `ollama list`, filtering out any headers and capturing only the needed data.
-  - If models exist, they are used with `compgen` to generate suggestions. Completion results are sorted and trimmed for display.
-
-- **Special Flag Completion**:
-  - The `create` command supports completion of specific flags like `--file` or `-q`. This is handled when the cursor is at position two (`$cword`), suggesting relevant options.
-
-- **No Argument Commands**: For commands such as `serve`, `pull`, etc., no additional argument completion logic is required; thus, they simply return without suggestions.
-
-Finally, the function is registered with `complete -F _ollama_completions ollama` to ensure that it activates whenever the user types `ollama` in a terminal. This setup allows for enhanced usability and efficiency by providing contextual completions directly related to the user's input.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Explanation
+# 
+# - **Initialization**: The function `_ollama_completions` begins by setting up local variables using `_get_comp_words_by_ref`, which helps in understanding the current word (`cur`) and previous word (`prev`) among other details, crucial for providing context-aware completions.
+# 
+# - **Top-Level Completion**: If `ollama` is detected as the previous word, all available subcommands are suggested as completions. This ensures that users can quickly discover what they can do with `ollama`.
+# 
+# - **Model Name Completion Logic**:
+#   - Commands requiring `<MODEL>` completion (`show`, `run`, etc.) follow a defined sequence to fetch model names. 
+#   - The existence of the `ollama` command is checked first; if absent, no completions are provided.
+#   - Model names are retrieved using `ollama list`, filtering out any headers and capturing only the needed data.
+#   - If models exist, they are used with `compgen` to generate suggestions. Completion results are sorted and trimmed for display.
+# 
+# - **Special Flag Completion**:
+#   - The `create` command supports completion of specific flags like `--file` or `-q`. This is handled when the cursor is at position two (`$cword`), suggesting relevant options.
+# 
+# - **No Argument Commands**: For commands such as `serve`, `pull`, etc., no additional argument completion logic is required; thus, they simply return without suggestions.
+# 
+# Finally, the function is registered with `complete -F _ollama_completions ollama` to ensure that it activates whenever the user types `ollama` in a terminal. This setup allows for enhanced usability and efficiency by providing contextual completions directly related to the user's input.

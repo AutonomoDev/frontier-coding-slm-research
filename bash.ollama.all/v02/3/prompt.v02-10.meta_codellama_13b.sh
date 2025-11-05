@@ -1,6 +1,8 @@
+#!/bin/bash
 
-Here is a Bash completion script for the `ollama` command line tool:
-```bash
+# [[HUMAN COMMENTED-OUT]]
+# Here is a Bash completion script for the `ollama` command line tool:
+
 # Register the completion function
 complete -F _ollama_completions ollama
 
@@ -36,6 +38,6 @@ _ollama_completions() {
       ;;
   esac
 }
-```
-This script uses a `case` statement to switch on the subcommand and provide different completions based on the command. The `show`, `run`, `stop`, `push`, `cp`, and `rm` commands require completion of `<MODEL>`, which is handled by fetching a list of all models from `ollama list` and generating completions with `compgen`. The `create` command requires special flag completion, which is handled by generating completions for the flags `--file`, `-f`, `--quantize`, and `-q`. Finally, commands such as `serve`, `pull`, `signin`, `signout`, `list`, `ps`, and `help` require no argument completion and are handled with an empty list of completions.
 
+# [[HUMAN COMMENTED-OUT]]
+# This script uses a `case` statement to switch on the subcommand and provide different completions based on the command. The `show`, `run`, `stop`, `push`, `cp`, and `rm` commands require completion of `<MODEL>`, which is handled by fetching a list of all models from `ollama list` and generating completions with `compgen`. The `create` command requires special flag completion, which is handled by generating completions for the flags `--file`, `-f`, `--quantize`, and `-q`. Finally, commands such as `serve`, `pull`, `signin`, `signout`, `list`, `ps`, and `help` require no argument completion and are handled with an empty list of completions.

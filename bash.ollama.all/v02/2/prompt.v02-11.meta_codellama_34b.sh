@@ -1,6 +1,6 @@
+# [[HUMAN COMMENTED-OUT]]
+# Here's a sample Bash script that should satisfy the above requirements:
 
-Here's a sample Bash script that should satisfy the above requirements:
-```bash
 # Define the `_ollama_completions` function
 _ollama_completions() {
     # Check if the `ollama` command is available
@@ -26,5 +26,3 @@ _ollama_completions() {
     COMPREPLY=($(printf "%s\n" "${COMPREPLY[@]}" | sort))
 }
 complete -F _ollama_completions ollama
-```
-

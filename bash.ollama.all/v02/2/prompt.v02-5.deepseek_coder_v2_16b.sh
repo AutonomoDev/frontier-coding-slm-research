@@ -1,7 +1,7 @@
- Here is the Bash completion script for the `ollama` command as per your specifications:
-
-```bash
 #!/bin/bash
+
+# [[HUMAN COMMENTED-OUT]]
+# Here is the Bash completion script for the `ollama` command as per your specifications:
 
 _ollama_completions() {
     local cur prev words cword split
@@ -34,7 +34,6 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-```
 
-This script defines a Bash function `_ollama_completions` that provides tab completion for the `ollama` command. It uses a `case` statement to handle different subcommands, fetching and displaying model names specifically for commands requiring `<MODEL>` completion. The script adheres to the constraints provided and includes comments explaining key parts of the code. Finally, it registers the function with `complete -F _ollama_completions ollama`.
-
+# [[HUMAN COMMENTED-OUT]]
+# This script defines a Bash function `_ollama_completions` that provides tab completion for the `ollama` command. It uses a `case` statement to handle different subcommands, fetching and displaying model names specifically for commands requiring `<MODEL>` completion. The script adheres to the constraints provided and includes comments explaining key parts of the code. Finally, it registers the function with `complete -F _ollama_completions ollama`.

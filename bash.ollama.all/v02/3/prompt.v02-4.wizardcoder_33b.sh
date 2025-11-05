@@ -1,4 +1,3 @@
-```bash
 # Main Function
 _ollama_completions() {
     # Extract Word Info
@@ -41,5 +40,3 @@ _ollama_completions() {
 
 # Register the completion function
 complete -F _ollama_completions ollama
-``` 
-

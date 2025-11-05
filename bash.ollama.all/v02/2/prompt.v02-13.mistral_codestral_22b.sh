@@ -1,6 +1,6 @@
- Based on your requirements, here's a Bash completion script for the `ollama` command line tool:
+# [[HUMAN COMMENTED-OUT]]
+# Based on your requirements, here's a Bash completion script for the `ollama` command line tool:
 
-```bash
 # Define the main completion function
 _ollama_completions() {
     local cur prev subcommand commands models
@@ -43,7 +43,6 @@ _ollama_completions() {
 
 # Register the completion function for 'ollama' command
 complete -F _ollama_completions ollama
-```
 
-This script defines a single function `_ollama_completions` that provides tab completion for various subcommands of the `ollama` tool. It uses a `case` statement to handle different types of completion based on the subcommand provided.
-
+# [[HUMAN COMMENTED-OUT]]
+# This script defines a single function `_ollama_completions` that provides tab completion for various subcommands of the `ollama` tool. It uses a `case` statement to handle different types of completion based on the subcommand provided.

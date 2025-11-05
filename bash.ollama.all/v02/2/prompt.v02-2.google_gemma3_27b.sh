@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
   local cur prev
   _get_comp_words_by_ref -n : cur prev # Extract current and previous words
@@ -29,5 +28,3 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama # Register the completion function
-```
-

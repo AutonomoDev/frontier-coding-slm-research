@@ -1,6 +1,6 @@
- Here is a Bash completion script for the `ollama` command line tool based on your requirements:
+# [[HUMAN COMMENTED-OUT]]
+# Here is a Bash completion script for the `ollama` command line tool based on your requirements:
 
-```bash
 # Define the main completion function
 _ollama_completions() {
     # Use a case statement to switch on subcommand
@@ -42,7 +42,6 @@ _ollama_model_completion() {
 
 # Register the completion function
 complete -F _ollama_completions ollama
-```
 
-This script will provide tab completion for the `ollama` command line tool, including model name completion and special flag completion.
-
+# [[HUMAN COMMENTED-OUT]]
+# This script will provide tab completion for the `ollama` command line tool, including model name completion and special flag completion.

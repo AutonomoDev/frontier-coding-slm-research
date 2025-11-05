@@ -1,4 +1,3 @@
-```bash
 # Main Function
 _ollama_completions() {
     local cur prev
@@ -37,6 +36,5 @@ _ollama_completions() {
 
 # Register the function
 complete -F _ollama_completions ollama
-```
-This script generates a Bash completion for `ollama` command, which has the above described behaviour and constraints. 
-
+# [[HUMAN COMMENTED-OUT]]
+# This script generates a Bash completion for `ollama` command, which has the above described behaviour and constraints.

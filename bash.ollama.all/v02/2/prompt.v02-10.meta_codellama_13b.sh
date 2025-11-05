@@ -1,10 +1,10 @@
-
+# [[HUMAN COMMENTED-OUT]]
 # Completion Function for Ollama CLI
+# [[HUMAN COMMENTED-OUT]]
+# This is a bash completion script for the Ollama CLI tool, which provides tab completion for commands and options. The script uses a case statement to handle different completion types based on the subcommand entered.
+# [[HUMAN COMMENTED-OUT]]
+# Here's the complete function:
 
-This is a bash completion script for the Ollama CLI tool, which provides tab completion for commands and options. The script uses a case statement to handle different completion types based on the subcommand entered.
-
-Here's the complete function:
-```bash
 _ollama_completions() {
   local cur prev models
   _get_comp_words_by_ref -n : cur prev
@@ -31,10 +31,11 @@ _ollama_completions() {
       COMPREPLY=( $( compgen -W '${COMP_WORDS[@]:1}' -- "$cur" ) )
   esac
 }
-```
-To use this completion function, you need to register it with the `complete` built-in command. You can do this by running the following command in your terminal:
-```bash
-complete -F _ollama_completions ollama
-```
-This will enable tab completion for the Ollama CLI tool whenever you type "ollama" followed by a space.
 
+# [[HUMAN COMMENTED-OUT]]
+# To use this completion function, you need to register it with the `complete` built-in command. You can do this by running the following command in your terminal:
+
+complete -F _ollama_completions ollama
+
+# [[HUMAN COMMENTED-OUT]]
+# This will enable tab completion for the Ollama CLI tool whenever you type "ollama" followed by a space.

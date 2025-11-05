@@ -1,4 +1,5 @@
-```bash
+#!/bin/bash
+
 _ollama_completions() {
     local cur prev
     _get_comp_words_by_ref -n : cur prev
@@ -30,5 +31,3 @@ _ollama_completions() {
 
 # Register the completion function with 'ollama' command
 complete -F _ollama_completions ollama
-```
-

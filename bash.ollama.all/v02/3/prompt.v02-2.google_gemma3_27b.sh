@@ -1,11 +1,10 @@
-```bash
 _ollama_completions() {
   local cur prev
   _get_comp_words_by_ref -n : cur prev # Extract current and previous words
 
-  case "$cur" in
+  case "$prev" in
     ollama) # Top-level completion: list subcommands
-      COMPREPLY=(show run stop push cp rm create serve pull signin signout list ps help)
+      COMPREPLY=($(compgen -W "show run stop push cp rm create serve pull signin signout list ps help" -- "$cur"))
       ;;
     show|run|stop|push|cp|rm) # Model name completion
       local models
@@ -17,21 +16,30 @@ _ollama_completions() {
       __ltrim_colon_completions "$cur" # Trim leading colons
       ;;
     create) # Create command with flag completion
-      if [[ "$prev" == "-f" || "$prev" == "--file" ]]; then
-        COMPREPLY=(<files>) # Complete file names
-      elif [[ "$prev" == "-q" || "$prev" == "--quantize" ]]; then
-        COMPREPLY=(q2_K q2_Q q3_K_M q3_K_S q4_0 q4_K_M q4_K_S q5_K_M q5_K_S q8_0) # Complete quantization levels
-      else
-        COMPREPLY=(--file -f --quantize -q) # Complete flags
+      if [[ "$cur" == -* ]]; then
+        COMPREPLY=($(compgen -W "--file -f --quantize -q" -- "$cur"))
       fi
       ;;
     serve|pull|signin|signout|list|ps|help) # Commands with no argument completion
+      COMPREPLY=()
       ;;
     *) # No completion
+      COMPREPLY=()
       ;;
   esac
+
+  # Handle argument completion for specific flags
+  case "$prev" in
+    -f|--file)
+        _filedir
+        return
+      ;;
+    -q|--quantize)
+        COMPREPLY=($(compgen -W "q2_K q3_K_M q3_K_S q4_0 q4_K_M q4_K_S q5_K_M q5_K_S q8_0" -- "$cur"))
+        return
+      ;;
+  esac
+
 }
 
 complete -F _ollama_completions ollama
-```
-

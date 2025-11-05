@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Define a Bash function named `_ollama_completions` that provides tab completion for the `ollama` command line tool.
@@ -41,4 +40,3 @@ _ollama_completions() {
 
 # Register the completion function for `ollama`.
 complete -F _ollama_completions ollama
-

@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 
 _ollama_completions() {
@@ -31,6 +30,5 @@ _ollama_completions() {
   esac
 }
 complete -F _ollama_completions ollama
-```
-Note that this code is written in a single line to make it easier to copy and paste. You can format it properly by removing the backslashes and splitting the lines at the appropriate places.
-
+# [[HUMAN COMMENTED-OUT]]
+# Note that this code is written in a single line to make it easier to copy and paste. You can format it properly by removing the backslashes and splitting the lines at the appropriate places.

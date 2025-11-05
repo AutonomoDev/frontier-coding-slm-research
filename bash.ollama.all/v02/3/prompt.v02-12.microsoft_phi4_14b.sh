@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
     local cur prev words cword
     _get_comp_words_by_ref -n : cur prev words cword
@@ -46,18 +45,17 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-```
 
-### Explanation of Key Parts:
-
-- **Top-Level Completion:** When the previous word is `ollama`, it provides a list of all subcommands as completions.
-  
-- **Model Name Completion Logic:**
-  - It uses `_get_comp_words_by_ref` to extract current and previous words for context-based completion.
-  - Checks if the `ollama` command exists before proceeding to fetch model names.
-  - Uses `compgen` with a list of models obtained from `ollama list` to generate possible completions.
-  
-- **Special Flag Completion for `create`:** Recognizes flags like `--file`, `-f`, `--quantize`, and `-q`.
-
-- **No Argument Commands:** Directly returns without further completion actions.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Explanation of Key Parts:
+# 
+# - **Top-Level Completion:** When the previous word is `ollama`, it provides a list of all subcommands as completions.
+#   
+# - **Model Name Completion Logic:**
+#   - It uses `_get_comp_words_by_ref` to extract current and previous words for context-based completion.
+#   - Checks if the `ollama` command exists before proceeding to fetch model names.
+#   - Uses `compgen` with a list of models obtained from `ollama list` to generate possible completions.
+#   
+# - **Special Flag Completion for `create`:** Recognizes flags like `--file`, `-f`, `--quantize`, and `-q`.
+# 
+# - **No Argument Commands:** Directly returns without further completion actions.

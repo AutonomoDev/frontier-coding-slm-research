@@ -1,3 +1,5 @@
+#!/bin/bash
+
 _ollama_completions() {
     local cur prev subcommands="show run stop push cp rm create serve pull signin signout list ps help"
     local model_commands="show run stop push cp rm"
@@ -33,4 +35,3 @@ _ollama_completions() {
 
 # Register the completion function with 'ollama'
 complete -F _ollama_completions ollama
-

@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
     local cur prev words cword
     _get_comp_words_by_ref -n : cur prev words cword
@@ -51,7 +50,6 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-```
 
-This Bash function provides tab completion for the `ollama` command line tool by categorizing commands into three groups based on their completion behavior: those requiring `<MODEL>` completion, a command with special flag completion, and commands with no argument completion. The implementation adheres to specified logic steps for fetching and displaying model names using the `ollama list` command, ensuring robust handling of various scenarios such as missing commands or empty model lists.
-
+# [[HUMAN COMMENTED-OUT]]
+# This Bash function provides tab completion for the `ollama` command line tool by categorizing commands into three groups based on their completion behavior: those requiring `<MODEL>` completion, a command with special flag completion, and commands with no argument completion. The implementation adheres to specified logic steps for fetching and displaying model names using the `ollama list` command, ensuring robust handling of various scenarios such as missing commands or empty model lists.

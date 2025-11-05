@@ -1,7 +1,7 @@
-
-Here is a possible Bash script that satisfies the given prompt:
-```bash
 #!/bin/bash
+
+# [[HUMAN COMMENTED-OUT]]
+# Here is a possible Bash script that satisfies the given prompt:
 
 # Main completion function for 'ollama' command.
 _ollama_completions() {
@@ -35,5 +35,3 @@ _ollama_completions() {
 
 # Register completion function.
 complete -F _ollama_completions ollama
-```
-

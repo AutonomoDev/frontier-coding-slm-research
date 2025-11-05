@@ -1,4 +1,3 @@
-```bash
 # Bash completion for 'ollama' command
 _ollama_completions() {
     local cur prev words cword subcommand modelcmds
@@ -34,5 +33,3 @@ _ollama_completions() {
     __ltrim_colon_completions "$cur"
 }
 complete -F _ollama_completions ollama
-```
-

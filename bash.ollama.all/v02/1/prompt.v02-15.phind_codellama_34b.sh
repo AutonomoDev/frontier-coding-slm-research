@@ -1,7 +1,6 @@
+# [[HUMAN COMMENTED-OUT]]
+# Here is a possible Bash completion script for `ollama`:
 
-Here is a possible Bash completion script for `ollama`:
-
-```bash
 _ollama_completions() {
     local cur prev
     _get_comp_words_by_ref -n : cur prev
@@ -30,6 +29,6 @@ _ollama_completions() {
     esac
 }
 complete -F _ollama_completions ollama
-```
-This script follows the prompt's guidelines and uses a `case` statement to handle different completion types. It also provides model name completions for commands from Group 1, as specified in the prompt.
 
+# [[HUMAN COMMENTED-OUT]]
+# This script follows the prompt's guidelines and uses a `case` statement to handle different completion types. It also provides model name completions for commands from Group 1, as specified in the prompt.
