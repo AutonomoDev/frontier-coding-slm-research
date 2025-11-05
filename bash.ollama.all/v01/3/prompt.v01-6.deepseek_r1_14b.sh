@@ -1,22 +1,21 @@
-Thinking...
-Okay, so I need to write a Bash function that enables tab completion for the 'ollama' command. The user has provided specific instructions, so I should follow them closely.
+# Thinking...
+# Okay, so I need to write a Bash function that enables tab completion for the 'ollama' command. The user has provided specific instructions, so I should follow them closely.
+# 
+# First, the function must be named _ollama_completions and start with that. Then, there's a validation step where it checks if the first word is 'ollama' and the second is one of the specified commands. If not, it returns early without providing any completions.
+# 
+# Next, I need to extract the current word and previous word using _get_comp_words_by_ref with -n : for the cur and prev variables. That's a bit tricky, but I remember that this command helps in getting the words around the cursor.
+# 
+# Then, check if the 'ollama' command exists. If not, return early because we can't get models. Once confirmed, fetch the models by running ollama list, ignoring any errors, and extracting the model names from the output starting from the second line. These are stored in the models variable.
+# 
+# If there are no models, again, return early to avoid unnecessary processing.
+# 
+# For generating completions, I use compgen with -W which takes a list of words separated by newlines. So, I format $models as a string with each model on its own line, then pass it along with the current word to compgen. This should give me the possible completions based on the models available.
+# 
+# After generating COMPREPLY, I need to sort them and trim any colons that might be present using __ltrim_colon_completions. Finally, I complete the function by setting up the completion for 'ollama' using this function.
+# 
+# I have to make sure all these steps are followed exactly as specified, without adding any extra logic or checks beyond what's necessary. Also, inline comments should explain each key part of the code to make it clear for anyone reading it later.
+# ...done thinking.
 
-First, the function must be named _ollama_completions and start with that. Then, there's a validation step where it checks if the first word is 'ollama' and the second is one of the specified commands. If not, it returns early without providing any completions.
-
-Next, I need to extract the current word and previous word using _get_comp_words_by_ref with -n : for the cur and prev variables. That's a bit tricky, but I remember that this command helps in getting the words around the cursor.
-
-Then, check if the 'ollama' command exists. If not, return early because we can't get models. Once confirmed, fetch the models by running ollama list, ignoring any errors, and extracting the model names from the output starting from the second line. These are stored in the models variable.
-
-If there are no models, again, return early to avoid unnecessary processing.
-
-For generating completions, I use compgen with -W which takes a list of words separated by newlines. So, I format $models as a string with each model on its own line, then pass it along with the current word to compgen. This should give me the possible completions based on the models available.
-
-After generating COMPREPLY, I need to sort them and trim any colons that might be present using __ltrim_colon_completions. Finally, I complete the function by setting up the completion for 'ollama' using this function.
-
-I have to make sure all these steps are followed exactly as specified, without adding any extra logic or checks beyond what's necessary. Also, inline comments should explain each key part of the code to make it clear for anyone reading it later.
-...done thinking.
-
-```bash
 # Bash completion function for ollama commands
 function _ollama_completions() {
     # Check if command is 'ollama' and second word matches valid commands
@@ -60,5 +59,3 @@ function _ollama_completions() {
 
 # Register completion function for ollama command
 complete -F _ollama_completions ollama;
-```
-

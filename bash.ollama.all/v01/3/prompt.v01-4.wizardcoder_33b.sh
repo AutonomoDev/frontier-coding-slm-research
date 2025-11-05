@@ -1,6 +1,8 @@
-The following Bash function will provide tab completion for `ollama`. It fetches a list of all available models and completes based on these, sorting the results as it goes along.
+#!/bin/bash
 
-```bash
+# [[HUMAN COMMENTED-OUT]]
+# The following Bash function will provide tab completion for `ollama`. It fetches a list of all available models and completes based on these, sorting the results as it goes along.
+
 _ollama_completions() 
 {
     # Only complete if we are completing the "ollama" command.
@@ -24,5 +26,3 @@ _ollama_completions()
 }
 
 complete -F _ollama_completions ollama
-``` 
-

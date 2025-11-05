@@ -1,4 +1,3 @@
-  ```
 #!/bin/bash
 
 _ollama_completions() {
@@ -23,5 +22,3 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-```
-

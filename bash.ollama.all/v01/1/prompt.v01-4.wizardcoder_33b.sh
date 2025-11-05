@@ -1,4 +1,10 @@
-```bash
+#!/bin/bash
+
+# [[HUMAN COMMENTED-OUT]]
+# Please note that the script assumes:
+# - The `list` command is available and it returns a list of models.
+# - You are using a recent version of Bash which supports arrays.
+
 _ollama_completions() {
     [[ "${COMP_WORDS[0]}" != "ollama" ]] && { COMPREPLY=(); return; }
     local cur prev
@@ -22,8 +28,3 @@ _ollama_completions() {
     esac
 }
 complete -F _ollama_completions ollama
-```
-Please note that the script assumes:
-- The `list` command is available and it returns a list of models.
-- You are using a recent version of Bash which supports arrays. 
-

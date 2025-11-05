@@ -1,4 +1,5 @@
-  ```bash
+#!/bin/bash
+
 # Bash Completion Generator for Ollama
 
 # Function
@@ -26,5 +27,3 @@ _ollama_completions() {
 
 # Register completion function for ollama command
 complete -F _ollama_completions ollama
-  ```
-

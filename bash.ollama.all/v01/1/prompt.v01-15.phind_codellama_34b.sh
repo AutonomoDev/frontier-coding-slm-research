@@ -1,6 +1,8 @@
-The following Bash function provides completion for the `ollama` command. This script assumes that the ollama command is correctly installed and configured in your environment, and uses the `__ltrim_colon_completions` and `_get_comp_words_by_ref` functions which are built-in in bash version 4.0 and newer:
+#!/bin/bash
 
-```bash
+# [[HUMAN COMMENTED-OUT]]
+# The following Bash function provides completion for the `ollama` command. This script assumes that the ollama command is correctly installed and configured in your environment, and uses the `__ltrim_colon_completions` and `_get_comp_words_by_ref` functions which are built-in in bash version 4.0 and newer:
+
 _ollama_completions() {
     # Validate command
     [[ "${COMP_WORDS[0]}" != "ollama" ]] && return
@@ -27,7 +29,6 @@ _ollama_completions() {
     fi
 }
 complete -F _ollama_completions ollama
-```
 
-Make sure to copy and paste this function into your `.bashrc` or equivalent configuration file to make it available in your current shell session. If you want to make it system-wide, you may need to add it to `/etc/bash_completion.d/`.
-
+# [[HUMAN COMMENTED-OUT]]
+# Make sure to copy and paste this function into your `.bashrc` or equivalent configuration file to make it available in your current shell session. If you want to make it system-wide, you may need to add it to `/etc/bash_completion.d/`.

@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
   # Validate command
   [[ "${COMP_WORDS[0]}" != "ollama" || -z "${COMP_WORDS[1]}" ]] && { COMPREPLY=(); return; }
@@ -40,5 +39,3 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-```
-

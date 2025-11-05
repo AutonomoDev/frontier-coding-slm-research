@@ -1,4 +1,5 @@
-```bash
+#!/bin/bash
+
 _ollama_completions() {
     # Validate that the command is 'ollama' followed by a specific subcommand
     [[ "${COMP_WORDS[0]}" != "ollama" || -z "${COMP_WORDS[1]}" ]] && { COMPREPLY=(); return; }
@@ -28,18 +29,17 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-```
 
-### Explanation:
-- **Validation**: The function first checks that the command being completed starts with `ollama` followed by a subcommand. If not, it exits early.
-  
-- **Command Existence Check**: Before attempting to fetch models, it ensures that the `ollama` command is available on the system.
-
-- **Model Fetching**: It uses `ollama list`, processes its output starting from the second line (using `tail -n +2`), and extracts model names using `awk`.
-
-- **Completion Generation**: The function uses `compgen` to generate possible completions for the current word (`$cur`). These are based on the models retrieved.
-
-- **Sorting and Trimming**: It sorts the completion options and applies a trimming function to handle colons, which is useful for models prefixed with something like `codellama:`.
-
-This setup provides tab completion specifically for subcommands of `ollama` that involve model names.
-
+# [[HUMAN COMMENTED-OUT]]
+# ### Explanation:
+# - **Validation**: The function first checks that the command being completed starts with `ollama` followed by a subcommand. If not, it exits early.
+#   
+# - **Command Existence Check**: Before attempting to fetch models, it ensures that the `ollama` command is available on the system.
+# 
+# - **Model Fetching**: It uses `ollama list`, processes its output starting from the second line (using `tail -n +2`), and extracts model names using `awk`.
+# 
+# - **Completion Generation**: The function uses `compgen` to generate possible completions for the current word (`$cur`). These are based on the models retrieved.
+# 
+# - **Sorting and Trimming**: It sorts the completion options and applies a trimming function to handle colons, which is useful for models prefixed with something like `codellama:`.
+# 
+# This setup provides tab completion specifically for subcommands of `ollama` that involve model names.

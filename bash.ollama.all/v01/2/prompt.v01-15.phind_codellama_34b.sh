@@ -1,6 +1,6 @@
-Here is the Bash completion function for `ollama`:
+# [[HUMAN COMMENTED-OUT]]
+# Here is the Bash completion function for `ollama`:
 
-```bash
 _ollama_completions() {
     # Validate command
     [[ "${COMP_WORDS[0]}" != "ollama" ]] && { COMPREPLY=(); return; }
@@ -24,7 +24,6 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-```
 
-This function first validates that the command is `ollama`. It then extracts the current and previous words using `_get_comp_words_by_ref`. It fetches the models by calling `ollama list` and generates completions with `compgen -W "$models" -- "$cur"`. The generated completions are sorted and trimmed by calling `printf | sort` and `__ltrim_colon_completions "$cur"`, respectively. Finally, it registers the completion function for `ollama`.
-
+# [[HUMAN COMMENTED-OUT]]
+# This function first validates that the command is `ollama`. It then extracts the current and previous words using `_get_comp_words_by_ref`. It fetches the models by calling `ollama list` and generates completions with `compgen -W "$models" -- "$cur"`. The generated completions are sorted and trimmed by calling `printf | sort` and `__ltrim_colon_completions "$cur"`, respectively. Finally, it registers the completion function for `ollama`.

@@ -15,3 +15,6 @@ mistral-small:24b: 00:29
 phind-codellama:34b: 00:50
 phi4-reasoning:14b: 04:06
 codellama:13b: 00:19
+gemma3:27b: 00:25
+gemma3:27b: 00:17
+gemma3:27b: 01:44
