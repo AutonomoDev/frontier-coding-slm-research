@@ -1,0 +1,19 @@
+=== Test run on Fri Oct 31 11:28:06 PM CDT 2025 ===
+=== Test run on Fri Oct 31 11:33:47 PM CDT 2025 ===
+prompt.v02-1.qwen3_coder_30b.sh Doesn't filter the commands.
+prompt.v02-2.google_gemma3_27b.sh FAILED: No suggestions.
+prompt.v02-3.openai_gpt_oss_20b.sh PASSED: Perfect.
+prompt.v02-4.wizardcoder_33b.sh PASSED: Perfect.
+prompt.v02-5.deepseek_coder_v2_16b.sh PASSED: Perfect.
+prompt.v02-6.deepseek_r1_14b.sh Doesn't filter commands
+prompt.v02-7.deepseek_r1_32b.sh PASSED: Perfect.
+prompt.v02-8.deepseek_v3_qwen2.5_32b.sh Doesn't suggestion models for commands.
+prompt.v02-9.google_gemma3_12b.sh Didn't show MODELS commands at all...
+prompt.v02-10.meta_codellama_13b.sh Didn't suggest commands.
+prompt.v02-11.meta_codellama_34b.sh PASSED: Perfect.
+prompt.v02-12.microsoft_phi4_14b.sh FAILED: No suggestions.
+prompt.v02-13.mistral_codestral_22b.sh PASSED: Perfect.
+prompt.v02-14.mistral_small_24b.sh PASSED: Perfect.
+prompt.v02-15.phind_codellama_34b.sh PASSED: Perfect.
+prompt.v02-16.microsoft_phi4_reasoning_14b.sh PASSED: Perfect.
+=== Test run on Wed Nov  5 09:12:12 AM CST 2025 ===
