@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
     # Check if previous word is 'ollama' (top-level command)
     if [ "${#COMP_WORDS[@]}" -gt 2 ] && [ "${COMP_WORDS[0]}" = "ollama" ]; then
@@ -47,5 +46,3 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-``` 
-

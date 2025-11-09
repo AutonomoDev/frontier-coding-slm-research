@@ -1,6 +1,5 @@
- # Generated Bash Completion Script for `ollama`
+# Generated Bash Completion Script for `ollama`
 
-```bash
 # Define the main completion function
 function _ollama_completions() {
     local cur prev
@@ -86,5 +85,3 @@ function _ollama_model_completion() {
 
 # Register the completion function for 'ollama' command
 complete -F _ollama_completions ollama
-```
-

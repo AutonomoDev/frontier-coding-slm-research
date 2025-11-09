@@ -1,6 +1,6 @@
- # Bash Completion Script for `ollama`
+# [[HUMAN COMMENTED-OUT]]
+# Bash Completion Script for `ollama`
 
-```bash
 # Function definition for Ollama command completions
 function _ollama_completions() {
     local cur prev opts
@@ -47,4 +47,3 @@ function _ollama_completions() {
 
 # Register the completion function for 'ollama' command
 complete -F _ollama_completions ollama
-

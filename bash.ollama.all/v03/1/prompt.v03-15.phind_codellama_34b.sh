@@ -1,6 +1,6 @@
-Here's a bash completion script for `ollama`:
+# [[HUMAN COMMENTED-OUT]]
+# Here's a bash completion script for `ollama`:
 
-```bash
 _ollama_completions() {
     local cur prev opts subcommands
     COMPREPLY=()
@@ -49,5 +49,3 @@ _ollama_completions() {
     __ltrim_colon_completions "$cur"
     return 0
 } && complete -F _ollama_completions ollama
-```
-

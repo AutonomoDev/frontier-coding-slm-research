@@ -74,4 +74,3 @@ _ollama_completions() {
 
 # Register the completion function for ollama command
 complete -F _ollama_completions ollama
-

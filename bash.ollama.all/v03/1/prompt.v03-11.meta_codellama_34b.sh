@@ -1,5 +1,6 @@
-  Here is a Bash completion script for the `ollama` command:
-```bash
+# [[HUMAN COMMENTED-OUT]]
+# Here is a Bash completion script for the `ollama` command:
+
 # Main function for ollama completions
 _ollama_completions() {
     # Extract word info
@@ -50,5 +51,3 @@ _ollama_completions() {
 
 # Register completion function for ollama command
 complete -F _ollama_completions ollama
-```
-

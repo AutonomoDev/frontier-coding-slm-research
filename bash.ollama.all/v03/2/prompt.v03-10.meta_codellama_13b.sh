@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 
 _ollama_completions() {
@@ -39,5 +38,4 @@ _ollama_completions() {
         fi;;
   esac
 }
-```
 

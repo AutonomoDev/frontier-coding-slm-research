@@ -1,4 +1,3 @@
-```bash
 # Bash completion for 'ollama' command
 function _ollama_completions() {
     local cur prev opts
@@ -26,5 +25,3 @@ function _ollama_completions() {
     __ltrim_colon_completions "$cur"
 }
 complete -F _ollama_completions ollama
-```
-

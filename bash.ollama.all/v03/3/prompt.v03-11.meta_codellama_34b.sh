@@ -1,7 +1,7 @@
-
-Here is a Bash script that provides tab completion for the `ollama` command line tool:
-```bash
 #!/bin/bash
+
+# [[HUMAN COMMENTED-OUT]]
+# Here is a Bash script that provides tab completion for the `ollama` command line tool:
 
 _ollama_completions() {
     local cur prev
@@ -33,5 +33,3 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-```
-

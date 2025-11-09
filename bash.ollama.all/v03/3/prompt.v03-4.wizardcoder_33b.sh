@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 
 # Function for model name completion
@@ -43,5 +42,3 @@ _ollama_completions() {
 
 # Register the completion function for ollama
 complete -F _ollama_completions ollama
-``` 
-

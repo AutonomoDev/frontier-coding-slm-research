@@ -1,5 +1,3 @@
-
-```
 #!/bin/bash
 
 # Completion script for ollama command line tool
@@ -25,5 +23,3 @@ _ollama_completions() {
 
 # Register completion function at the end with complete -F _ollama_completions ollama
 complete -F _ollama_completions ollama
-```
-

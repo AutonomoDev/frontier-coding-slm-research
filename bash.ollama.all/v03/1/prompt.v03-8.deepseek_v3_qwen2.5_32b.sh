@@ -96,4 +96,3 @@ _ollama_completions() {
 
 # Register completion function
 complete -F _ollama_completions ollama
-

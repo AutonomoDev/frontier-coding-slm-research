@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
     local cur prev words cword subcommand model_commands model_flags
     _get_comp_words_by_ref -n : cur prev words cword
@@ -72,5 +71,3 @@ _ollama_completions() {
 
 # Register the completion function for 'ollama'
 complete -F _ollama_completions ollama
-```
-

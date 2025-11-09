@@ -1,4 +1,5 @@
-```bash
+#!/bin/bash
+
 _ollama_completions() {
     # Use a case statement to switch on the subcommand
     local cur prev
@@ -39,5 +40,3 @@ _ollama_completions() {
     esac
 }
 complete -F _ollama_completions ollama
-```
-

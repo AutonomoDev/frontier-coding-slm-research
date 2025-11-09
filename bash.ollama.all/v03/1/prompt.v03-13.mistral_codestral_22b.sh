@@ -1,4 +1,3 @@
- ```bash
 # Main Function: _ollama_completions
 _ollama_completions() {
     local cur prev subcommand
@@ -58,5 +57,3 @@ _ollama_completions() {
 
 # Register the completion function at the end
 complete -F _ollama_completions ollama
-```
-
