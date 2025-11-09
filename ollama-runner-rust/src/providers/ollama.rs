@@ -38,6 +38,8 @@ impl LLMProvider for OllamaProvider {
 
         let mut command = Command::new("ollama")
             .arg("run")
+            //.arg("--temperature")
+            //.arg("0.9")
             .arg(model_name)
             .arg(prompt_content)
             .stdin(Stdio::null())

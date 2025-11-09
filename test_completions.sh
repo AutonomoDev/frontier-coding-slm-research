@@ -32,6 +32,7 @@ outcome_selection() {
     declare -a PASS_SCENARIOS=(
         "When two or more models have the same name, it stops at the :."
         "When two or more models have the same name, it repeats the search after the colon."
+        "Doesn't suggest commands"
     )
 
     local scenarios=()

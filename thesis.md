@@ -35,6 +35,13 @@ v10:  4 failing, 12 passing, 0 perfect.
 v11:  8 failing, 0 passing, 8 perfect.
 v12:  7 failing, 2 passing, 7 perfect.
 v13: 11 failing, 1 passing, 5 perfect.
+v14: 4 failing, 1 passing, 11 perfect.
+v15: 7 failing, 9 passing, 0 perfect.
+v16: 0 failing, 16 passing, 0 perfect.
+v17: 8 failing, 8 passing, 0 perfect.
+v18: 1 failing, 1 passing, 0 perfect.
+v19: 0 failing, 0 passing, 16 perfect.
+v20: 0 failing, 0 passing, 16 perfect.
 ```
 
 ### Table 2: Milestone Achievement - First Version to Achieve Any Perfect Run (>= 1)
@@ -53,6 +60,9 @@ phind_codellama_34b: v11
 qwen3_coder_30b: v11
 google_gemma3_12b: v12
 mistral_small_24b: v12
+meta_codellama_13b: v18
+google_gemma3_27b: v19
+deepseek_r1_14b: v19
 ```
 
 ## 4. Analysis and Discussion
