@@ -1,0 +1,2 @@
+=== Test run on Sat Nov  8 07:22:04 AM CST 2025 ===
+prompt.v3-cloud.anthropic_sonnet_4.5.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
