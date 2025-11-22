@@ -1,3 +1,12 @@
+_default_completion() {
+    # Try normal completion loader
+    _completion_loader "${COMP_WORDS[0]}"
+
+    # Fallback to file names
+    _filedir
+}
+
+
 _ollama_completions() {
     local cur prev
     _get_comp_words_by_ref -n : cur prev

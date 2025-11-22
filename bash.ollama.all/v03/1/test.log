@@ -1,2 +1,25 @@
 === Test run on Sat Nov  8 07:22:04 AM CST 2025 ===
 prompt.v3-cloud.anthropic_sonnet_4.5.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+=== Test run on Sat Nov 22 10:45:30 AM CST 2025 ===
+prompt.v3-cloud.moonshotai_kimi_k2_thinking.sh PASSED: PASSED: When two or more models have the same name, it stops at the :.
+prompt.v03-1.qwen3_coder_30b.sh PASSED: Didn't do `ollama ps` for stop.
+prompt.v03-2.google_gemma3_27b.sh FAILED: No suggestions.
+prompt.v03-3.openai_gpt_oss_20b.sh PASSED: Perfect.
+prompt.v03-4.wizardcoder_33b.sh Doesn't filter models, only --arguments.
+prompt.v03-5.deepseek_coder_v2_16b.sh Doesn't filter the models, only --arguments.
+=== Test run on Sat Nov 22 10:52:23 AM CST 2025 ===
+prompt.v03-6.deepseek_r1_14b.sh PASSED: Doesn't handle stop with `ollama ps`.
+=== Test run on Sat Nov 22 10:53:57 AM CST 2025 ===
+=== Test run on Sat Nov 22 11:19:27 AM CST 2025 ===
+=== Test run on Sat Nov 22 11:21:05 AM CST 2025 ===
+prompt.v03-7.deepseek_r1_32b.sh PASSED: Doesn't handle ollama stop with ollama ps
+prompt.v03-8.deepseek_v3_qwen2.5_32b.sh PASSED: Doesnt handle models with arguments.
+prompt.v03-9.google_gemma3_12b.sh FAILED: No suggestions.
+=== Test run on Sat Nov 22 11:26:02 AM CST 2025 ===
+prompt.v03-10.meta_codellama_13b.sh 
+prompt.v03-11.meta_codellama_34b.sh PASSED: 
+prompt.v03-12.microsoft_phi4_14b.sh PASSED: 
+prompt.v03-13.mistral_codestral_22b.sh PASSED: 
+prompt.v03-14.mistral_small_24b.sh PASSED: 
+prompt.v03-15.phind_codellama_34b.sh PASSED: 
+prompt.v03-16.microsoft_phi4_reasoning_14b.sh PASSED: 
