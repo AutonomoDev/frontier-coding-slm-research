@@ -4,7 +4,6 @@ _ollama_completions() {
 
     case "$subcommand" in
         show|run|stop|push|cp|rm)
-            # Group 1 commands requiring <MODEL> completion
 
             if [[ $cword == 2 ]]; then
                 _get_comp_words_by_ref -n : cur prev
@@ -22,7 +21,6 @@ _ollama_completions() {
             fi
             ;;
         create)
-            # Group 2 commands with flags
 
             if [[ $cword == 2 ]]; then
                 _get_comp_words_by_ref -n : cur prev
@@ -39,7 +37,6 @@ _ollama_completions() {
             fi
             ;;
         pull)
-            # Group 2 commands with flags only
 
             if [[ $cword == 2 && "$cur" == -* ]]; then
                 local flags="--insecure"
@@ -47,7 +44,6 @@ _ollama_completions() {
             fi
             ;;
         run)
-            # Group 1 commands requiring <MODEL> completion
 
             if [[ $cword == 2 ]]; then
                 _get_comp_words_by_ref -n : cur prev
@@ -64,7 +60,6 @@ _ollama_completions() {
             fi
             ;;
         show)
-            # Group 1 commands requiring <MODEL> completion
 
             if [[ $cword == 2 ]]; then
                 _get_comp_words_by_ref -n : cur prev
@@ -81,12 +76,10 @@ _ollama_completions() {
             fi
             ;;
         serve|start|signin|signout|list|ls|ps|help)
-            # Group 3 commands with no argument completion
 
             COMPREPLY=()
             ;;
         *)
-            # Top-level command completion
 
             local subcommands="show run stop push cp rm create pull serve start signin signout list ls ps help"
             COMPREPLY=($(compgen -W "$subcommands" -- "$cur"))
@@ -95,4 +88,3 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-

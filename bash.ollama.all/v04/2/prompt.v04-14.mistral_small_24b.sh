@@ -76,4 +76,3 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-

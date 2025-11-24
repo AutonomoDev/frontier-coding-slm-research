@@ -11,7 +11,6 @@ _ollama_completions() {
 
     case $subcmd in
         show|run|push|cp|rm)
-            # Steps A-D for model completion
             if ! command -v ollama &>/dev/null; then COMPREPLY=(); return; fi
             local models=$(ollama list 2>/dev/null | tail -n +2 | awk '{print $1}')
             [[ -z "$models" ]] && { COMPREPLY=(); return; }
@@ -29,7 +28,6 @@ _ollama_completions() {
             ;;
         create)
             if [[ $cword -eq 2 ]]; then
-                # Model completion first
                 _ollama_completions
                 return
             fi
@@ -45,11 +43,9 @@ _ollama_completions() {
             fi
             ;;
         serve|start|signin|signout|list|ls|ps|help)
-            # No completion
             COMPREPLY=()
             ;;
     esac
 }
 
 complete -F _ollama_completions ollama
-

@@ -78,4 +78,3 @@ _ollama_completions() {
   esac
 }
 complete -F _ollama_completions ollama
-

@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
   local cur prev words cword split
   _get_comp_words_by_ref -n : cur prev words cword
@@ -39,5 +38,3 @@ _get_model_completions() {
 }
 
 complete -F _ollama_completions ollama
-```
-

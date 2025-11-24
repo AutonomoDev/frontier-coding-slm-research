@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
   # Get the current and previous words
   local cur prev
@@ -61,5 +60,3 @@ _ollama_completions() {
   esac
 }
 complete -F _ollama_completions ollama
-```
-

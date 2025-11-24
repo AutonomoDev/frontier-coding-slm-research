@@ -1,5 +1,5 @@
-  Here is a fully-working bash completion function for the `ollama` CLI:
-```bash
+# [[HUMAN COMMENTED-OUT]]
+# Here is a fully-working bash completion function for the `ollama` CLI:
 _ollama_completions() {
     local cur prev words cword
     _get_comp_words_by_ref -n : cur prev words cword
@@ -153,5 +153,3 @@ _ollama_completions() {
     esac
 }
 complete -F _ollama_completions ollama
-```
-

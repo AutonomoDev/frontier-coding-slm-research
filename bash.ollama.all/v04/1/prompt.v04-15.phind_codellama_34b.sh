@@ -1,6 +1,6 @@
-Here is the required Bash completion function:
+# [[HUMAN COMMENTED-OUT]]
+# Here is the required Bash completion function:
 
-```bash
 _ollama_completions() {
     local cur prev words cword
     _get_comp_words_by_ref -n : cur prev words cword
@@ -76,7 +76,6 @@ _ollama_completions() {
             ;;
     esac
 } && complete -F _ollama_completions ollama
-```
 
-This function implements the completion rules as described in your task, and registers it using `complete -F`.
-
+# [[HUMAN COMMENTED-OUT]]
+# This function implements the completion rules as described in your task, and registers it using `complete -F`.

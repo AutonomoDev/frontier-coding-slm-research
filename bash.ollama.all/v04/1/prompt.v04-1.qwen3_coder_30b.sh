@@ -70,11 +70,9 @@ _ollama_completions() {
       return
       ;;
     *)
-      # Top-level completion
       COMPREPLY=($(compgen -W "show run stop push cp rm create pull serve start signin signout list ls ps help" -- "$cur"))
       return
       ;;
   esac
 }
 complete -F _ollama_completions ollama
-

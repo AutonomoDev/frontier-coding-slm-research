@@ -1,4 +1,3 @@
-```bash
 _ollama_completions() {
     local cur prev words cword models
     _get_comp_words_by_ref -n : cur prev words cword
@@ -62,6 +61,5 @@ _ollama_completions() {
     [[ ${#COMPREPLY[@]} -eq 1 && ${COMPREPLY[0]} == "--" ]] && compopt -o nospace || compopt +o default
 }
 complete -F _ollama_completions ollama
-```
-This script will set up tab completion for your `ollama` command. The function `_ollama_completions` is the function that does all of the work, and it's registered with `complete -F _ollama_completions ollama`. 
-
+# [[HUMAN COMMENTED-OUT]]
+# This script will set up tab completion for your `ollama` command. The function `_ollama_completions` is the function that does all of the work, and it's registered with `complete -F _ollama_completions ollama`.

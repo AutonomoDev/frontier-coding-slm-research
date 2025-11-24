@@ -5,7 +5,6 @@ _ollama_completions() {
 
     case $subcommand in
         show|run|stop|push|cp|rm)
-            # Group 1 commands requiring <MODEL> completion
             if [[ "$cur" == -* ]]; then
                 COMPREPLY=()
                 return
@@ -18,7 +17,6 @@ _ollama_completions() {
             local models
 
             if [[ $subcommand == stop ]]; then
-                # Special rule for `stop`
                 models=$(ollama ps 2>/dev/null | tail -n +2 | awk '{print $1}')
             else
                 models=$(ollama list 2>/dev/null | tail -n +2 | awk '{print $1}')
@@ -31,7 +29,6 @@ _ollama_completions() {
             __ltrim_colon_completions "$cur"
             ;;
         create)
-            # Group 2 commands with flags
             if [[ $cword -eq 2 ]]; then
                 local cur prev
                 _get_comp_words_by_ref -n : cur prev
@@ -56,7 +53,6 @@ _ollama_completions() {
             fi
             ;;
         pull)
-            # Group 2 commands with flags only
             if [[ $cword -gt 1 && $prev == -* ]]; then
                 COMPREPLY=( $(compgen -W '--insecure' -- "$cur") )
             else
@@ -64,7 +60,6 @@ _ollama_completions() {
             fi
             ;;
         run)
-            # Group 2 commands with flags and model completion
             if [[ $cword -eq 2 ]]; then
                 local cur prev
                 _get_comp_words_by_ref -n : cur prev
@@ -82,7 +77,6 @@ _ollama_completions() {
             fi
             ;;
         show)
-            # Group 2 commands with flags and model completion
             if [[ $cword -eq 2 ]]; then
                 local cur prev
                 _get_comp_words_by_ref -n : cur prev
@@ -100,11 +94,9 @@ _ollama_completions() {
             fi
             ;;
         serve|start|signin|signout|list|ls|ps|help)
-            # Group 3 commands with no argument completion
             COMPREPLY=()
             ;;
         *)
-            # Top-level completion rule
             COMPREPLY=( $(compgen -W 'show run stop push cp rm create pull serve start signin signout list ls ps help' -- "$cur") )
             ;;
     esac
@@ -113,4 +105,3 @@ _ollama_completions() {
 }
 
 complete -F _ollama_completions ollama
-

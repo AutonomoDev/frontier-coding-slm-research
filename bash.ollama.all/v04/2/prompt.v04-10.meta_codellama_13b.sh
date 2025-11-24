@@ -1,3 +1,4 @@
+#!/bin/bash
 
 _ollama_completions() {
   local cur prev cword words subcommand
@@ -51,4 +52,3 @@ _ollama_completions() {
   esac
 }
 complete -F _ollama_completions ollama
-
